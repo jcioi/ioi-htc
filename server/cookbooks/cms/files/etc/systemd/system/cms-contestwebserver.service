@@ -1,0 +1,13 @@
+[Unit]
+Description=CMS ContestWebServer
+
+[Service]
+User=cmsuser
+Group=cmsuser
+RuntimeDirectory=cms
+
+EnvironmentFile=-/etc/ioi-contest-id.env
+ExecStart=/usr/bin/cmsContestWebServer -c $CMS_CONTEST_ID
+
+[Install]
+WantedBy=multi-user.target

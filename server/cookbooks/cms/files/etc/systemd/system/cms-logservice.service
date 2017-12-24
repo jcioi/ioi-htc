@@ -1,0 +1,12 @@
+[Unit]
+Description=CMS LogService
+
+[Service]
+User=cmsuser
+Group=cmsuser
+RuntimeDirectory=cms
+
+ExecStart=/usr/bin/cmsLogService
+
+[Install]
+WantedBy=multi-user.target

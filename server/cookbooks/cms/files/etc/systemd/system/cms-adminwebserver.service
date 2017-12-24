@@ -1,0 +1,12 @@
+[Unit]
+Description=CMS AdminWebServer
+
+[Service]
+User=cmsuser
+Group=cmsuser
+RuntimeDirectory=cms
+
+ExecStart=/usr/bin/cmsAdminWebServer
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=CMS ScoringService
+
+[Service]
+User=cmsuser
+Group=cmsuser
+RuntimeDirectory=cms
+
+ExecStart=/usr/bin/cmsScoringService
+
+[Install]
+WantedBy=multi-user.target

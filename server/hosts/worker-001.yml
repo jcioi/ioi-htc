@@ -1,0 +1,7 @@
+sorah-cms-worker-001.dev.aws.ckpd.co:
+  properties:
+    attributes:
+      desired_hostname: sorah-cms-worker-001
+    run_list:
+      - roles/base/default.rb
+      - roles/cms-worker/default.rb

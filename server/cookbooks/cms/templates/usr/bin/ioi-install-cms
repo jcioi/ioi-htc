@@ -1,0 +1,43 @@
+#!/bin/bash -xe
+target=/opt/cms
+
+if [ -e "${target}" ]; then
+  echo "${target} exists" 1>&2
+  exit 1
+fi
+
+url='<%= node[:cms].fetch(:tarball_url) %>'
+
+mkdir /opt/cms
+chown cmsuser:cmsuser /opt/cms
+
+curl -LSsf -o /tmp/cms.tar.gz "${url}"
+
+sudo -u cmsuser tar xf /tmp/cms.tar.gz --strip-components=1 -C /opt/cms
+cd /opt/cms
+
+virtualenv -p python2 /opt/cms_venv
+chown -R cmsuser:cmsuser /opt/cms_venv
+
+sudo -u cmsuser bash -xe <<-'EOF'
+source /opt/cms_venv/bin/activate
+pip install --no-cache-dir -r requirements.txt
+./setup.py install
+./prerequisites.py build_l10n
+EOF
+
+for x in /opt/cms_venv/bin/cms*; do
+  cat > /usr/bin/$(basename "$x") <<-'EOF'
+#!/bin/bash
+if [ "_$(whoami)" = "_ioi" ]; then
+  echo "Run as 'ioi' user" 1>&2
+  exit 1
+fi
+source /opt/cms_venv/bin/activate
+exec $(basename $0) "$@"
+EOF
+  chmod +x /usr/bin/$(basename "$x")
+done
+
+chown root:root /opt/cms
+chown root:root /opt/cms_venv

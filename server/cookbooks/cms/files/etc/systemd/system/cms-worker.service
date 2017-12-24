@@ -1,0 +1,12 @@
+[Unit]
+Description=CMS Worker
+
+[Service]
+User=cmsuser
+Group=cmsuser
+RuntimeDirectory=cms
+
+ExecStart=/usr/bin/cmsWorker
+
+[Install]
+WantedBy=multi-user.target

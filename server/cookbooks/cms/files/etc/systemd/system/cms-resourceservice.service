@@ -1,0 +1,12 @@
+[Unit]
+Description=CMS ResourceService
+
+[Service]
+User=cmsuser
+Group=cmsuser
+RuntimeDirectory=cms
+
+ExecStart=/usr/bin/cmsResourceService
+
+[Install]
+WantedBy=multi-user.target

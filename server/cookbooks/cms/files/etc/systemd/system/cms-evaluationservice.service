@@ -1,0 +1,12 @@
+[Unit]
+Description=CMS EvaluationService
+
+[Service]
+User=cmsuser
+Group=cmsuser
+RuntimeDirectory=cms
+
+ExecStart=/usr/bin/cmsEvaluationService
+
+[Install]
+WantedBy=multi-user.target

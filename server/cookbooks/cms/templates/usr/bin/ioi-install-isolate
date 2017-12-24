@@ -1,0 +1,9 @@
+#!/bin/bash -xe
+target=/opt/cms
+
+cd $target
+cd isolate/
+sudo -u cmsuser make isolate
+cp ./isolate /usr/bin/
+chown root:cmsuser /usr/bin/isolate
+chmod 4750 /usr/bin/isolate
