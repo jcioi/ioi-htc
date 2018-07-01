@@ -1,0 +1,170 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+REV_DOMAINS = %w(
+  10
+)
+DOMAIN = "aws.ioi18.net"
+REGIONS = %w(
+  ap-northeast-1
+)
+
+template "ioi18.net-public" do
+end
+
+template "ioi18.net-private" do
+end
+
+template "ioi18.net-common" do
+  rrset "bastion.ioi18.net", "A" do
+    ttl 60
+    resource_records "18.179.132.187"
+  end
+end
+
+
+
+##
+require 'aws-sdk-ec2'
+def fetch_instances()
+  REGIONS.map do |region|
+    ec2 = Aws::EC2::Resource.new(region: region)
+
+    vpcs = ec2.vpcs.map do |vpc|
+      tag = vpc.tags.find { |_| _.key == 'Name' }
+      next unless tag
+
+      vpc_name = tag.value
+      vpc_domain = "#{vpc_name}.#{DOMAIN}"
+
+      instances = vpc.instances.map do |instance|
+        name_tag = instance.tags.find { |_| _.key == "Name" }
+        alias_tag = instance.tags.find { |_| _.key == "Alias" }
+
+        name_from_ip = instance.private_dns_name.split('.').first
+        raise if name_from_ip.empty?
+
+        if name_tag && !name_tag.value.empty?
+          next if name_tag.value.size > 62
+          name = name_tag.value.gsub(?_,?-)
+          next unless /\A[A-Za-z0-9-]+\z/ === name
+        else
+          name = name_from_ip
+        end
+
+        alias_name = alias_tag && alias_tag.value.gsub(?_,?-)
+
+        alias_name_from_ip = unless name_from_ip == name
+                               name_from_ip
+                             end
+
+        [
+          name,
+          name: name,
+          alias: alias_name,
+          alias_from_ip: alias_name_from_ip,
+          ip: instance.private_ip_address,
+          fqdn: "#{name}.#{vpc_domain}.",
+          alias_fqdn: (alias_name && !alias_name.empty?) ? "#{alias_name}.#{vpc_domain}." : nil,
+          alias_fqdn_from_ip: alias_name_from_ip && "#{alias_name_from_ip}.#{vpc_domain}.",
+          alias_fqdn_from_instance_id: "#{instance.instance_id}.#{vpc_domain}.",
+          ptr_fqdn: "#{instance.private_ip_address.split(?.).reverse.join(?.)}.in-addr.arpa.",
+        ]
+      end.compact.to_h
+
+      [vpc_name, name: vpc_name, instances: instances, id: vpc.id]
+    end.compact.to_h
+
+    [region, vpcs]
+  end.to_h
+end
+
+region_vpc_instances = fetch_instances()
+
+template "ioi18.net-aws_instances" do
+  region_vpc_instances.each do |region, vpcs|
+    instances_by_alias = Hash.new {|h, k| h[k] = [] }
+
+    vpcs.each do |short_name, vpc_obj|
+      vpc_obj[:instances].each do |name, instance|
+        rrset instance[:fqdn], "A" do
+          ttl 60
+          resource_records instance[:ip]
+        end
+
+        if instance[:alias]
+          instances_by_alias[instance[:alias_fqdn]] << instance
+        end
+
+        if instance[:alias_fqdn_from_ip]
+          rrset instance[:alias_fqdn_from_ip], "CNAME" do
+            ttl 60
+            resource_records instance[:fqdn]
+          end
+        end
+
+        rrset instance[:alias_fqdn_from_instance_id], "CNAME" do
+          ttl 60
+          resource_records instance[:fqdn]
+        end
+      end
+    end
+
+    instances_by_alias.each do |alias_fqdn, instances|
+      if instances.size == 1
+        rrset alias_fqdn, "CNAME" do
+          ttl 60
+          resource_records instances.first[:fqdn]
+        end
+      else
+        rrset alias_fqdn, "A" do
+          ttl 60
+          resource_records(*instances.map {|i| i[:ip] })
+        end
+      end
+    end
+  end
+
+
+end
+
+###
+
+REV_DOMAINS.each do |network|
+  rev_domain = "#{network.split(?.).reverse.join(?.)}.in-addr.arpa."
+  hosted_zone rev_domain do
+    region_vpc_instances.each do |region, vpcs|
+      vpcs.each do |short_name, _|
+        vpc region, _[:id]
+      end
+    end
+
+    region_vpc_instances.each do |region, vpcs|
+      vpcs.each do |short_name, vpc_obj|
+        vpc_obj[:instances].each do |name, instance|
+          next unless instance[:ip].start_with?("#{network}.")
+
+          rrset instance[:ptr_fqdn], "PTR" do
+            ttl 60
+            resource_records instance[:fqdn]
+          end
+        end
+      end
+    end
+  end
+end
+
+
+hosted_zone "ioi18.net." do
+  include_template 'ioi18.net-common'
+  include_template 'ioi18.net-public'
+
+end
+
+hosted_zone "ioi18.net.", "Z1V30A252QIS0J" do
+  vpc "ap-northeast-1", "vpc-03eed691a6a5a03b2"
+  include_template 'ioi18.net-common'
+  include_template 'ioi18.net-private'
+  include_template 'ioi18.net-aws_instances'
+end
+
+
