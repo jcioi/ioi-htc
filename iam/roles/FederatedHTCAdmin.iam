@@ -10,11 +10,15 @@ role "FederatedHTCAdmin", :path=>"/" do
   assume_role_policy_document do
     {
       "Version"=>"2012-10-17",
-      "Statement"=>
-      [
+      "Statement"=>[
         {
           "Effect"=>"Allow",
-          "Principal"=>{"AWS"=>"arn:aws:iam::341857463381:root"}, # sorah
+          "Principal"=>{
+            "AWS"=>[
+              "arn:aws:iam::341857463381:root", # sorah
+              "arn:aws:iam::436825298211:root", # hanazuki
+            ]
+          },
           "Action"=>"sts:AssumeRole",
           "Condition"=>{},
         },
