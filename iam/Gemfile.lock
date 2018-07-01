@@ -1,0 +1,31 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    aws-sdk-core (2.11.79)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sigv4 (1.0.3)
+    diffy (3.2.1)
+    hashie (3.5.7)
+    jmespath (1.4.0)
+    miam (0.2.4.beta16)
+      aws-sdk-core (>= 2.0.42, < 3)
+      diffy
+      hashie
+      parallel
+      ruby-progressbar
+      term-ansicolor
+    parallel (1.12.1)
+    ruby-progressbar (1.9.0)
+    term-ansicolor (1.6.0)
+      tins (~> 1.0)
+    tins (1.16.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  miam (>= 0.2.4.beta1)
+
+BUNDLED WITH
+   1.16.1

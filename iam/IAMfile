@@ -1,0 +1,8 @@
+# vim: ft=ruby
+
+Dir["#{__dir__}/{users,groups,roles,policies,templates}/**/*.rb"].each do |name|
+  rb = File.read(name)
+  path = File.dirname(name.sub(/^#{Regexp.escape(__dir__)}\/(.+?)\//,'/')) + "/"
+  path.sub!("//",'/')
+  instance_eval rb, name, 1
+end
