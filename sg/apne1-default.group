@@ -1,0 +1,23 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ec2 "vpc-9a6e2afd" do
+  security_group "default" do
+    description "default VPC security group"
+
+    ingress do
+      permission :any do
+        groups(
+          "default"
+        )
+      end
+    end
+
+    egress do
+      permission :any do
+        ip_ranges(
+          "0.0.0.0/0"
+        )
+      end
+    end
+  end
+end

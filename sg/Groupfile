@@ -1,0 +1,5 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Dir['./*.group'].each do |f|
+  require f
+end
