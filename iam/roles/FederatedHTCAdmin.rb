@@ -17,6 +17,7 @@ role "FederatedHTCAdmin", :path=>"/" do
             "AWS"=>[
               "arn:aws:iam::341857463381:root", # sorah
               "arn:aws:iam::436825298211:root", # hanazuki
+              "arn:aws:iam::461017142772:root", # sei1tani
             ]
           },
           "Action"=>"sts:AssumeRole",
