@@ -1,4 +1,5 @@
 # vim: ft=ruby
+require_relative '../misc/ensure-aws-account.rb'
 
 Dir["#{__dir__}/{users,groups,roles,policies,templates}/**/*.rb"].each do |name|
   rb = File.read(name)

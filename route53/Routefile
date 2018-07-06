@@ -1,3 +1,5 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+require_relative '../misc/ensure-aws-account.rb'
+
 require 'ioi18.net.route'
