@@ -17,7 +17,7 @@ initializers:
 driver_options:
   mitamae:
     mitamae_outdate_check_script: |
-      [ -x /usr/bin/mitamae ] && [ "_$(mitamae version)" != "_MItamae v1.5.1" ]
+      [ -x /usr/bin/mitamae ] && [ "_$(mitamae version)" != "_MItamae v1.6.2" ]
     mitamae_prepare_script:
       - |
         set -x
@@ -26,7 +26,7 @@ driver_options:
           apt-get update
           apt-get install -y curl apt-transport-https
           curl -Ssf https://sorah.jp/packaging/debian/C3FF3305.pub.txt | apt-key add -
-          echo 'deb https://deb.nekom.it/ xenial main' > /etc/apt/sources.list.d/nekomit.list
+          echo 'deb https://deb.nekom.it/ bionic main' > /etc/apt/sources.list.d/nekomit.list
         fi
         apt-get update
         apt-get install -y mitamae

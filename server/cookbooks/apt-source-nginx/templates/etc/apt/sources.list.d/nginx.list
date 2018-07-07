@@ -1,2 +1,2 @@
-deb http://ppa.launchpad.net/nginx/development/ubuntu xenial main
-deb-src http://ppa.launchpad.net/nginx/development/ubuntu xenial main
+deb http://ppa.launchpad.net/nginx/development/ubuntu bionic main
+deb-src http://ppa.launchpad.net/nginx/development/ubuntu bionic main
