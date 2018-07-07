@@ -61,3 +61,7 @@ end
 file '/root/.ssh/authorized_keys' do
   action :delete
 end
+
+file '/home/ubuntu/.ssh/authorized_keys' do
+  action :delete
+end
