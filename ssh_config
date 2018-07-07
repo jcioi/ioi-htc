@@ -1,0 +1,9 @@
+Host *.aws.ioi18.net
+  ProxyCommand ssh bastion.ioi18.net -W %h:%p
+Host bastion.ioi18.net
+  Port 9922
+Host *.ioi18.net
+  User ioi
+  IdentityFile ~/.ssh/id_rsa.ioi18
+  IdentitiesOnly yes
+

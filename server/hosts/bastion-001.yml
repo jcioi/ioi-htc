@@ -1,0 +1,7 @@
+bastion-001.apne1.aws.ioi18.net:
+  properties:
+    ssh_options:
+      proxy: false
+      host_name: bastion.ioi18.net
+      port: 9922
+      # user: ubuntu
