@@ -1,6 +1,6 @@
 node.reverse_merge!(
   ssh: {
-    port: [22],
+    port: [9922, 22],
   },
 )
 
