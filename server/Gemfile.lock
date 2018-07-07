@@ -1,3 +1,20 @@
+GIT
+  remote: https://github.com/sorah/hocho
+  revision: c46d3ccdbf4c06dc8026dab4bc9d75d35d044e37
+  specs:
+    hocho (0.2.2)
+      hashie
+      itamae
+      net-ssh
+      thor
+
+GIT
+  remote: https://github.com/sorah/hocho-ec2
+  revision: 865a4a9c7fc4463aa89c7ffe332c8c81b60e2746
+  specs:
+    hocho-ec2 (0.1.0)
+      aws-sdk-ec2
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -14,13 +31,6 @@ GEM
       aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.3)
     hashie (3.5.7)
-    hocho (0.2.2)
-      hashie
-      itamae
-      net-ssh
-      thor
-    hocho-ec2 (0.1.0)
-      aws-sdk-ec2
     itamae (1.9.11)
       ansi
       hashie
@@ -47,8 +57,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  hocho
-  hocho-ec2
+  hocho!
+  hocho-ec2!
   itamae-secrets
 
 BUNDLED WITH
