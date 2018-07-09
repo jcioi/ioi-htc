@@ -21,6 +21,8 @@ end
 include_cookbook 'op-user'
 include_cookbook 'sshd'
 
+include_cookbook 'systemd-networkd'
+
 template "/etc/systemd/timesyncd.conf" do
   owner 'root'
   group 'root'
