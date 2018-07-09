@@ -4,6 +4,13 @@ if node[:hocho_ec2]
     group 'root'
     mode  '0644'
   end
+
+  file "/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg" do
+    content "network: {config: disabled}\n"
+    owner 'root'
+    group 'root'
+    mode  '0644'
+  end
 end
 
 execute "rm -rf /etc/netplan && netplan generate" do
