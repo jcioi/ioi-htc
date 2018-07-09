@@ -5,7 +5,7 @@ node[:op_user_name] = 'ioi'
 node[:orgname] = 'ioi18'
 node[:site_domain] = 'ioi18.net'
 node[:contest_id] = 1
-# node[:site_cidr] = '10.0.0.0/16'
+node[:site_cidr] = '10.18.0.0/16'
 # node[:site_cidr6] = ''
 
 node[:desired_hostname] ||= node[:hocho_ec2][:tags][:Name]
