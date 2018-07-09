@@ -1,7 +1,10 @@
 # vim: ft=ruby
 require_relative '../misc/ensure-aws-account.rb'
 
-Dir["#{__dir__}/{users,groups,roles,policies,templates}/**/*.rb"].each do |name|
+[
+  *Dir["#{__dir__}/templates/**/*.rb"],
+  *Dir["#{__dir__}/{users,groups,roles,policies}/**/*.rb"],
+].each do |name|
   rb = File.read(name)
   path = File.dirname(name.sub(/^#{Regexp.escape(__dir__)}\/(.+?)\//,'/')) + "/"
   path.sub!("//",'/')
