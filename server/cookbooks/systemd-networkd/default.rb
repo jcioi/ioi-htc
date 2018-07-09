@@ -6,16 +6,19 @@ if node[:hocho_ec2]
   end
 end
 
-execute "rm -fv /run/systemd/network/*netplan*" do
-  only_if "test -e /lib/systemd/system-generators/netplan"
+execute "rm -rf /etc/netplan && netplan generate" do
+  only_if "test -e /etc/netplan"
+  notifies :restart, 'service[systemd-networkd]'
 end
 
-package "netplan.io" do
-  action :remove
-end
+# package "netplan.io" do
+#   action :remove
+# end
 
 service "systemd-networkd" do
   action [:enable, :start]
 end
 
-
+service "systemd-resolved" do
+  action [:enable, :start]
+end
