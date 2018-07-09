@@ -4,6 +4,6 @@ Host bastion.ioi18.net
   Port 9922
 Host *.ioi18.net
   User ioi
-  IdentityFile ~/.ssh/id_rsa.ioi18
+  IdentityFile ~/.ssh/id_rsa.ioi18b
   IdentitiesOnly yes
 
