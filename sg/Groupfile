@@ -1,6 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 require_relative '../misc/ensure-aws-account.rb'
+
+# CIDR_VENUE_LIFE = 
+# CIDR_VENUE_SRV = 
+
 Dir['./*.group'].each do |f|
   require f
 end
