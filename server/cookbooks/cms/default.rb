@@ -1,3 +1,13 @@
+node.reverse_merge!(
+  cms: {
+    cluster: nil,
+    contest_id: nil,
+  },
+)
+
+node[:cms][:cluster] ||= node.dig(:hocho_ec2, :tags, :CmsCluster)
+node[:cms][:contest_id] ||= node[:contest_ids][node[:cms][:cluster]]
+
 user 'cmsuser' do
   uid 900
   shell '/bin/false'

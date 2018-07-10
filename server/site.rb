@@ -4,7 +4,10 @@ node[:secrets] = MitamaeSecrets::Store.new(File.join(node[:basedir],'secrets'))
 node[:op_user_name] = 'ioi'
 node[:orgname] = 'ioi18'
 node[:site_domain] = 'ioi18.net'
-node[:contest_id] = 1
+
+node[:contest_ids] = {
+  'dev' => 1,
+}
 node[:site_cidr] = '10.18.0.0/16'
 # node[:site_cidr6] = ''
 
