@@ -5,6 +5,8 @@ require_relative '../misc/ensure-aws-account.rb'
 # CIDR_VENUE_LIFE = 
 # CIDR_VENUE_SRV = 
 
+::CIDR_SYSTEM = ['10.18.0.0/18'] # FIXME
+
 Dir['./*.group'].each do |f|
   require f
 end
