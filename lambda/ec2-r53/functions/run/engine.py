@@ -60,6 +60,23 @@ class AwsAdapter():
         pager = self.ec2.get_paginator('describe_instances').paginate(InstanceIds=list(ids))
         return [i for r in pager.search('Reservations') for i in r['Instances']]
 
+    def r53_get_rrset(self, zone, name, rtype):
+        res = self.r53.list_resource_record_sets(
+            HostedZoneId=zone,
+            StartRecordName=name,
+            StartRecordType=rtype,
+            MaxItems='1',
+        )
+        if len(res['ResourceRecordSets']) == 0:
+            return None
+
+        rrset = res['ResourceRecordSets'][0]
+        if rrset['Name'] != name:
+            return None
+
+        return rrset
+
+
     def r53_change_rrsets(self, zone, changes, ignore_invalid_change_batch=False):
         print("R53 change(%s):" % (zone))
         for change in changes:
@@ -91,6 +108,10 @@ class MockAdapter():
     def ec2_instances_by_ids(self, instance_ids):
         ids = set(instance_ids)
         return [i for i in self.ec2_instances if i['InstanceId'] in ids]
+
+    def r53_get_rrset(self, zone, name, rtype):
+        # FIXME:
+        return None
 
     def r53_change_rrsets(self, zone, changes, ignore_invalid_change_batch=False):
         if self.r53_error_on_rrset_deletion:
@@ -130,17 +151,20 @@ class InstanceStateProcessor():
 
         fqdn = "%s.%s.%s" % (ipv4_amazon_name(address), self.engine.adapter.fetch_vpc_name(vpc_id), self.engine.domain)
 
-        self.handler.change_rrset(self.engine.zone, {
-            'Action': 'UPSERT',
-            'ResourceRecordSet': {
-                'Name': fqdn,
-                'Type': 'A',
-                'TTL': 60,
-                'ResourceRecords': [
-                    {'Value': address},
-                ],
-            },
-        })
+        rrset = self.engine.adapter.r53_get_rrset(self.engine.zone, fqdn, 'CNAME')
+        if rrset == None:
+            self.handler.change_rrset(self.engine.zone, {
+                'Action': 'UPSERT',
+                'ResourceRecordSet': {
+                    'Name': fqdn,
+                    'Type': 'A',
+                    'TTL': 60,
+                    'ResourceRecords': [
+                        {'Value': address},
+                    ],
+                },
+            })
+
         if find_tag('Name', i.get('Tags', [])) == None:
             ptr_zone = self.engine.lookup_ptr_zone(address)
             if ptr_zone:
