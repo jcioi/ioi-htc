@@ -1,0 +1,7 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+require_relative '../misc/ensure-aws-account.rb'
+
+Dir['./*.rb'].each do |f|
+  require f
+end
