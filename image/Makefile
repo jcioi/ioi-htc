@@ -1,4 +1,5 @@
 GZIP=pigz
+SPARSIFY=true
 
 export PACKER_KEY_INTERVAL = 10ms
 
@@ -11,6 +12,7 @@ preview: preview.ova
 %.qcow2: %.json %.rebuild
 	rm -rf tmp/$$(basename -s .qcow2 $@)
 	time packer build $<
+	$(SPARSIFY) && sudo virt-sparsify --in-place $@
 
 base.qcow2: d-i/bionic/preseed.cfg
 preview.qcow2: base.qcow2
