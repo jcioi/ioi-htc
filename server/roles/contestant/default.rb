@@ -1,7 +1,10 @@
 node.reverse_merge!(
   contestant: {
     preview: false,
-  }
+  },
+  compilers: {
+    install_doc: true,
+  },
 )
 
 if node[:contestant][:preview]
@@ -9,3 +12,5 @@ if node[:contestant][:preview]
 end
 
 package 'ubuntu-desktop'
+
+include_cookbook 'compilers'
