@@ -1,0 +1,8 @@
+tmp/
+packer_cache/
+*.json
+*.qcow2
+*.vmdk
+*.vmdk.gz
+*.ova
+*.rebuild

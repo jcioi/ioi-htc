@@ -1,0 +1,52 @@
+variables:
+  name: preview
+  tmpdir: ./tmp
+  vcpus: '2'
+  mem: '4096'
+
+builders:
+  - type: qemu
+    accelerator: kvm
+    iso_urls:
+      - ./base.qcow2
+    iso_checksum_type: none
+    disk_image: yes
+    ssh_username: provisioner
+    ssh_password: provisioner
+    ssh_timeout: 10m
+    shutdown_command: 'sudo poweroff'
+    http_directory: .
+    output_directory: '{{user `tmpdir`}}/{{user `name`}}'
+    boot_wait: 0s
+    headless: yes
+    vnc_bind_address: 0
+    qemuargs:
+      - [-smp, '{{user `vcpus`}}']
+      - [-m, '{{user `mem`}}']
+
+provisioners:
+  - type: shell
+    inline: 'rm -rf /tmp/itamae && mkdir -p /tmp/itamae'
+  - type: file
+    source: ../server/site.rb
+    destination: /tmp/itamae/
+  - type: file
+    source: ../server/roles
+    destination: /tmp/itamae/
+  - type: file
+    source: ../server/cookbooks
+    destination: /tmp/itamae/
+  - type: shell
+    inline: |
+      echo '{"contestant":{"preview":true}}' > /tmp/itamae/node.json
+      cd /tmp/itamae && sudo mitamae local -j node.json site.rb roles/contestant/default.rb
+  - type: shell
+    execute_command: 'sudo {{ .Vars }} sh -ex {{ .Path }}'
+    scripts: scripts/cleanup.sh
+
+post-processors:
+  - type: shell-local
+    environment_vars:
+      - 'TMPDIR={{user `tmpdir`}}'
+      - 'IMGNAME={{user `name`}}'
+    inline: 'mv "$TMPDIR/$IMGNAME/packer-qemu" "$IMGNAME.qcow2"; rmdir "$TMPDIR/$IMGNAME"'

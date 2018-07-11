@@ -11,7 +11,7 @@ node[:contest_ids] = {
 node[:site_cidr] = '10.18.0.0/16'
 # node[:site_cidr6] = ''
 
-node[:desired_hostname] ||= node[:hocho_ec2][:tags][:Name]
+node[:desired_hostname] ||= node.dig(:hocho_ec2, :tags, :Name)
 
 execute "systemctl daemon-reload" do
   action :nothing
