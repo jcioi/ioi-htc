@@ -1,0 +1,12 @@
+{
+  "name": "ec2-r53",
+  "description": "",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::550372229658:role/ec2-r53_lambda_function",
+  "environment": {
+    "EC2R53_ZONE": "Z1V30A252QIS0J",
+    "EC2R53_ZONE_PTR": "10:ZIOWYU1XGG6MH",
+    "EC2R53_DOMAIN": "aws.ioi18.net."
+  }
+}
