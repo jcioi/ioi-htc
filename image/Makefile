@@ -27,3 +27,5 @@ preview.qcow2: base.qcow2
 
 %.ova: %.ovf %.vmdk.gz
 	tar cf $@ -- $^
+
+.SECONDARY:
