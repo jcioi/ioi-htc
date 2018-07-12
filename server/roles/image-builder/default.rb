@@ -5,3 +5,4 @@ package 'libguestfs-tools'
 package 'pigz'
 
 include_cookbook 'packer'
+include_cookbook 'apt-cacher-ng'
