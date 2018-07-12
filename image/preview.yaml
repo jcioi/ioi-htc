@@ -25,6 +25,11 @@ builders:
       - [-m, '{{user `mem`}}']
 
 provisioners:
+  - type: file
+    source: ./timestamp
+    destination: /tmp/
+  - type: shell
+    inline: 'sudo mv -f /tmp/timestamp /etc'
   - type: shell
     inline: 'rm -rf /tmp/itamae && mkdir -p /tmp/itamae'
   - type: file
@@ -42,7 +47,8 @@ provisioners:
       cd /tmp/itamae && sudo mitamae local -j node.json site.rb roles/contestant/default.rb
   - type: shell
     execute_command: 'sudo {{ .Vars }} sh -ex {{ .Path }}'
-    scripts: scripts/cleanup.sh
+    scripts:
+      - scripts/cleanup.sh
 
 post-processors:
   - type: shell-local

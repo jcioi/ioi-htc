@@ -31,6 +31,12 @@ builders:
       - [-m, '{{user `mem`}}']
 
 provisioners:
+  - type: file
+    source: ./timestamp
+    destination: /tmp/
+    generated: yes
+  - type: shell
+    inline: 'sudo mv -f /tmp/timestamp /etc'
   - type: shell
     execute_command: 'sudo {{ .Vars }} sh -ex {{ .Path }}'
     scripts:

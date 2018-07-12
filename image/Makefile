@@ -9,7 +9,7 @@ preview: preview.ova
 %.json: %.yaml
 	ruby -rjson -ryaml -e 'File.write(ARGV[1], JSON.dump(YAML.load_file(ARGV[0])))' $< $@
 
-%.qcow2: %.json %.rebuild
+%.qcow2: %.json %.rebuild | timestamp
 	rm -rf tmp/$$(basename -s .qcow2 $@)
 	time packer build $<
 	$(SPARSIFY) && sudo virt-sparsify --in-place $@
@@ -21,6 +21,9 @@ preview.qcow2: base.qcow2
 %.rebuild:
 	touch $@
 
+timestamp: FORCE
+	(TZ=Asia/Tokyo date +"%FT%T+0900"; git rev-parse @) > $@
+
 %.vmdk: %.qcow2
 	qemu-img convert -O vmdk $< $@
 
@@ -31,3 +34,5 @@ preview.qcow2: base.qcow2
 	tar cf $@ -- $^
 
 .SECONDARY:
+FORCE:
+.PHONY: FORCE
