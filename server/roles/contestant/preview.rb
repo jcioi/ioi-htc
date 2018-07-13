@@ -37,7 +37,3 @@ end
 file '/etc/systemd/network/default.network' do
   action :delete
 end
-
-service 'networkd' do
-  action :disable
-end
