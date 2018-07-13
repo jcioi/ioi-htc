@@ -14,9 +14,30 @@ user username do
   create_home true
 end
 
-file '/etc/sudoers.d/contestant' do
+
+# Networks are managed by NetworkManager so that VM users can change settings using gnome-control-center
+# NB. NetworkManager requires a user to belong to "sudo" group to change network settings
+
+execute "usermod -a -G sudo #{username.shellescape}" do
+  only_if "! getent group sudo | cut -d: -f4 | tr , '\\n' | grep -Fxq #{username.shellescape}"
+end
+
+package 'netplan.io'
+file '/etc/netplan/01-netcfg.yaml' do
   owner 'root'
   group 'root'
-  mode '640'
-  content "#{username} ALL= ALL"
+  mode '644'
+  content <<EOF
+network:
+  version: 2
+  renderer: NetworkManager
+EOF
+end
+
+file '/etc/systemd/network/default.network' do
+  action :delete
+end
+
+service 'networkd' do
+  action :disable
 end
