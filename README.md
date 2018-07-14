@@ -28,6 +28,14 @@ rm -v tmp/hocho-ec2-cache.* # Purge cache (default up to 3600s)
 
 hocho-ec2.gem loads EC2 instance information for you. Make sure an instance to have `Name` and `Role` tag. Specific overriding can be done with manually creating `hosts/*.yml`.
 
+#### secret key
+
+```
+bundle exec itamae-secrets newkey --method=aes-passphrase default
+```
+
+- https://docs.google.com/spreadsheets/d/1Gfsfvb1pcnibkanu2xwjB9crrc0xp1-xDxqRCf-_fWA/edit#gid=928059752
+
 ### roadworker: DNS
 
 ```
@@ -64,4 +72,13 @@ cd s3/
 
 bundle exec bukelatta -a --dry-ryn
 bundle exec bukelatta -a
+```
+
+## cmsconfig: CMS config.json template
+
+```
+cd cmsconfig/
+
+# For clusters/dev.rb
+bundle exec ruby upload.rb dev 
 ```

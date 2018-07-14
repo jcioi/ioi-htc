@@ -35,6 +35,15 @@ role "Ec2CmsDev", :path=>"/" do
             arn:aws:s3:::ioi18-cms-files-dev/*
           ),
         },
+        {
+          "Effect" => "Allow",
+          "Action" => %w(
+            s3:GetObject
+          ),
+          "Resource" => %w(
+            arn:aws:s3:::ioi18-infra/cms/dev/config.json
+          ),
+        },
       ]
     }
   end

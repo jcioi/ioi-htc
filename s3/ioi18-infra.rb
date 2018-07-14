@@ -8,6 +8,8 @@ bucket "ioi18-infra" do
         "Action" => %w(s3:GetObject),
         "Resource" => %w(
           arn:aws:s3:::ioi18-infra/tmp/*
+          arn:aws:s3:::ioi18-infra/cms/dev/config.json
+          arn:aws:s3:::ioi18-infra/cms/prd/config.json
         ),
         "Condition" => {
           "StringEquals" => {

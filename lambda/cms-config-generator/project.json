@@ -1,0 +1,9 @@
+{
+  "name": "cms-config-generator",
+  "description": "",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::550372229658:role/LambdaCmsConfigGenerator",
+  "environment": {
+  }
+}
