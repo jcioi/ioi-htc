@@ -1,9 +1,20 @@
 #!/bin/bash -xe
-target=/opt/cms
+target=/opt/cms-isolate
+url='<%= node[:cms].fetch(:isolate).fetch(:tarball_url) %>'
+
+if [ -e "/usr/bin/isolate" ]; then
+  echo "${target} exists" 1>&2
+  exit 1
+fi
+
+mkdir -p $target
+chown deploy:deploy $target
 
 cd $target
-cd isolate/
-sudo -u cmsuser make isolate
-cp ./isolate /usr/bin/
+sudo -u deploy curl -LSsf -o /tmp/isolate.tar.gz "${url}"
+sudo -u deploy tar xf /tmp/isolate.tar.gz --strip-components=1 -C /opt/cms-isolate
+sudo -u deploy make isolate
+chown -R root:root $target
+cp $target/isolate /usr/bin/
 chown root:cmsuser /usr/bin/isolate
 chmod 4750 /usr/bin/isolate

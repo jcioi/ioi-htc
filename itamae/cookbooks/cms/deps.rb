@@ -16,6 +16,7 @@
   libyaml-dev
   libffi-dev
   python-pip
+  libcap-dev
   texlive-latex-base
   a2ps
   gcj-jdk
