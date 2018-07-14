@@ -4,15 +4,15 @@ node.reverse_merge!(
   },
 )
 
-template '/usr/bin/ioi-install-cms' do
-  owner 'root'
-  group 'root'
-  mode '0755'
-end
+# template '/usr/bin/ioi-install-cms' do
+#   owner 'root'
+#   group 'root'
+#   mode '0755'
+# end
 
-execute '/usr/bin/ioi-install-cms' do
-  not_if 'test -e /opt/cms'
-end
+# execute '/usr/bin/ioi-install-cms' do
+#   not_if 'test -e /opt/cms'
+# end
 
 %w(
   /var/log/cms
