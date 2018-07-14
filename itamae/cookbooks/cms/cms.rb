@@ -27,6 +27,7 @@ end
 end
 
 %w(
+  cms.target
   cms-logservice.service
   cms-resourceservice.service
   cms-evaluationservice.service
@@ -43,4 +44,8 @@ end
     mode  '0644'
     notifies :run, 'execute[systemctl daemon-reload]'
   end
+end
+
+service 'cms.target' do
+  action [:enable]
 end

@@ -1,5 +1,6 @@
 [Unit]
 Description=Update CMS config
+PartOf=cms.target
 Before=cms-logservice.service cms-resourceservice.service cms-evaluationservice.service cms-scoringservice.service cms-contestwebserver.service cms-adminwebserver.service cms-worker.service cms-checker.service cms-proxyservice.service
 
 [Service]

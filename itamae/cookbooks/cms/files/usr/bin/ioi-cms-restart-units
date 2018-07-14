@@ -1,9 +1,11 @@
 #!/bin/bash
 echo "!!!! Restarting following units !!!!"
-systemctl list-unit-files|grep enabled|grep '^cms-'|awk '{print $1}'
+#systemctl list-unit-files|grep enabled|grep '^cms-'|awk '{print $1}'
+systemctl show cms.target|grep ConsistsOf
 echo "=> Sleeping 6 seconds"
 sleep 6
 set -x
-for x in $(systemctl list-unit-files|grep enabled|grep '^cms-'|awk '{print $1}'); do
-  systemctl restart $x
-done
+systemctl restart cms.target
+#for x in $(systemctl list-unit-files|grep enabled|grep '^cms-'|awk '{print $1}'); do
+#  systemctl restart $x
+#done
