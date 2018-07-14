@@ -18,7 +18,7 @@ All the following tools require you to have proper `AWS_*` environment variables
 ### mitamae: Server Provisioning
 
 ``` sh
-cd server/
+cd itamae/
 
 bundle exec hocho apply servername --dry-run
 bundle exec hocho apply servername

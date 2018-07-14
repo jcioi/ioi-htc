@@ -5,7 +5,7 @@ require 'itamae/secrets'
 cluster = ARGV[0]
 abort "Usage: #$0 CLUSTER" unless cluster
 
-@secrets = Itamae::Secrets("#{__dir__}/../server/secrets")
+@secrets = Itamae::Secrets("#{__dir__}/../itamae/secrets")
 
 filename = "#{__dir__}/clusters/#{cluster}.rb"
 
