@@ -1,0 +1,10 @@
+#!/bin/bash
+timecond="-z /etc/cms.conf"
+if ! grep -q '{' /etc/cms.conf; then
+  timecond=""
+fi
+if [[ ! -e /etc/cms_config_url.txt ]]; then
+  exit 1
+fi
+
+curl -Ssf ${timecond} -o /etc/cms.conf "$(cat /etc/cms_config_url.txt)"

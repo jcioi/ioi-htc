@@ -1,7 +1,5 @@
 node.reverse_merge!(
   cms: {
-    cluster: nil,
-    contest_id: nil,
   },
 )
 
