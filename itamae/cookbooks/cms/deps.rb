@@ -5,7 +5,7 @@
   fpc
   postgresql-client
   gettext
-  python2.7
+  python3
   iso-codes
   shared-mime-info
   stl-manual
