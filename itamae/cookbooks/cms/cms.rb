@@ -26,6 +26,29 @@ node.reverse_merge!(
   end
 end
 
+
+%w(
+  cmsAdminWebServer
+  cmsChecker
+  cmsContestWebServer
+  cmsDropDB
+  cmsEvaluationService
+  cmsInitDB
+  cmsLogService
+  cmsPrintingService
+  cmsProxyService
+  cmsRankingWebServer
+  cmsResourceService
+  cmsScoringService
+  cmsWorker
+).each do |command|
+  template "/usr/bin/#{command}" do
+    source 'templates/usr/bin/cms'
+    user  'root'
+    group 'root'
+    mode  '0755'
+  end
+end
 %w(
   cms.target
   cms-logservice.service
