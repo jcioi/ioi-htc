@@ -33,13 +33,13 @@ provisioners:
   - type: shell
     inline: 'rm -rf /tmp/itamae && mkdir -p /tmp/itamae'
   - type: file
-    source: ../server/site.rb
+    source: ../itamae/site.rb
     destination: /tmp/itamae/
   - type: file
-    source: ../server/roles
+    source: ../itamae/roles
     destination: /tmp/itamae/
   - type: file
-    source: ../server/cookbooks
+    source: ../itamae/cookbooks
     destination: /tmp/itamae/
   - type: shell
     inline: |
