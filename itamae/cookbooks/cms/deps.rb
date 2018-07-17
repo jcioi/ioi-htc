@@ -10,16 +10,16 @@
   shared-mime-info
   stl-manual
   cgroup-lite
-  python-dev
+  python3-dev
   libpq-dev
   libcups2-dev
   libyaml-dev
   libffi-dev
-  python-pip
   libcap-dev
+  python3-pip
+  python3-venv
   texlive-latex-base
   a2ps
-  python-virtualenv
 ).each do |dep|
   package dep
 end
