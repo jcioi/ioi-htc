@@ -16,8 +16,22 @@ package 'ubuntu-desktop'
 include_cookbook 'compilers'
 
 ## Editors
+package 'codeblocks'
+package 'codeblocks-contrib'
+package 'hunspell'  # for codeblocks (spellchecker plugin)
+package 'eclipse-cdt'
+package 'eclipse-cdt-perf'
+package 'eclipse-cdt-valgrind'
+package 'eclipse-jdt'
+package 'geany'
+package 'geany-plugins'
 package 'emacs'
 package 'gedit'
+package 'joe'
+package 'kate'
+package 'kdevelop'
+package 'lazarus'
+package 'fpc-source'  # for lazarus
 package 'nano'
 package 'vim'
 package 'vim-gtk3'
@@ -31,6 +45,7 @@ package 'ruby'
 package 'ruby2.5-doc'
 
 ## Debuggers
+package 'cppcheck'
 package 'ddd'
 package 'ddd-doc'
 package 'gdb'
@@ -41,6 +56,14 @@ package 'visualvm'
 ## Utilities
 package 'firefox'
 package 'gnome-terminal'
+package 'konsole'
+package 'xterm'
 
 package 'byobu'
+package 'mc'
 package 'screen'
+
+## Extra documents
+include_recipe './cppreference.rb'
+
+include_recipe './desktop.rb'
