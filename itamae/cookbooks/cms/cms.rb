@@ -14,6 +14,12 @@ node.reverse_merge!(
 #   not_if 'test -e /opt/cms'
 # end
 
+remote_file '/etc/sudoers.d/cms-deploy' do
+  owner 'root'
+  group 'root'
+  mode  '0640'
+end
+
 %w(
   /var/log/cms
   /var/cache/cms
