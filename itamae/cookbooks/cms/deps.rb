@@ -19,7 +19,6 @@
   libcap-dev
   texlive-latex-base
   a2ps
-  gcj-jdk
   python-virtualenv
 ).each do |dep|
   package dep
