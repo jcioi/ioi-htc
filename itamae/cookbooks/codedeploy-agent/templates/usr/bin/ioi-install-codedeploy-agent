@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+repo = 'https://github.com/aws/aws-codedeploy-agent'
+commit = '<%= node[:codedeploy_agent].fetch(:commit) %>'
+
+path = '/opt/codedeploy-agent'
+
+def cmd(*args)
+  system(*args) or raise "command #{args.inspect} failed"
+end
+
+if ARGV.include?("--is-latest")
+  exit 1 unless File.exist?(File.join(path, '.git'))
+  Dir.chdir(path)
+  rev = `git rev-parse HEAD`.chomp
+  exit commit == rev ? 0 : 1
+end
+
+unless File.exist?(File.join(path, '.git'))
+  cmd "git", "clone", repo, path
+  Dir.chdir(path)
+else
+  Dir.chdir(path)
+  cmd "git", "fetch"
+end
+
+cmd "git", "reset", "--hard", commit
+unless system("bundle", "check")
+  cmd "bundle", "install", "--path", "vendor/bundle"
+end

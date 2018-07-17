@@ -1,0 +1,4 @@
+#!/bin/bash
+cd /opt/codedeploy-agent
+exec bundle exec ruby lib/codedeploy-agent.rb "$@"
+
