@@ -31,8 +31,8 @@ node.reverse_merge!(
       reqsize:$request_length
       runtime:$upstream_http_x_runtime
       apptime:$upstream_response_time
-   ].join('\t'),
-
+     ].join('\t'),
+    default_conf: true,
   }
 )
 
@@ -81,6 +81,14 @@ directory '/etc/nginx/conf.d' do
   owner 'root'
   group 'root'
   mode  '0755'
+end
+
+if node.dig(:nginx, :default_conf)
+  template '/etc/nginx/conf.d/default.conf' do
+    owner 'root'
+    group 'root'
+    mode '644'
+  end
 end
 
 directory '/etc/nginx/public' do

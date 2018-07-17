@@ -2,7 +2,7 @@ include_role 'base'
 include_cookbook 'cms'
 include_cookbook 'nginx'
 
-template '/etc/nginx/conf.d/default.conf' do
+template '/etc/nginx/conf.d/contest.conf' do
   owner 'root'
   group 'root'
   mode  '0755'
