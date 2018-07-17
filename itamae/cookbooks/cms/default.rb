@@ -17,7 +17,7 @@ end
 if node.dig(:op_user, :name)
   opuser = node.dig(:op_user, :name)
   execute "usermod -a -G cmsuser #{opuser}" do
-    not_if "id -zG | grep -z -q -x 900"
+    not_if "id -zG #{opuser} | grep -z -q -x 900"
   end
 end
 
