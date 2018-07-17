@@ -22,7 +22,7 @@ if node.dig(:op_user, :name)
 end
 
 file '/etc/ioi-contest-id.env' do
-  content "CMS_CONTEST_ID=#{node[:contest_id]}\n"
+  content "CMS_CONTEST_ID=#{node[:cms][:contest_id]}\n"
   owner 'root'
   group 'root'
   mode  '0644'
