@@ -12,3 +12,12 @@ end
 link '/usr/local/bin/idea' do
   to '/opt/idea/bin/idea.sh'
 end
+
+include_cookbook 'xdg-desktop'
+
+desktop_entry 'intellij-idea-community' do
+  display_name 'IntelliJ IDEA Community'
+  icon '/opt/idea/bin/idea.png'
+  exec '/usr/local/bin/idea'
+  categories %w(Development IDE Java)
+end
