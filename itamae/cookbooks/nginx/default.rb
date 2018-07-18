@@ -98,6 +98,6 @@ directory '/etc/nginx/public' do
 end
 
 execute 'nginx try-reload' do
-  command 'systemctl try-reload-or-restart nginx.service'
+  command 'nginx -t && systemctl try-reload-or-restart nginx.service'
   action :nothing
 end
