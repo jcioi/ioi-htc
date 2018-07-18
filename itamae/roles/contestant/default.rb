@@ -11,9 +11,12 @@ if node[:contestant][:preview]
   include_recipe './preview.rb'
 end
 
-package 'ubuntu-desktop'
-
 include_cookbook 'compilers'
+
+## Base Desktop Environment
+package 'ubuntu-desktop'
+package 'fonts-noto'
+package 'fonts-noto-cjk'
 
 ## Editors
 package 'codeblocks'
