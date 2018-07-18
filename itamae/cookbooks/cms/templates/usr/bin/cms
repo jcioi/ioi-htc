@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ "_$(whoami)" = "_ioi" ]; then
+if ! groups | grep -q cmsuser; then
   echo "Run as 'ioi' user" 1>&2
   exit 1
 fi
