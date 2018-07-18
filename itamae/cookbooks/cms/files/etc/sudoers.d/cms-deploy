@@ -1,5 +1,6 @@
 # vim: ft=sudoers
 
-Cmnd_Alias CMS_UNIT_RESTART = /bin/systemctl restart cms.target
-deploy ALL = (root) NOPASSWD: CMS_UNIT_RESTART
-Defaults!CMS_UNIT_RESTART !requiretty
+Cmnd_Alias CMS_DEPLOY = /bin/systemctl restart cms.target, \
+                        /usr/bin/systemd-run -P -p User=deploy -p MemoryMax= /opt/cms/deploy/setup.sh
+deploy ALL = (root) NOPASSWD: CMS_DEPLOY
+Defaults!CMS_DEPLOY !requiretty
