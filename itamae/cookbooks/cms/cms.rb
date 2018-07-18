@@ -32,6 +32,16 @@ end
   end
 end
 
+%w(
+  /opt/cms_venv
+  /opt/cms
+).each do |_|
+  directory _ do
+    owner 'deploy'
+    group 'deploy'
+    mode  '0755'
+  end
+end
 
 %w(
   cmsAdminWebServer
