@@ -1,6 +1,7 @@
 include_role 'base'
 include_cookbook 'cms'
 include_cookbook 'nginx'
+include_cookbook 'codedeploy-agent'
 
 template '/etc/nginx/conf.d/admin.conf' do
   owner 'root'
