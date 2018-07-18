@@ -13,8 +13,9 @@ chown deploy:deploy $target
 cd $target
 sudo -u deploy curl -LSsf -o /tmp/isolate.tar.gz "${url}"
 sudo -u deploy tar xf /tmp/isolate.tar.gz --strip-components=1 -C /opt/cms-isolate
-sudo -u deploy make isolate
+sudo -u deploy make PREFIX=/ isolate
 chown -R root:root $target
 cp $target/isolate /usr/bin/
+cp $target/isolate-check-environment /usr/bin/
 chown root:cmsuser /usr/bin/isolate
 chmod 4750 /usr/bin/isolate
