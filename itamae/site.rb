@@ -31,12 +31,12 @@ define :apt_key, keyname: nil do
   if node[:http_proxy]
     execute "apt-key #{name}" do
       command "apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --keyserver-option http-proxy=#{node[:http_proxy]} --recv-keys #{name}"
-      only_if "! apt-key list | grep -q '/#{name} ' || apt-key list | grep -Eq '/#{name}\s.+expired'"
+      not_if "apt-key export #{name}|grep -q PGP"
     end
   else
     execute "apt-key #{name}" do
       command "apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys #{name}"
-      only_if "! apt-key list | grep -q '/#{name} ' || apt-key list | grep -Eq '/#{name}\s.+expired'"
+      not_if "apt-key export #{name}|grep -q PGP"
     end
   end
 end
