@@ -69,6 +69,7 @@
 
   # "Whether Tornado prints debug information on stdout.",
   tornado_debug: false,
+  file_log_debug: true,
 
   ### "ContestWebServer",
 
@@ -150,5 +151,8 @@
   pdf_printing_allowed: false,
 
   # "This is the end of this file."
+  s3_backend_region: 'ap-northeast-1',
+  s3_backend_bucket: 'ioi18-cms-files-dev',
+  s3_backend_prefix: '',
 }
 
