@@ -36,6 +36,9 @@ package 'nano'
 package 'vim'
 package 'vim-gtk3'
 
+include_recipe './eclipse.rb'
+include_recipe './intellij_idea.rb'
+
 ## Interpreters
 package 'python'
 package 'python-doc'
