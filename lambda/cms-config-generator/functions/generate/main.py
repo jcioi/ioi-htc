@@ -41,6 +41,8 @@ def generate_ec2_services(cluster):
                 if services.get(service_name) == None:
                     services[service_name] = []
                 services[service_name].append([instance['PrivateIpAddress'], service_name_to_port[service_name]])
+    for service_name in services:
+        services[service_name].sort(key=lambda node: node[0])
 
     return services
 
