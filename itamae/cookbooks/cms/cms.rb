@@ -14,6 +14,8 @@ node.reverse_merge!(
 #   not_if 'test -e /opt/cms'
 # end
 
+include_cookbook 'deploy-user'
+
 remote_file '/etc/sudoers.d/cms-deploy' do
   owner 'root'
   group 'root'
