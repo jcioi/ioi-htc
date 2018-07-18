@@ -3,7 +3,7 @@ include_cookbook 'xdg-desktop'
 desktop_entry 'cppreference' do
   display_name 'C++/C Reference'
   icon 'html'
-  exec 'x-www-browser /opt/cppreference/reference/en/index.html'
+  exec 'x-www-browser /usr/share/cppreference/doc/html/en/index.html'
   categories %w(Documentation)
 end
 

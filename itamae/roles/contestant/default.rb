@@ -66,6 +66,6 @@ package 'mc'
 package 'screen'
 
 ## Extra documents
-include_recipe './cppreference.rb'
+package 'cppreference-doc-en-html'
 
 include_recipe './desktop.rb'
