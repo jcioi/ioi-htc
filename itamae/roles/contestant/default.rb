@@ -7,10 +7,6 @@ node.reverse_merge!(
   },
 )
 
-if node[:contestant][:preview]
-  include_recipe './preview.rb'
-end
-
 include_cookbook 'compilers'
 
 ## Base Desktop Environment
@@ -68,4 +64,12 @@ package 'screen'
 ## Extra documents
 package 'cppreference-doc-en-html'
 
+
 include_recipe './desktop.rb'
+include_recipe './skel.rb'
+include_recipe './trust-launchers.rb'
+
+if node[:contestant][:preview]
+  include_recipe './preview.rb'
+end
+
