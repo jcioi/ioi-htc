@@ -1,3 +1,5 @@
+package 'dbus-user-session'
+
 remote_file '/etc/systemd/user/ioi-trust-launchers.service' do
   owner 'root'
   group 'root'
