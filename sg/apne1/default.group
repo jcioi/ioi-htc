@@ -13,7 +13,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
 
       permission :tcp, 22..22 do
         groups(
-          "default",
+          "bastion",
         )
       end
     end
