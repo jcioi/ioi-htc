@@ -47,6 +47,10 @@ role "Ec2CmsDev", :path=>"/" do
       ]
     }
   end
+
+  attached_managed_policies(
+    "arn:aws:iam::550372229658:policy/IoiCodeDeploy",
+  )
 end
 
 instance_profile "Ec2CmsDev", :path=>"/"

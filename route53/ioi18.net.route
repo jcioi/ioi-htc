@@ -24,10 +24,41 @@ template "ioi18.net-common" do
     resource_records "18.179.132.187"
   end
 
-  rrset "_631443614a51aeef30597369338b45d4.s3-apne1.ioi18.net.", "CNAME" do
+  rrset "cms-dev-public.elb.ioi18.net.", "CNAME" do
     ttl 60
-    resource_records "_2a11a85cc8ea57ad9cdc4241c6e80af8.acm-validations.aws."
+    resource_records "cms-dev-public-766146013.ap-northeast-1.elb.amazonaws.com."
   end
+
+  rrset "contest-dev.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "cms-dev-public.elb.ioi18.net."
+  end
+  rrset "admin-dev.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "cms-dev-public.elb.ioi18.net."
+  end
+
+
+  %w(
+    _631443614a51aeef30597369338b45d4.s3-apne1.ioi18.net. _2a11a85cc8ea57ad9cdc4241c6e80af8.acm-validations.aws.
+
+    _d4f78db4c298fbc45330f0d1c9d9e849.contest-dev.ioi18.net. _1633bd98cb4163a5da11c64f521fc4cc.acm-validations.aws.
+    _28e7c50a7da8abdeb4b9052a496131ba.admin-dev.ioi18.net. _1752cbcca843adf936a314d7a06c9cf6.acm-validations.aws.
+
+    _49b0d8867958cbdf4bf0a1b5bb05ca9d.contest-prd.ioi18.net. _f444da3c7f19c069578a5df4e5346bb5.acm-validations.aws.
+    _f84c971670274fed5f5b5f6eacf93831.contest.ioi18.net. _0eb88c8671bd02fc410223b9e0245112.acm-validations.aws.
+    _2d4786213b2decc5137acde13908983b.practice.ioi18.net. _3d2be546d8e02ce302f22c67fc66b1dc.acm-validations.aws.
+
+    _53f69bc3666681b7273a15de51c34421.admin-prd.ioi18.net. _b2d4ec0466de36a82bc79d0e5da1192c.acm-validations.aws.
+    _0b2e01274f08027e8ee3e190a6611dd2.admin.ioi18.net. _a1bbc20246715abc577dccf3e4a18473.acm-validations.aws.
+  ).each_slice(2) do |(name,target)|
+    rrset name, "CNAME" do
+      ttl 60
+      resource_records target
+    end
+  end
+
+
 end
 
 

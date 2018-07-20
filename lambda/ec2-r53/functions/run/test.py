@@ -268,7 +268,7 @@ class TestEngine(unittest.TestCase):
         self.assertEqual(len(self.adapter.r53_received_change_sets), 0)
         return
 
-    def test_ec2state_upsert(self):
+    def test_ec2state_upsert_unnamed(self):
         self.adapter.ec2_instances = [
             self._ec2('i-a0', 'vpc-a', '192.0.2.1', {}),
         ]
@@ -283,6 +283,24 @@ class TestEngine(unittest.TestCase):
         ])
         self.assertEqual(len(self.adapter.r53_received_change_sets), 2)
         return
+
+    def test_ec2state_upsert_named(self):
+        self.adapter.ec2_instances = [
+            self._ec2('i-a0', 'vpc-a', '192.0.2.1', {'Name': 'foo'}),
+        ]
+
+        self.engine.handle(self._ec2_state('i-a0', 'running'))
+
+        self._assertRRSetChanges('ZONE', [
+            self._r53_change('UPSERT', 'ip-192-0-2-1.a.test.invalid.', 'A', ['192.0.2.1']),
+            self._r53_change('UPSERT', 'foo.a.test.invalid.', 'A', ['192.0.2.1']),
+        ])
+        self._assertRRSetChanges('PTRA', [
+            self._r53_change('UPSERT', '1.2.0.192.in-addr.arpa.', 'PTR', ['foo.a.test.invalid.']),
+        ])
+        self.assertEqual(len(self.adapter.r53_received_change_sets), 2)
+        return
+
 
 
 

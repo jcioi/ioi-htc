@@ -1,0 +1,13 @@
+#!/bin/bash
+if ! groups | grep -q cmsuser; then
+  echo "Run as 'ioi' user" 1>&2
+  exit 1
+fi
+if [ -n "${IOI18_CMS_COMMAND}" ]; then
+  echo "Loop! check venv is correctly set up (Have CMS been deployed?)" 1>&@
+  exit 1
+fi
+export IOI18_CMS_COMMAND=1
+source /opt/cms_venv/bin/activate
+exec $(basename $0) "$@"
+

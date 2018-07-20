@@ -165,7 +165,8 @@ class InstanceStateProcessor():
                 },
             })
 
-        if find_tag('Name', i.get('Tags', [])) == None:
+        name = find_tag('Name', i.get('Tags', []))
+        if name == None:
             ptr_zone = self.engine.lookup_ptr_zone(address)
             if ptr_zone:
                 self.handler.change_rrset(ptr_zone, {
@@ -179,9 +180,8 @@ class InstanceStateProcessor():
                         ],
                     },
                 })
-
-        return
-
+        else:
+            NameTagProcessor(self.handler, 'CreateTags', name, [self.instance()['InstanceId']]).run()
 
 class NameTagProcessor():
     def __init__(self, handler, event_name, name, instance_ids):
@@ -415,7 +415,6 @@ class Handler():
 
         print("Instance state %s: %s" % (instance_id, state))
         self.ensure_records_for_instance(instance_id, state)
-
 
     def handle_tag_event(self, event_name, instance_ids, tags):
         for tag in tags:

@@ -1,0 +1,24 @@
+[Unit]
+Description=AWS CodeDeploy Host Agent
+
+[Service]
+Type=forking
+User=deploy
+
+Environment=BUNDLE_GEMFILE=/opt/codedeploy-agent/Gemfile
+ExecStart=/bin/bash -a -c '[ -f /etc/profile ] && source /etc/profile; bundle exec /opt/codedeploy-agent/bin/codedeploy-agent start'
+ExecStop=/opt/codedeploy-agent/bin/codedeploy-agent stop
+
+RemainAfterExit=no
+
+Restart=on-failure
+
+LogsDirectory=codedeploy-agent
+RuntimeDirectory=codedeploy-agent
+StateDirectory=codedeploy-agent
+
+MemorySwapMax=0
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+---
+:log_aws_wire: false
+:log_dir: '/var/log/codedeploy-agent/'
+:pid_dir: '/run/codedeploy-agent/pid/'
+:program_name: codedeploy-agent
+:root_dir: '/var/lib/codedeploy-agent/deployment-root'
+:verbose: false
+:wait_between_runs: 1
+:proxy_uri:
+:max_revisions: 5

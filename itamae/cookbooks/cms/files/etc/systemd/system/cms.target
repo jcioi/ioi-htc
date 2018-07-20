@@ -1,0 +1,5 @@
+[Unit]
+Description=CMS system
+
+[Install]
+WantedBy=multi-user.target

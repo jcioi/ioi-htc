@@ -1,0 +1,8 @@
+#!/bin/bash
+if ! groups | grep -q cmsuser; then
+  echo "Run as 'ioi' user" 1>&2
+  exit 1
+fi
+source /opt/cms_venv/bin/activate
+cd /opt/cms
+exec bash

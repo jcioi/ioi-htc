@@ -1,7 +1,9 @@
+include_role 'base'
 include_cookbook 'cms'
 include_cookbook 'nginx'
+include_cookbook 'codedeploy-agent'
 
-template '/etc/nginx/conf.d/default.conf' do
+template '/etc/nginx/conf.d/contest.conf' do
   owner 'root'
   group 'root'
   mode  '0755'
@@ -9,13 +11,13 @@ template '/etc/nginx/conf.d/default.conf' do
 end
 
 service 'cms-resourceservice.service' do
-  action [:enable, :start]
+  action [:enable]
 end
 
 service 'cms-contestwebserver.service' do
-  action [:enable, :start]
+  action [:enable]
 end
 
 service 'nginx.service' do
-  action [:enable, :start]
+  action [:enable]
 end

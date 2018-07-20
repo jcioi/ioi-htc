@@ -49,10 +49,12 @@ end
   apt-transport-https
   git
   ruby
+  ruby-bundler
   btrfs-tools
 ).each do |_|
   package _
 end
+
 
 include_cookbook 'iperf3'
 

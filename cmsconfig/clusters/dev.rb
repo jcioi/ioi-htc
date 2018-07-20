@@ -31,7 +31,7 @@
   ### "Database",
 
   # "Connection string for the database.",
-  database: "postgresql+psycopg2://cmsuser:#{@secrets.fetch(:db_cmsuser_password)}@sorah-cms-101.cwsmfajr96lt.ap-northeast-1.rds.amazonaws.com/cmsdb",
+  database: "postgresql+psycopg2://cmsuser:#{@secrets.fetch(:db_cmsuser_password)}@cms-dev-db.cluster-c9ge2hh8rox6.ap-northeast-1.rds.amazonaws.com/cmsdb",
 
   # "Whether SQLAlchemy prints DB queries on stdout.",
   database_debug: false,
@@ -69,6 +69,7 @@
 
   # "Whether Tornado prints debug information on stdout.",
   tornado_debug: false,
+  file_log_debug: true,
 
   ### "ContestWebServer",
 
@@ -150,5 +151,8 @@
   pdf_printing_allowed: false,
 
   # "This is the end of this file."
+  s3_backend_region: 'ap-northeast-1',
+  s3_backend_bucket: 'ioi18-cms-files-dev',
+  s3_backend_prefix: '',
 }
 
