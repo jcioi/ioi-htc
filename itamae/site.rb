@@ -11,6 +11,10 @@ node[:contest_ids] = {
 node[:site_cidr] = '10.18.0.0/16'
 # node[:site_cidr6] = ''
 
+if node.dig(:hocho_vpc, :cidr_block)
+  node[:resolvers] = [IPAddr.new(node.dig(:hocho_vpc, :cidr_block)).to_s.sub(/\.0$/,'.2')]
+end
+
 node[:desired_hostname] ||= node.dig(:hocho_ec2, :tags, :Name)
 
 execute "systemctl daemon-reload" do

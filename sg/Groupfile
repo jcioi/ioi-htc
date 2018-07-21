@@ -2,6 +2,9 @@
 # vi: set ft=ruby :
 require_relative '../misc/ensure-aws-account.rb'
 
+# CIDR_VENUE_ARENA = 
+# CIDR_VENUE_CONF = 
+# CIDR_VENUE_GUEST = 
 # CIDR_VENUE_LIFE = 
 # CIDR_VENUE_SRV = 
 
