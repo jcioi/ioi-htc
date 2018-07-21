@@ -13,7 +13,7 @@ service 'haproxy' do
   action [:enable, :start]
 end
 
-template '/etc/nginx/conf.d/default.conf' do
+template '/etc/nginx/conf.d/s3.conf' do
   owner 'root'
   group 'root'
   mode  '0644'
