@@ -26,6 +26,31 @@ template "ioi18.net-private" do
 end
 
 template "ioi18.net-common" do
+  rrset "ioi18.net.", "CAA" do
+    ttl 300
+    resource_records(
+      *%w(
+        letsencrypt.org
+        amazon.com
+        amazontrust.com
+        awstrust.com
+        amazonaws.com
+      ).map do |cn|
+        "0 issue \"#{cn}\""
+      end,
+      *%w(
+        letsencrypt.org
+        amazon.com
+        amazontrust.com
+        awstrust.com
+        amazonaws.com
+      ).map do |cn|
+        "0 issuewild \"#{cn}\""
+      end,
+    )
+  end
+
+
   rrset "bastion.ioi18.net", "A" do
     ttl 60
     resource_records "18.179.132.187"
