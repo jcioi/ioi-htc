@@ -81,4 +81,7 @@ cd cmsconfig/
 
 # For clusters/dev.rb
 bundle exec ruby upload.rb dev 
+
+# For variants/prd/onpremise.rb
+bundle exec ruby upload.rb prd onpremise
 ```

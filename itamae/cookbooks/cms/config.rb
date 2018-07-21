@@ -3,9 +3,35 @@ node.reverse_merge!(
     config_url: "https://s3-apne1.ioi18.net/ioi18-infra/cms/#{node[:cms].fetch(:cluster)}/config.json",
   },
 )
+if node[:cms][:variant]
+  node.reverse_merge!(
+    cms: {
+      variant_config_url: "https://s3-apne1.ioi18.net/ioi18-infra/cms/#{node[:cms].fetch(:cluster)}/config.#{node[:cms].fetch(:variant)}.json",
+    },
+  )
+end
 
-file '/etc/cms_config_url.txt' do
+file '/etc/cms_config_url.cluster.txt' do
   content "#{node[:cms][:config_url]}\n"
+  owner 'root'
+  group 'root'
+  mode  '0640'
+end
+
+if node[:cms][:variant_config_url]
+  file '/etc/cms_config_url.variant.txt' do
+    content "#{node[:cms][:variant_config_url]}\n"
+    owner 'root'
+    group 'root'
+    mode  '0640'
+  end
+else
+  file '/etc/cms_config_url.variant.txt' do
+    action :delete
+  end
+end
+
+file '/etc/cms_config_mark.txt' do
   owner 'root'
   group 'root'
   mode  '0640'
@@ -36,6 +62,17 @@ file '/etc/cms.conf' do
   group 'cmsuser'
   mode  '0640'
 end
+file '/etc/cms.cluster.conf' do
+  owner 'root'
+  group 'cmsuser'
+  mode  '0600'
+end
+file '/etc/cms.variant.conf' do
+  owner 'root'
+  group 'cmsuser'
+  mode  '0600'
+end
+
 
 service 'ioi-update-cms-config.timer' do
   action [:enable, :start]
