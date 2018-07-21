@@ -12,16 +12,7 @@
 
   ### "AsyncLibrary",
   core_services: {
-    # LogService:        %w(sorah-cms-log-001).map { |_| [_, 29000] },
-    # ResourceService: %w(sorah-cms-log-001 sorah-cms-eval-001 sorah-cms-scoring-001 sorah-cms-web-contest-001 sorah-cms-web-admin-001).map { |_| [_, 28000] },
-    # ScoringService:  %w(sorah-cms-scoring-001).map { |_| [_, 28500] },
-    # Checker:           [["localhost", 22000]],
-    # EvaluationService: %w(sorah-cms-eval-001).map { |_| [_, 25000] },
     # Worker:            %w(sorah-cms-worker-001 sorah-cms-worker-002).map { |_| [_, 26000] },
-    # ContestWebServer: %w(sorah-cms-web-contest-001).map{ |_| [_, 21000] },
-    # AdminWebServer: %w(sorah-cms-web-admin-001).map{ |_| [_, 21100] },
-    # ProxyService:      [["localhost", 28600]],
-    # PrintingService:   [["localhost", 25123]]
   },
   other_services: {
     TestFileCacher:    [["localhost", 27501]]
