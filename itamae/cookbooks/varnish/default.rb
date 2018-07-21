@@ -2,6 +2,7 @@ node.reverse_merge!(
   varnish: {
     mem_size: "#{(node[:memory][:total].to_i * 0.8).to_i}k",
     listen: ':80',
+    timeout_idle: 60, # keep-alive
   }
 )
 package 'varnish' do
