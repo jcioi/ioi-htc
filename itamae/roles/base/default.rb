@@ -27,6 +27,7 @@ template "/etc/systemd/timesyncd.conf" do
   owner 'root'
   group 'root'
   mode  '0644'
+  notifies :restart, 'service[systemd-timesyncd]' unless node[:in_container]
 end
 
 unless node[:in_container]
