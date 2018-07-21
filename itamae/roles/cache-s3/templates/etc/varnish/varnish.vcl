@@ -100,6 +100,7 @@ sub vcl_deliver {
   }
   set resp.http.X-Cache-Hits = obj.hits;
   set resp.http.X-Cache-Age = obj.age;
+  set resp.http.X-Cache-TTL = obj.ttl;
   set resp.http.X-Cache-Node = server.identity;
 
   return (deliver);
