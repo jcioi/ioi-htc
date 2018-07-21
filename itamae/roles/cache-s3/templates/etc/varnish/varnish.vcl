@@ -25,6 +25,11 @@ sub vcl_hash {
 
 sub vcl_recv {
   set req.backend_hint = haproxy_elb_rproxy_s3;
+
+  if (req.url == "/httpd_alived") {
+    return (synth(200, "OK " + server.identity));
+  }
+
   if (req.http.host ~ "(?i)^cache\.") {
     set req.http.host = regsub(req.http.host, "(?i)^cache\.", "");
   } else {
