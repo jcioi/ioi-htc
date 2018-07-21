@@ -80,13 +80,14 @@ sub vcl_backend_response {
     return (deliver);
   }
 
-  if (beresp.ttl <= 0s) {
-    if (bereq.url ~ "(?i)/[^/]+cms-files-[^/]+/") {
-      set beresp.ttl = 28800s;
-    } else {
-      set beresp.ttl = 300s;
-    }
+  if (beresp.http.Expires || beresp.http.Surrogate-Control ~ "max-age" || beresp.http.Cache-Control ~"(s-maxage|max-age)") {
+    # keep the ttl here
+  } else if (bereq.url ~ "(?i)^/[^/]+cms-files-[^/]+/") {
+    set beresp.ttl = 28800s;
+  } else {
+    set beresp.ttl = 300s;
   }
+
   set beresp.grace = 3600s;
   return (deliver);
 }
