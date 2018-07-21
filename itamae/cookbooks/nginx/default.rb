@@ -10,7 +10,7 @@ node.reverse_merge!(
     proxy_buffers: '100 64k',
     proxy_buffer_size: '8k',
     large_client_header_buffers: '4 8k',
-    proxy_read_timeout: '20s',
+    proxy_read_timeout: '60s',
     proxy_connect_timeout: '5s',
     server_names_hash_bucket_size: 128,
     proxy_headers_hash_bucket_size: 64,
