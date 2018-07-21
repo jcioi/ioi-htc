@@ -11,7 +11,8 @@ fi
 curl -Ssf ${timecond} -o /etc/cms.cluster.conf "$(cat /etc/cms_config_url.cluster.txt)"
 
 if [[ ! -e /etc/cms_config_url.variant.txt ]]; then
-  cp --preserve=timestamps /etc/cms.cluster.conf /etc/cms.conf
+  cp -p /etc/cms.cluster.conf /etc/cms.conf.new
+  mv /etc/cms.conf.new /etc/cms.conf
   exit 0
 fi
 
@@ -23,6 +24,8 @@ curl -Ssf ${timecond} -o /etc/cms.variant.conf "$(cat /etc/cms_config_url.varian
 
 newmark="$(cat /etc/cms.cluster.conf /etc/cms.variant.conf | shasum)"
 if [[ "_${newmark}" != "_$(cat /etc/cms_config_mark.txt)" ]]; then
-  ruby -rjson -e 'puts JSON.parse(File.read(ARGV[0])).merge(JSON.parse(File.read(ARGV[1]))).to_json' -- /etc/cms.cluster.conf /etc/cms.variant.conf > /etc/cms.conf
+  cp -p /etc/cms.conf /etc/cms.conf.new # Preserve owner/mode
+  ruby -rjson -e 'puts JSON.parse(File.read(ARGV[0])).merge(JSON.parse(File.read(ARGV[1]))).to_json' -- /etc/cms.cluster.conf /etc/cms.variant.conf > /etc/cms.conf.new
+  mv /etc/cms.conf.new /etc/cms.conf
   echo "${newmark}" > /etc/cms_config_mark.txt
 fi
