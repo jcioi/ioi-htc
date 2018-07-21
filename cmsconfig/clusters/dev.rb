@@ -154,5 +154,7 @@
   s3_backend_region: 'ap-northeast-1',
   s3_backend_bucket: 'ioi18-cms-files-dev',
   s3_backend_prefix: '',
+  s3_backend_proxy: 'fproxy.ioi18.net:80',
+  s3_backend_fetch_base_url: 'https://cache.s3-apne1.ioi18.net/ioi18-cms-files-dev/',
 }
 
