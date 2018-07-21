@@ -18,10 +18,10 @@ template "ioi18.net-private" do
   end
 
   rrset "cache.s3-apne1.ioi18.net.", "CNAME" do
-    set_identifier 'fproxy-001'
+    set_identifier 'cache-s3-001'
     weight 10
     ttl 5
-    resource_records "cache-s3-001.apne1.aws.ckpd.co."
+    resource_records "cache-s3-001.apne1.aws.ioi18.net."
   end
 
 
