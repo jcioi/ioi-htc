@@ -73,7 +73,6 @@ file '/etc/cms.variant.conf' do
   mode  '0600'
 end
 
-
 service 'ioi-update-cms-config.timer' do
   action [:enable, :start]
 end

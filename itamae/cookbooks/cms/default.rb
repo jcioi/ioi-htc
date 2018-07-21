@@ -14,6 +14,12 @@ end
 
 node[:cms][:contest_id] ||= node[:contest_ids][node[:cms][:cluster]]
 
+if node.dig(:cms, :variant) == 'onpremise' || node.dig(:cms, :cluster) == 'dev' # XXX:
+  include_recipe 'clientlb.rb' # CLB for cache-s3 & fproxy
+end
+
+##########
+
 user 'cmsuser' do
   uid 900
   shell '/bin/false'
@@ -27,6 +33,7 @@ if node.dig(:op_user, :name)
   end
 end
 
+# This affects cms-contestwebserver & cms-proxyservice
 file '/etc/ioi-contest-id.env' do
   content "CMS_CONTEST_ID=#{node[:cms][:contest_id]}\n"
   owner 'root'
