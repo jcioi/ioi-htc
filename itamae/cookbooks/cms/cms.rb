@@ -75,6 +75,7 @@ end
   cms-scoringservice.service
   cms-contestwebserver.service
   cms-adminwebserver.service
+  cms-rankingwebserver.service
   cms-worker.service
   cms-checker.service
   cms-proxyservice.service

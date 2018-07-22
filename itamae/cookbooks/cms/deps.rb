@@ -1,5 +1,3 @@
-include_cookbook 'compilers'
-
 %w(
   build-essential
   fpc

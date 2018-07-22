@@ -89,6 +89,10 @@ if node.dig(:nginx, :default_conf)
     group 'root'
     mode '644'
   end
+else
+  file '/etc/nginx/conf.d/default.conf' do
+    action :delete
+  end
 end
 
 directory '/etc/nginx/public' do

@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ec2 "vpc-03eed691a6a5a03b2" do
+  security_group "cms-ranking" do
+    description "cms-ranking"
+
+    ingress do
+      permission :tcp, 80 do
+        groups(
+          "bastion",
+          "cms",
+          "elb-cms-ranking",
+        )
+        # ip_ranges(
+        #   CIDR_VENUE_LIFE,
+        #   CIDR_VENUE_SRV,
+        # )
+      end
+    end
+
+    egress do
+      permission :any do
+        ip_ranges(
+          "0.0.0.0/0",
+        )
+      end
+    end
+  end
+end

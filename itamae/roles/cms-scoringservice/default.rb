@@ -9,3 +9,7 @@ end
 service 'cms-scoringservice.service' do
   action [:enable]
 end
+
+service 'cms-proxyservice.service' do
+  action [:enable]
+end

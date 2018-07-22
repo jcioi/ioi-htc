@@ -1,0 +1,13 @@
+[Unit]
+Description=CMS RankingWebServer
+PartOf=cms.target
+
+[Service]
+User=cmsuser
+Group=cmsuser
+RuntimeDirectory=cms
+
+ExecStart=/usr/bin/cmsRankingWebServer
+
+[Install]
+WantedBy=cms.target

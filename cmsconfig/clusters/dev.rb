@@ -117,7 +117,7 @@
   # "load balancing proxy (if any), just the backends. If any",
   # "of them uses HTTPS specify a file with the certificates",
   # "you trust.",
-  rankings: ["http://usern4me:passw0rd@localhost:8890/"],
+  rankings: ["http://citrus:aikotoba@cms-dev-ranking-001.apne1.aws.ioi18.net:80/"],
   https_certfile: nil,
 
 
