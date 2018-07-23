@@ -1,0 +1,9 @@
+{
+  "name": "cms-rankingwebserver-sse-preprocess",
+  "description": "",
+  "runtime": "nodejs8.10",
+  "memory": 128,
+  "timeout": 2,
+  "role": "arn:aws:iam::550372229658:role/LambdaDefault",
+  "environment": {}
+}
