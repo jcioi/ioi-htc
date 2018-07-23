@@ -27,7 +27,7 @@ def find_tag(key, tags, default=None):
 def generate_ec2_services(cluster):
     services = {}
 
-    pager = ec2.get_paginator('describe_instances').paginate(Filters=[{'Name': 'tag:CmsCluster', 'Values': [cluster]}])
+    pager = ec2.get_paginator('describe_instances').paginate(Filters=[{'Name': 'tag:CmsCluster', 'Values': [cluster]}, {'Name': 'instance-state-name', 'Values': ['running']}])
     for r in pager.search('Reservations'):
         for instance in r['Instances']:
             service_tag = find_tag('CmsService', instance.get('Tags', []))
