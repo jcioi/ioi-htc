@@ -6,7 +6,7 @@ PartOf=cms.target
 User=cmsuser
 Group=cmsuser
 RuntimeDirectory=cms
-
+Environment=PYTHONUNBUFFERED=1
 ExecStart=/usr/bin/cmsRankingWebServer
 
 [Install]
