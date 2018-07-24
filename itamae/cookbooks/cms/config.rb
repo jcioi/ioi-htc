@@ -65,12 +65,12 @@ end
 file '/etc/cms.cluster.conf' do
   owner 'root'
   group 'cmsuser'
-  mode  '0600'
+  mode  '0640'
 end
 file '/etc/cms.variant.conf' do
   owner 'root'
   group 'cmsuser'
-  mode  '0600'
+  mode  '0640'
 end
 
 service 'ioi-update-cms-config.timer' do
