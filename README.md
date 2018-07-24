@@ -65,13 +65,22 @@ bundle exec miam -a --dry-run
 bundle exec miam -a
 ```
 
-## s3: S3 Bucket Polcy
+## bukelatta: S3 Bucket Polcy
 
 ```
 cd s3/
 
 bundle exec bukelatta -a --dry-ryn
 bundle exec bukelatta -a
+```
+
+## cfdef: CloudFront
+
+```
+cd cloudfront/
+
+bundle exec cfdef -a --dry-run
+bundle exec cfdef -a
 ```
 
 ## cmsconfig: CMS config.json template
