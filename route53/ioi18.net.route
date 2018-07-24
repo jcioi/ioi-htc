@@ -85,6 +85,10 @@ template "ioi18.net-common" do
     ttl 60
     resource_records "cms-dev-public-766146013.ap-northeast-1.elb.amazonaws.com."
   end
+  rrset "cms-admin-dev-public.elb.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "cms-dev-admin-public-1197269847.ap-northeast-1.elb.amazonaws.com."
+  end
   rrset "cms-ranking-dev.elb.ioi18.net.", "CNAME" do
     ttl 60
     resource_records "cms-ranking-dev-1796043830.ap-northeast-1.elb.amazonaws.com."
@@ -96,7 +100,7 @@ template "ioi18.net-common" do
   end
   rrset "admin-dev.ioi18.net.", "CNAME" do
     ttl 60
-    resource_records "cms-dev-public.elb.ioi18.net."
+    resource_records "cms-admin-dev-public.elb.ioi18.net."
   end
 
   rrset "ranking-dev.ioi18.net.", "CNAME" do
