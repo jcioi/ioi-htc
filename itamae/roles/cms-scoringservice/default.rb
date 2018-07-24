@@ -11,5 +11,5 @@ service 'cms-scoringservice.service' do
 end
 
 service 'cms-proxyservice.service' do
-  action [:enable]
+  action [:disable]
 end
