@@ -113,7 +113,10 @@ template "ioi18.net-common" do
     resource_records "cms-ranking-dev.elb.ioi18.net."
   end
 
-
+  rrset "translation-dev.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "hako-translation-dev-43725753.ap-northeast-1.elb.amazonaws.com."
+  end
 
   %w(
     _631443614a51aeef30597369338b45d4.s3-apne1.ioi18.net. _2a11a85cc8ea57ad9cdc4241c6e80af8.acm-validations.aws.
@@ -139,6 +142,8 @@ template "ioi18.net-common" do
     _c063bd48cbc67ffd2513b1d017300872.ranking.ioi18.net. _f90a64419522052a76b257622118626b.acm-validations.aws.
 
     _f9aa29e9d33b79bc4c1618a10553de2f.ranking-dev.ioi18.net. _95be44eaf321748480040382a6bebd0b.acm-validations.aws.
+
+    _7ee53d667f9938d2f230a981d40c6f4b.translation-dev.ioi18.net. _2335a3574f5cecfbfc3d33b2b9b85cd4.acm-validations.aws.
   ).each_slice(2) do |(name,target)|
     rrset name, "CNAME" do
       ttl 60
