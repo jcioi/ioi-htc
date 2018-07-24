@@ -6,6 +6,8 @@ node.reverse_merge!(
   },
 )
 
+include_cookbook 'isolate-recommendation'
+
 template '/usr/bin/ioi-install-isolate' do
   owner 'root'
   group 'root'
@@ -29,7 +31,6 @@ template '/etc/isolate' do
   group 'root'
   mode  '0644'
 end
-
 
 execute '/usr/bin/ioi-install-isolate' do
   not_if 'test -e /usr/bin/isolate'
