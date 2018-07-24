@@ -1,5 +1,6 @@
 include_role 'base'
 include_cookbook 'cms'
+include_cookbook 'compilers'
 include_cookbook 'cms::isolate'
 include_cookbook 'codedeploy-agent'
 

@@ -16,7 +16,6 @@ end
 
 include_recipe 'user.rb'
 
-include_cookbook 'compilers'
 include_recipe 'deps.rb'
 
 include_recipe 'config.rb'

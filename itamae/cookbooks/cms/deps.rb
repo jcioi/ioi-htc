@@ -1,6 +1,5 @@
 %w(
   build-essential
-  fpc
   postgresql-client
   gettext
   python3
@@ -15,8 +14,6 @@
   libcap-dev
   python3-pip
   python3-venv
-  texlive-latex-base
-  a2ps
 ).each do |dep|
   package dep
 end
