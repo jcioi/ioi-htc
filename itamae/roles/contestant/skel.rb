@@ -1,6 +1,9 @@
 skel = '/etc/skel'
 
 desktop_shortcuts = {
+  nil => %w[
+    /usr/local/share/applications/ioi18-cms.desktop
+  ],
   'Editors & IDEs' => %w[
     /usr/share/applications/codeblocks.desktop
     /usr/share/applications/emacs25.desktop
@@ -35,15 +38,17 @@ directory "#{skel}/Desktop" do
   mode '755'
 end
 
-desktop_shortcuts.each do |name, entries|
-  directory "#{skel}/Desktop/#{name}" do
-    owner 'root'
-    group 'root'
-    mode '755'
+desktop_shortcuts.each do |folder, entries|
+  if folder
+    directory "#{skel}/Desktop/#{folder}" do
+      owner 'root'
+      group 'root'
+      mode '755'
+    end
   end
 
   entries.each do |entry|
-    dest = "#{skel}/Desktop/#{name}/#{entry.split('/').last}"
+    dest = "#{skel}/Desktop/#{folder + ?/ if folder}#{entry.split('/').last}"
     execute "create #{dest}" do
       command "install -T #{entry.shellescape} #{dest.shellescape}"
       not_if "diff #{entry.shellescape} #{dest.shellescape}"

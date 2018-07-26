@@ -7,6 +7,13 @@ node.reverse_merge!(
   },
 )
 
+node[:contestant][:cms_uri] ||=
+  if node[:contestant][:preview]
+    'https://contest-practice.ioi18.net'
+  else
+    'https://contest.ioi18.net'
+  end
+
 include_cookbook 'compilers'
 
 ## Base Desktop Environment
@@ -72,4 +79,3 @@ include_recipe './trust-launchers.rb'
 if node[:contestant][:preview]
   include_recipe './preview.rb'
 end
-

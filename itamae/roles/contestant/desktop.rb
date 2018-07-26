@@ -1,5 +1,18 @@
 include_cookbook 'xdg-desktop'
 
+remote_file '/usr/share/icons/hicolor/scalable/apps/ioi18.svg' do
+  owner 'root'
+  group 'root'
+  mode '644'
+end
+
+desktop_entry 'ioi18-cms' do
+  display_name 'Grading System'
+  icon '/usr/share/icons/hicolor/scalable/apps/ioi18.svg'
+  exec "x-www-browser #{node.dig(:contestant, :cms_uri)}"
+  categories %w(Education)
+end
+
 desktop_entry 'cppreference' do
   display_name 'C++/C Reference'
   icon 'html'
