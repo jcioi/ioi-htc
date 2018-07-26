@@ -24,6 +24,7 @@ include_recipe './apps.rb'
 include_recipe './desktop.rb'
 include_recipe './skel.rb'
 include_recipe './trust-launchers.rb'
+include_recipe './pam.rb'
 
 if node[:contestant][:preview]
   include_recipe './preview.rb'

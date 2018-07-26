@@ -11,7 +11,7 @@ user username do
   home "/home/#{username}"
   shell '/bin/bash'
   password password
-  create_home true
+  create_home false
 end
 
 
