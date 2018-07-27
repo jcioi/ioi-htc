@@ -79,6 +79,18 @@ define :mount, mountpoint: nil do
   end
 end
 
+define :statoverride, path: nil, owner: 'root', group: 'root', mode: '0644' do
+  file = params[:path] || params[:name]
+  owner = params[:owner]
+  group = params[:group]
+  mode = params[:mode]
+
+  execute "dpkg-statoverride #{file}" do
+    command %{dpkg-statoverride --update --force --add #{owner.shellescape} #{group.shellescape} #{mode.shellescape} #{file.shellescape}}
+    only_if %{test "$(dpkg-statoverride --list #{file.shellescape} | cut -d' ' -f1-3)" != #{"#{owner} #{group} #{mode}".shellescape}}
+  end
+end
+
 MItamae::RecipeContext.class_eval do
   ROLES_DIR = File.expand_path("../roles", __FILE__)
   def include_role(name)
