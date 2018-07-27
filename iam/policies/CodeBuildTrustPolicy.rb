@@ -15,5 +15,24 @@ managed_policy "CodeBuildTrustPolicy", :path=>"/" do
          ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]},
        {"Effect"=>"Allow",
         "Resource"=>["arn:aws:s3:::codepipeline-ap-northeast-1-*"],
-        "Action"=>["s3:GetObject", "s3:GetObjectVersion", "s3:PutObject"]}]}
+        "Action"=>["s3:GetObject", "s3:GetObjectVersion", "s3:PutObject"]},
+        {
+          'Effect' => 'Allow',
+          'Action' => [
+            'ecr:GetAuthorizationToken',
+            'ecr:GetDownloadUrlForLayer',
+            'ecr:BatchGetImage',
+            'ecr:BatchCheckLayerAvailability',
+            'ecr:PutImage',
+            'ecr:InitiateLayerUpload',
+            'ecr:UploadLayerPart',
+            'ecr:CompleteLayerUpload',
+            'ecr:DescribeRepositories',
+            'ecr:GetRepositoryPolicy',
+            'ecr:CreateRepository',
+            'ecr:PutLifecyclePolicy',
+          ],
+          'Resource' => '*',
+        },
+      ]}
 end
