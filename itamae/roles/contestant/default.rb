@@ -14,6 +14,10 @@ node[:contestant][:cms_uri] ||=
     'https://contest.ioi18.net'
   end
 
+group 'contestant' do
+  gid 1000
+end
+
 include_cookbook 'isolate-recommendation'
 include_cookbook 'compilers'
 include_cookbook 'console-setup'
@@ -26,8 +30,9 @@ include_recipe './apps.rb'
 include_recipe './desktop.rb'
 include_recipe './skel.rb'
 include_recipe './trust-launchers.rb'
-include_recipe './pam.rb'
 include_recipe './dconf.rb'
+include_recipe './pam.rb'
+include_recipe './limits.rb'
 
 if node[:contestant][:preview]
   include_recipe './preview.rb'
