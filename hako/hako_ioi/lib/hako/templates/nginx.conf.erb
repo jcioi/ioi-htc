@@ -1,0 +1,37 @@
+upstream backend_server {
+  server <%= listen_spec %>;
+  keepalive 4;
+}
+
+geo $ioi_internal {
+  proxy 127.0.0.1/32;
+  proxy 10.18.192.0/18;
+  proxy_recursive;
+
+  default 0;
+  # apne1 VPC
+  10.18.192.0/18 1;
+}
+
+server {
+  listen 80;
+
+  set $request_proto "$http_x_forwarded_proto";
+  if ($request_proto = "") {
+    set $request_proto "http";
+  }
+
+  <%- if location_uses_omniauth? -%>
+  include /etc/nginx/utils/ngx_omniauth_enable_server.conf;
+  <%- end -%>
+
+  <%- if client_max_body_size -%>
+  client_max_body_size <%= client_max_body_size %>;
+  <%- end -%>
+
+  <%- locations.each do |path, location| -%>
+  location <%= path %> {
+<%= render_location(listen_spec, location) %>
+  }
+  <%- end -%>
+}

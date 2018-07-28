@@ -1,4 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'hako'
+gem 'hako'#, path: '~/git/github.com/eagletmt/hako'
 gem 'hako-itamae-secrets'
+#gem 'hako-codebuild', path: '~/git/github.com/sorah/hako-codebuild'
+gem 'hako-codebuild', git: 'https://github.com/sorah/hako-codebuild'
+
+gem 'hako_ioi', path: File.join(__dir__, 'hako_ioi')

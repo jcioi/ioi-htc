@@ -94,3 +94,12 @@ bundle exec ruby upload.rb dev
 # For variants/prd/onpremise.rb
 bundle exec ruby upload.rb prd onpremise
 ```
+
+## hako: ECS tasks
+
+```
+cd hako/
+
+
+bundle exec hako deploy nanika.jsonnet -t codebuild
+```

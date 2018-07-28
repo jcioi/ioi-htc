@@ -1,0 +1,37 @@
+<%- case location.https_type -%>
+<%- when 'always' -%>
+if ($request_proto = "http") {
+  return 301 https://$host$request_uri;
+}
+<%- when 'public' -%>
+set $https_only_cond "$ioi_internal,$request_proto";
+if ($https_only_cond = "0,http") {
+  return 301 https://$host$request_uri;
+}
+<%- end -%>
+
+<%- if location.use_omniauth? -%>
+  <%- if location.omniauth_except_internal? -%>
+set $ngx_omniauth_except_internal "1";
+  <%- else -%>
+set $ngx_omniauth_except_internal "0";
+  <%- end -%>
+include /etc/nginx/utils/ngx_omniauth_enable_location.conf;
+<%- end -%>
+
+<%- if location.try_files -%>
+try_files <%= location.try_files.join(' ') %>;
+<%- end -%>
+<%- if location.root -%>
+root <%= location.root %>;
+<%- else -%>
+proxy_connect_timeout <%= location.proxy_connect_timeout %>;
+proxy_send_timeout <%= location.proxy_send_timeout %>;
+proxy_read_timeout <%= location.proxy_read_timeout %>;
+
+proxy_set_header X-Forwarded-Proto $request_proto;
+proxy_set_header Connection "";
+
+proxy_http_version 1.1;
+proxy_pass <%= location.proxy_pass %>;
+<%- end -%>

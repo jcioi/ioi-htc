@@ -10,6 +10,7 @@ local publicSubnets = ['subnet-05ef7963c73bdf728', 'subnet-06848ecd38958c144', '
 
 {
   vpcId: vpc,
+  privateSubnets: privateSubnets,
   publicSubnets: publicSubnets,
   secret(name):: secret(name),
   ecrRepository(name):: std.format('550372229658.dkr.ecr.ap-northeast-1.amazonaws.com/%s', name),
@@ -19,7 +20,7 @@ local publicSubnets = ['subnet-05ef7963c73bdf728', 'subnet-06848ecd38958c144', '
     region: 'ap-northeast-1',
     cluster: 'ioi18',
     desired_count: 1,
-    task_role_arn: null,
+    task_role_arn: 'arn:aws:iam::550372229658:role/EcsDefault',
     execution_role_arn: 'arn:aws:iam::550372229658:role/ecsTaskExecutionRole',
     cpu: '256',
     memory: '1024',
@@ -42,6 +43,12 @@ local publicSubnets = ['subnet-05ef7963c73bdf728', 'subnet-06848ecd38958c144', '
       'awslogs-region': 'ap-northeast-1',
       'awslogs-stream-prefix': 'ecs',
     },
+  },
+
+  codebuildTag(projectName):: {
+    type: 'codebuild_tag',
+    region: 'ap-northeast-1',
+    project: projectName,
   },
 
   createLogGroups():: {

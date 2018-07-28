@@ -1,3 +1,17 @@
+GIT
+  remote: https://github.com/sorah/hako-codebuild
+  revision: 2f6de751af205627a6ff658cbfd50d7670586d38
+  specs:
+    hako-codebuild (0.1.0)
+      aws-sdk-codebuild
+
+PATH
+  remote: hako_ioi
+  specs:
+    hako_ioi (0.1.0)
+      aws-sdk-s3
+      hako (>= 2.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -13,6 +27,9 @@ GEM
       aws-sdk-core (~> 3)
       aws-sigv4 (~> 1.0)
     aws-sdk-cloudwatchlogs (1.4.0)
+      aws-sdk-core (~> 3)
+      aws-sigv4 (~> 1.0)
+    aws-sdk-codebuild (1.13.0)
       aws-sdk-core (~> 3)
       aws-sigv4 (~> 1.0)
     aws-sdk-core (3.22.1)
@@ -71,7 +88,9 @@ PLATFORMS
 
 DEPENDENCIES
   hako
+  hako-codebuild!
   hako-itamae-secrets
+  hako_ioi!
 
 BUNDLED WITH
    1.16.1
