@@ -12,3 +12,9 @@ challenge_responders:
   - route53:
       hosted_zone_map:
         ioi18.net: /hostedzone/Z2Z649BVN3NNW
+
+post_issuing_hooks:
+  "auth.ioi18.net":
+    - acm:
+        region: ap-northeast-1
+
