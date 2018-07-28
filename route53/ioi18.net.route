@@ -138,10 +138,10 @@ template "ioi18.net-common" do
     resource_records "cms-ranking-dev.elb.ioi18.net."
   end
 
-  # rrset "ranking-practice.ioi18.net.", "CNAME" do
-  #   ttl 60
-  #   resource_records "TBD.cloudfront.net."
-  # end
+  rrset "ranking-practice.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "d3teer2fwjwtsm.cloudfront.net."
+  end
   rrset "ranking-practice-origin.ioi18.net.", "CNAME" do
     ttl 60
     resource_records "cms-ranking-practice.elb.ioi18.net."
