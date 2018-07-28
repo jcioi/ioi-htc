@@ -1,0 +1,40 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ec2 "vpc-03eed691a6a5a03b2" do
+  security_group "cms-practice" do
+    description "cms"
+
+    ingress do
+      [
+        28000, # resource
+        28500, # score
+        29000, # log 
+        22000, # check
+        25000, # eval
+        26000, # worker
+        21000, # contest web
+        21100, # admin  web
+        28600, # proxy
+        25123, # printing
+      ].each do |port|
+        permission :tcp, port do
+          groups(
+            "cms-practice",
+          )
+          # ip_ranges(
+          #   CIDR_VENUE_LIFE,
+          #   CIDR_VENUE_SRV,
+          # )
+        end
+      end
+    end
+
+    egress do
+      permission :any do
+        ip_ranges(
+          "0.0.0.0/0",
+        )
+      end
+    end
+  end
+end
