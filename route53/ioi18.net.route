@@ -143,6 +143,14 @@ template "ioi18.net-common" do
 
     _f9aa29e9d33b79bc4c1618a10553de2f.ranking-dev.ioi18.net. _95be44eaf321748480040382a6bebd0b.acm-validations.aws.
 
+    _41fa7168ac54d77a2b1b0707093fbecb.contest-practice.ioi18.net. _095766e39daaf9a738fd430ead11fe6a.acm-validations.aws.
+    _2d4786213b2decc5137acde13908983b.practice.ioi18.net. _3d2be546d8e02ce302f22c67fc66b1dc.acm-validations.aws.
+
+    _94ff4a3942e6203c38d3cc3760cdee48.admin-practice.ioi18.net. _7ae5fca33700e11841b8d2267b7a565b.acm-validations.aws.
+
+    _1342057c5d465f22596bd9e99038db75.ranking-practice.ioi18.net. _fea762e938137fffbe10f200da6eb08d.acm-validations.aws.
+    _1901438f09e38fa9c5fc3a04c0432dd0.ranking-practice-origin.ioi18.net. _64dd58d21f5d644b07cfcaa7624e6914.acm-validations.aws.
+
     _7ee53d667f9938d2f230a981d40c6f4b.translation-dev.ioi18.net. _2335a3574f5cecfbfc3d33b2b9b85cd4.acm-validations.aws.
   ).each_slice(2) do |(name,target)|
     rrset name, "CNAME" do
