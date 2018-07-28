@@ -10,6 +10,7 @@ bucket "ioi18-infra" do
           arn:aws:s3:::ioi18-infra/tmp/*
           arn:aws:s3:::ioi18-infra/healthcheck
           arn:aws:s3:::ioi18-infra/cms/dev/config.json
+          arn:aws:s3:::ioi18-infra/cms/practice/config.json
           arn:aws:s3:::ioi18-infra/cms/prd/config.json
           arn:aws:s3:::ioi18-infra/cms/dev/config.test.json
           arn:aws:s3:::ioi18-infra/cms/prd/config.onpremise.json
