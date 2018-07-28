@@ -1,6 +1,6 @@
 include_recipe 'variables.rb'
 
-if node.dig(:cms, :variant) == 'onpremise' || node.dig(:cms, :cluster) == 'dev' # XXX:
+if node.dig(:cms, :variant) == 'onpremise' || %[dev practice].include?(node.dig(:cms, :cluster))
   include_recipe 'clientlb.rb' # CLB for cache-s3 & fproxy
 end
 
