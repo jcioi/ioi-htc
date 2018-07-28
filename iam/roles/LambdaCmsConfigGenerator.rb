@@ -38,6 +38,9 @@ role "LambdaCmsConfigGenerator", :path=>"/" do
             arn:aws:s3:::ioi18-infra/cms/dev/base.json
             arn:aws:s3:::ioi18-infra/cms/dev/services.json
             arn:aws:s3:::ioi18-infra/cms/dev/config.json
+            arn:aws:s3:::ioi18-infra/cms/practice/base.json
+            arn:aws:s3:::ioi18-infra/cms/practice/services.json
+            arn:aws:s3:::ioi18-infra/cms/practice/config.json
             arn:aws:s3:::ioi18-infra/cms/prd/base.json
             arn:aws:s3:::ioi18-infra/cms/prd/services.json
             arn:aws:s3:::ioi18-infra/cms/prd/config.json
