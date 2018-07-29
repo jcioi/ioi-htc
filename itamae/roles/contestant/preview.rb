@@ -10,12 +10,15 @@ user username do
   create_home false
 end
 
+user 'root' do
+  password password
+end
 
 # Networks are managed by NetworkManager so that VM users can change settings using gnome-control-center
-# NB. NetworkManager requires a user to belong to "sudo" group to change network settings
+# NB. NetworkManager requires a user to belong to "netdev" group to change network settings
 
-execute "usermod -a -G sudo #{username.shellescape}" do
-  only_if "! getent group sudo | cut -d: -f4 | tr , '\\n' | grep -Fxq #{username.shellescape}"
+execute "usermod -a -G netdev #{username.shellescape}" do
+  only_if "! getent group netdev | cut -d: -f4 | tr , '\\n' | grep -Fxq #{username.shellescape}"
 end
 
 package 'netplan.io'
