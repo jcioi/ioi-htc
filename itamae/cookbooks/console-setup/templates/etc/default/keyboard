@@ -1,0 +1,9 @@
+<% {
+  XKBMODEL: node.dig(:console_setup, :keyboard, :model),
+  XKBLAYOUT: node.dig(:console_setup, :keyboard, :layout),
+  XKBVARIANT: node.dig(:console_setup, :keyboard, :variant),
+  XKBOPTIONS: node.dig(:console_setup, :keyboard, :options),
+  BACKSPACE: 'guess',
+}.each do |k, v| -%>
+<%= k %>=<%= v.shellescape %>
+<% end -%>

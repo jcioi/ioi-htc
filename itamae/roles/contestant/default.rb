@@ -15,6 +15,7 @@ node[:contestant][:cms_uri] ||=
   end
 
 include_cookbook 'compilers'
+include_cookbook 'console-setup'
 
 package 'ubuntu-desktop'
 package 'fonts-noto'

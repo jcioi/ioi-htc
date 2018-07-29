@@ -47,3 +47,6 @@ package 'screen'
 
 ## Extra documents
 package 'cppreference-doc-en-html'
+
+## For GNOME
+package 'gkbd-capplet'
