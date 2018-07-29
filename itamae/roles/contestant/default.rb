@@ -14,6 +14,7 @@ node[:contestant][:cms_uri] ||=
     'https://contest.ioi18.net'
   end
 
+include_cookbook 'isolate-recommendation'
 include_cookbook 'compilers'
 include_cookbook 'console-setup'
 
