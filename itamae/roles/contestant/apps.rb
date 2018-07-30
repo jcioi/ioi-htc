@@ -45,6 +45,8 @@ package 'byobu'
 package 'mc'
 package 'screen'
 
+package 'gnome-calculator'
+
 ## Extra documents
 package 'cppreference-doc-en-html'
 
