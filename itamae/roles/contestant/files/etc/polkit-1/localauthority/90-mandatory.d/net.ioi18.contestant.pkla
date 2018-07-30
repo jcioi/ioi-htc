@@ -1,0 +1,20 @@
+[Manage Storage]
+Identity=*
+Action=org.freedesktop.udisks2.*
+ResultAny=auth_admin
+ResultInactive=auth_admin
+ResultActive=auth_admin_keep
+
+[Manage System Power]
+Identity=*
+Action=org.freedesktop.login1.halt*;org.freedesktop.login1.hibernate*;org.freedesktop.login1.power-off*;org.freedesktop.login1.reboot*;org.freedesktop.login1.suspend*
+ResultAny=no
+ResultInactive=no
+ResultActive=no
+
+[Manage System Power (poweruser)]
+Identity=unix-group:sudo
+Action=org.freedesktop.login1.halt*;org.freedesktop.login1.hibernate*;org.freedesktop.login1.power-off*;org.freedesktop.login1.reboot*;org.freedesktop.login1.suspend*
+ResultAny=auth_admin
+ResultInactive=auth_admin
+ResultActive=yes

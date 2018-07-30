@@ -35,6 +35,7 @@ include_recipe './disabled_apps.rb'
 include_recipe './dconf.rb'
 include_recipe './pam.rb'
 include_recipe './limits.rb'
+include_recipe './polkit.rb'
 
 if node[:contestant][:preview]
   include_recipe './preview.rb'
