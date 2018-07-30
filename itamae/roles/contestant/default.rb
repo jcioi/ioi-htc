@@ -39,4 +39,6 @@ include_recipe './polkit.rb'
 
 if node[:contestant][:preview]
   include_recipe './preview.rb'
+else
+  include_recipe './modprobe.rb'
 end
