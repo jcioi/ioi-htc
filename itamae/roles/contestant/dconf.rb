@@ -11,3 +11,9 @@ dconf_defaults 'disable-powersaving' do
   )
   lock true
 end
+
+dconf_defaults 'universal-access' do
+  values(
+    '/org/gnome/desktop/a11y/always-show-universal-access-status' => true,
+  )
+end
