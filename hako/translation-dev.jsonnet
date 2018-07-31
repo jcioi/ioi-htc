@@ -38,6 +38,7 @@ local elbSecurityGroups = ['sg-035c00f22c7fe5429'];  // elb-translation-dev
     cpu: 1024,
     memory: 2048,
     env: {
+      SECRET_KEY: utils.secret('translation_secret_key'),
       DB_HOST: 'translation-dev-db.c9ge2hh8rox6.ap-northeast-1.rds.amazonaws.com',
       DB_USER: 'ioitrans',
       DB_PASSWORD: utils.secret('db_ioitrans_password'),
