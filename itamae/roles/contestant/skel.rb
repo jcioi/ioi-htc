@@ -32,10 +32,15 @@ desktop_shortcuts = {
   ],
 }
 
-directory "#{skel}/Desktop" do
-  owner 'root'
-  group 'root'
-  mode '755'
+%w[
+  Desktop
+  Templates
+].each do |_|
+  directory "#{skel}/#{_}" do
+    owner 'root'
+    group 'root'
+    mode '755'
+  end
 end
 
 desktop_shortcuts.each do |folder, entries|
@@ -53,5 +58,16 @@ desktop_shortcuts.each do |folder, entries|
       command "install -T #{entry.shellescape} #{dest.shellescape}"
       not_if "diff #{entry.shellescape} #{dest.shellescape}"
     end
+  end
+end
+
+[
+  'Text File.txt',
+].each do |_|
+  file "#{skel}/Templates/#{_}" do
+    owner 'root'
+    group 'root'
+    mode '644'
+    content ''
   end
 end

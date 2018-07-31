@@ -52,3 +52,4 @@ package 'cppreference-doc-en-html'
 
 ## For GNOME
 package 'gkbd-capplet'
+package 'nautilus-extension-gnome-terminal'
