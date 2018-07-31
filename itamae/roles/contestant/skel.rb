@@ -65,9 +65,9 @@ end
   'Text File.txt',
 ].each do |_|
   file "#{skel}/Templates/#{_}" do
+    action :create
     owner 'root'
     group 'root'
     mode '644'
-    content ''
   end
 end
