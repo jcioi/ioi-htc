@@ -40,6 +40,7 @@ local elbSecurityGroups = ['sg-06f0c7cda02530a27'];  // elb-nginx-omniauth-adapt
     cpu: 256,
     memory: 512,
     env: {
+      RACK_ENV: 'production',
       SECRET_KEY_BASE: utils.secret('nginx_omniauth_adapter_session_secret'),
       NGX_OMNIAUTH_SECRET: utils.secret('nginx_omniauth_adapter_secret'),
       GITHUB_KEY: utils.secret('nginx_omniauth_adapter_github_key'),
