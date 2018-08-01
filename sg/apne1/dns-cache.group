@@ -1,0 +1,35 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ec2 "vpc-03eed691a6a5a03b2" do
+  security_group "dns-cache" do
+    description "dns-cache"
+
+    ingress do
+      permission :tcp, 53..53 do
+        groups(
+          "default",
+        )
+        ip_ranges(
+          "10.18.0.0/16",
+        )
+      end
+
+      permission :udp, 53..53 do
+        groups(
+          "default",
+        )
+        ip_ranges(
+          "10.18.0.0/16",
+        )
+      end
+    end
+
+    egress do
+      permission :any do
+        ip_ranges(
+          "0.0.0.0/0",
+        )
+      end
+    end
+  end
+end

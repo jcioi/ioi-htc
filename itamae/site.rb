@@ -13,6 +13,9 @@ node[:site_cidr] = '10.18.0.0/16'
 
 if node.dig(:hocho_vpc, :cidr_block)
   node[:resolvers] = [IPAddr.new(node.dig(:hocho_vpc, :cidr_block)).to_s.sub(/\.0$/,'.2')]
+else
+  # dns-cache-001,dns-cache-002
+  node[:resolvers] = %w(10.18.205.55 10.18.221.163)
 end
 
 node[:desired_hostname] ||= node.dig(:hocho_ec2, :tags, :Name)
@@ -20,6 +23,10 @@ node[:desired_hostname] ||= node.dig(:hocho_ec2, :tags, :Name)
 execute "systemctl daemon-reload" do
   action :nothing
 end
+execute "systemctl reload apparmor.service" do
+  action :nothing
+end
+
 
 execute "apt-get update" do
   action :nothing
