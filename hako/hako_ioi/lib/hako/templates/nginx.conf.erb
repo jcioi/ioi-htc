@@ -13,12 +13,22 @@ geo $ioi_internal {
   10.18.192.0/18 1;
 }
 
+geo $ioi_internal_single {
+  default 0;
+  # apne1 VPC
+  10.18.192.0/18 1;
+}
+
 server {
   listen 80;
 
   set $request_proto "$http_x_forwarded_proto";
   if ($request_proto = "") {
     set $request_proto "http";
+  }
+  set $internal_xff_cond "$ioi_internal_single,$http_x_internal_forwarded_proto";
+  if ($internal_xff_cond ~ "^1,." ) {
+    set $request_proto "$http_x_internal_forwarded_proto";
   }
 
   <%- if location_uses_omniauth? -%>
