@@ -1,8 +1,10 @@
 execute 'install eclipse' do
   script = <<EOF
+tmp=$(mktemp --tmpdir "XXXXXXXXX.tar.gz")
 mkdir -p /opt/eclipse
-curl -fLsS http://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release/photon/R/eclipse-java-photon-R-linux-gtk-x86_64.tar.gz \
-  | tar zx -C /opt/eclipse --strip=1
+curl -fLsS -o "$tmp" http://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release/photon/R/eclipse-java-photon-R-linux-gtk-x86_64.tar.gz
+echo "e6f5ee4e5ced59d2cf6a9b7a992b7d01eb71480cd2353844ba47eb5c55a41816 $tmp" | sha256sum -c
+tar zxf "$tmp" -C /opt/eclipse --strip=1
 EOF
 
   command "bash -exo pipefail -c #{script.shellescape}"

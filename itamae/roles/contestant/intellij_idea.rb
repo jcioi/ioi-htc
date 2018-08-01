@@ -1,8 +1,10 @@
 execute 'install intellij-idea-community' do
   script = <<EOF
+tmp=$(mktemp --tmpdir "XXXXXXXXX.tar.gz")
 mkdir -p /opt/idea
-curl -fLsS https://download.jetbrains.com/idea/ideaIC-2018.1.6.tar.gz \
-  | tar zx -C /opt/idea --strip=1
+curl -fLsS -o "$tmp" https://download.jetbrains.com/idea/ideaIC-2018.1.6.tar.gz
+echo "ca7c746a26bc58c6c87c34e33fbba6f767f2df9dca34eb688e3c07a126cdc393 $tmp" | sha256sum -c
+tar zxf "$tmp" -C /opt/idea --strip=1
 EOF
 
   command "bash -exo pipefail -c #{script.shellescape}"
