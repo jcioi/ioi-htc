@@ -5,6 +5,7 @@ desktop_shortcuts = {
     /usr/local/share/applications/ioi18-cms.desktop
   ],
   'Editors & IDEs' => %w[
+    /usr/share/applications/atom.desktop
     /usr/share/applications/codeblocks.desktop
     /usr/share/applications/emacs25.desktop
     /usr/share/applications/geany.desktop
