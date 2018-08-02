@@ -12,6 +12,8 @@ property_providers:
       properties:
         nopasswd_sudo: true
         preferred_driver: mitamae
+        ssh_options:
+          auth_methods: [publickey]
         alternate_ssh_options:
           user: ubuntu
 initializers:
