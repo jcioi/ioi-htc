@@ -12,6 +12,8 @@ if node[:desired_hostname] && node[:desired_hostname] != node[:hostname]
   node[:hostname] = node[:desired_hostname]
 end
 
+include_cookbook 'apt-source-ubuntu'
+
 directory "/usr/share/cnw" do
   owner 'root'
   group 'root'
