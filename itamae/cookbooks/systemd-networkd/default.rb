@@ -11,6 +11,10 @@ if node[:hocho_ec2]
     group 'root'
     mode  '0644'
   end
+else
+  execute "mkdir -p /etc/systemd/network && cp -pv -t /etc/systemd/network /run/systemd/network/*netplan*" do
+    only_if "test -e /etc/netplan"
+  end
 end
 
 execute "rm -rf /etc/netplan && netplan generate" do
