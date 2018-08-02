@@ -6,6 +6,7 @@ local elbSecurityGroups = ['sg-035c00f22c7fe5429'];  // elb-translation-dev
   scheduler: utils.fargateScheduler(taskSecurityGroups) {
     cpu: '1024',
     memory: '2048',
+    task_role_arn: utils.iamRole('EcsTranslationDev'),
     elb_v2: {
       vpc_id: utils.vpcId,
       health_check_path: '/',
@@ -45,6 +46,7 @@ local elbSecurityGroups = ['sg-035c00f22c7fe5429'];  // elb-translation-dev
       DB_NAME: 'ioitrans',
       REDIS_HOST: 'ioitrans-dev-redis.vozztv.0001.apne1.cache.amazonaws.com',
       REDIS_DB: '1',
+      S3_BUCKET: 'ioi18-translation-files-dev',
       GUNICORN_WORKERS: '2',
     },
     mount_points: [

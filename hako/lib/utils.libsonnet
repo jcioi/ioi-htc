@@ -14,6 +14,7 @@ local publicSubnets = ['subnet-05ef7963c73bdf728', 'subnet-06848ecd38958c144', '
   publicSubnets: publicSubnets,
   secret(name):: secret(name),
   ecrRepository(name):: std.format('550372229658.dkr.ecr.ap-northeast-1.amazonaws.com/%s', name),
+  iamRole(name):: std.format('arn:aws:iam::550372229658:role/%s', name),
 
   fargateScheduler(securityGroups):: {
     type: 'ecs',
