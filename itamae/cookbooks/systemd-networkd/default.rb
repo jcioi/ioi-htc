@@ -26,6 +26,12 @@ end
 #   action :remove
 # end
 
+directory '/etc/systemd/resolved.conf.d' do
+  owner 'root'
+  group 'root'
+  mode '755'
+end
+
 service "systemd-networkd" do
   action [:enable, :start]
 end
