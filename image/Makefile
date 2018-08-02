@@ -1,10 +1,17 @@
 GZIP=pigz
 SPARSIFY=true
 
+PUBLIC_S3_BUCKET_NAME=ioi18-public-images-eu
+PUBLIC_S3_BUCKET_REGION=eu-west-1
+
 export PACKER_KEY_INTERVAL = 10ms
 
 preview: preview.ova
 .PHONY: preview
+
+publish-preview: preview.ova
+	aws s3 cp $< s3://${PUBLIC_S3_BUCKET_NAME}/ioi18-$$(date +%Y%m%d).ova --acl public-read --region ${PUBLIC_S3_BUCKET_REGION} --endpoint-url http://s3-accelerate.dualstack.amazonaws.com
+.PHONY: publish-preview
 
 %.json: %.yaml
 	ruby -rjson -ryaml -e 'File.write(ARGV[1], JSON.dump(YAML.load_file(ARGV[0])))' $< $@
