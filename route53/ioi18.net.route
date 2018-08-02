@@ -52,7 +52,10 @@ template "ioi18.net-private" do
     )
   end
 
-
+  rrset "cms-dev-worker-1.lab.ioi18.net", "A" do
+    ttl 20
+    resource_records "10.18.96.10"
+  end
 end
 
 template "ioi18.net-common" do

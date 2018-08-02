@@ -1,0 +1,10 @@
+cms-dev-worker-1.lab.ioi18.net:
+  properties:
+    attributes:
+      cms:
+        cluster: dev
+        variant: onpremise
+        # desired_hostname: cms-dev-worker-1
+    run_list:
+      - roles/base/default.rb
+      - roles/cms-worker/default.rb
