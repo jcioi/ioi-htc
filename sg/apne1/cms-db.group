@@ -9,10 +9,9 @@ ec2 "vpc-03eed691a6a5a03b2" do
         groups(
           "cms",
         )
-        # ip_ranges(
-        #   CIDR_VENUE_LIFE,
-        #   CIDR_VENUE_SRV,
-        # )
+        ip_ranges(
+            *::CIDR_CMS,
+        )
       end
     end
 

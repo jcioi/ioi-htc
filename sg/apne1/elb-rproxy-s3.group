@@ -11,7 +11,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
           "default",
         )
         ip_ranges(
-          *CIDR_SYSTEM,
+          *::CIDR_CMS,
         )
       end
       permission :tcp, 443..443 do
@@ -19,7 +19,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
           "default",
         )
         ip_ranges(
-          *CIDR_SYSTEM,
+          *::CIDR_CMS,
         )
       end
     end

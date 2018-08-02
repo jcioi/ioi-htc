@@ -13,7 +13,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
           "cms",
         )
         ip_ranges(
-          *CIDR_SYSTEM,
+          *CIDR_CMS,
         )
       end
 
@@ -25,7 +25,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
           "cms",
         )
         ip_ranges(
-          *CIDR_SYSTEM,
+          *CIDR_CMS,
         )
       end
 
