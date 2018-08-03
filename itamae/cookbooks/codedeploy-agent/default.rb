@@ -1,6 +1,7 @@
 node.reverse_merge!(
   codedeploy_agent: {
     commit: '81ffec26b1a394e5c951bc2e8a8ba3e731e81148',
+    proxy_uri: nil,
   }
 )
 
@@ -45,7 +46,6 @@ template '/etc/codedeploy-agent/conf/codedeployagent.yml' do
   group 'root'
   mode  '0644'
 end
-
 
 service 'codedeploy-agent.service' do
   action [:enable, :start]

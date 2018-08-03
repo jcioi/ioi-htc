@@ -1,6 +1,11 @@
 cms-dev-worker-1.lab.ioi18.net:
   properties:
     attributes:
+      codedeploy_agent:
+        onpremises:
+          tags:
+            CmsCluster: dev
+            CmsVariant: onpremise
       cms:
         cluster: dev
         variant: onpremise
