@@ -1,3 +1,4 @@
+local front = import 'lib/front.libsonnet';
 local utils = import 'lib/utils.libsonnet';
 local taskSecurityGroups = ['sg-0b97c2a51099cdf2a'];  // translation-dev
 local elbSecurityGroups = ['sg-035c00f22c7fe5429'];  // elb-translation-dev
@@ -9,7 +10,7 @@ local elbSecurityGroups = ['sg-035c00f22c7fe5429'];  // elb-translation-dev
     task_role_arn: utils.iamRole('EcsTranslationDev'),
     elb_v2: {
       vpc_id: utils.vpcId,
-      health_check_path: '/',
+      health_check_path: '/healthcheck',
       listeners: [
         {
           port: 80,
@@ -55,15 +56,13 @@ local elbSecurityGroups = ['sg-035c00f22c7fe5429'];  // elb-translation-dev
         container_path: '/usr/src/app/static',
       },
     ],
+    docker_labels: {
+      'net.ioi18.hako.health-check-path': '/healthcheck',
+    },
     log_configuration: utils.awsLogs('app'),
   },
   additional_containers: {
-    front: {
-      image_tag: utils.ecrRepository('ioi18-translation-front') + ':staging',
-      env: {
-        BACKEND_HOST: 'localhost',
-        BACKEND_PORT: '8000',
-      },
+    front: front.container {
       mount_points: [
         {
           source_volume: 'static',
@@ -71,14 +70,6 @@ local elbSecurityGroups = ['sg-035c00f22c7fe5429'];  // elb-translation-dev
           read_only: true,
         },
       ],
-      port_mappings: [
-        {
-          container_port: 80,
-          host_port: 80,
-          protocol: 'tcp',
-        },
-      ],
-      log_configuration: utils.awsLogs('front'),
     },
   },
   volumes: {
@@ -86,6 +77,33 @@ local elbSecurityGroups = ['sg-035c00f22c7fe5429'];  // elb-translation-dev
     },
   },
   scripts: [
+    utils.codebuildTag('ioi18-translation'),
     utils.createLogGroups(),
+    front.script.defaultPublic {
+      backend_port: '8000',
+      locations: {
+        '/': {
+          https_type: 'always',
+        },
+        '/static': {
+          https_type: 'always',
+          root: '/usr/src/app',
+        },
+        '/s3proxy': {
+          raw: |||
+            internal;
+            set $s3url $upstream_http_location;
+          |||,
+          proxy_set_header: {
+            Host: '$proxy_host',
+            Authorization: '',
+          },
+          proxy_pass: '$s3url',
+          add_header: {
+            'Cache-Control': 'private, no-cache',
+          },
+        },
+      },
+    },
   ],
 }

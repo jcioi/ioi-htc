@@ -1,5 +1,5 @@
 local utils = import './utils.libsonnet';
-local tag = '678d9f57f8ea9d9becd64116ddda95356750068f';
+local tag = 'a25049daac81226ad8a2849d61b960e83bcf808d';
 
 {
   container: {
