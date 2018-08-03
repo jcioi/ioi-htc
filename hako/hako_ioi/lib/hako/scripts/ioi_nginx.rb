@@ -75,6 +75,10 @@ module Hako
             'Host' => '$http_host',
           }
 
+          def raw
+            @config.fetch('raw', nil)
+          end
+
           def root
             @config.fetch('root', nil)
           end

@@ -19,6 +19,10 @@ set $ngx_omniauth_except_internal "0";
 include /etc/nginx/utils/ngx_omniauth_enable_location.conf;
 <%- end -%>
 
+<%- if location.raw -%>
+<%= location.raw %>
+<%- end -%>
+
 <%- if location.try_files -%>
 try_files <%= location.try_files.join(' ') %>;
 <%- end -%>
