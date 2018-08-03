@@ -1,13 +1,13 @@
 local front = import 'lib/front.libsonnet';
 local utils = import 'lib/utils.libsonnet';
-local taskSecurityGroups = ['sg-0b97c2a51099cdf2a'];  // translation-dev
-local elbSecurityGroups = ['sg-035c00f22c7fe5429'];  // elb-translation-dev
+local taskSecurityGroups = ['sg-049a0943234cd1d86'];  // translation-practice
+local elbSecurityGroups = ['sg-0d64b25feaaaa7225'];  // elb-translation-practice
 
 {
   scheduler: utils.fargateScheduler(taskSecurityGroups) {
     cpu: '1024',
     memory: '2048',
-    task_role_arn: utils.iamRole('EcsTranslationDev'),
+    task_role_arn: utils.iamRole('EcsTranslationPractice'),
     elb_v2: {
       vpc_id: utils.vpcId,
       health_check_path: '/healthcheck',
@@ -19,7 +19,7 @@ local elbSecurityGroups = ['sg-035c00f22c7fe5429'];  // elb-translation-dev
         {
           port: 443,
           protocol: 'HTTPS',
-          certificate_arn: 'arn:aws:acm:ap-northeast-1:550372229658:certificate/f322e479-c94f-4683-b20f-17a2e652fe64',
+          certificate_arn: 'arn:aws:acm:ap-northeast-1:550372229658:certificate/bbea314d-ea38-412e-8909-c65c89981a71',
         },
       ],
       subnets: utils.publicSubnets,
@@ -40,14 +40,14 @@ local elbSecurityGroups = ['sg-035c00f22c7fe5429'];  // elb-translation-dev
     cpu: 512,
     memory: 1024,
     env: {
-      SECRET_KEY: utils.secret('translation_secret_key'),
-      DB_HOST: 'translation-dev-db.c9ge2hh8rox6.ap-northeast-1.rds.amazonaws.com',
+      SECRET_KEY: utils.secret('translation_secret_key_practice'),
+      DB_HOST: 'translation-practice-db.c9ge2hh8rox6.ap-northeast-1.rds.amazonaws.com',
       DB_USER: 'ioitrans',
       DB_PASSWORD: utils.secret('db_ioitrans_password'),
       DB_NAME: 'ioitrans',
-      REDIS_HOST: 'ioitrans-dev-redis.vozztv.0001.apne1.cache.amazonaws.com',
+      REDIS_HOST: 'translation-practice.vozztv.0001.apne1.cache.amazonaws.com',
       REDIS_DB: '1',
-      S3_BUCKET: 'ioi18-translation-files-dev',
+      S3_BUCKET: 'ioi18-translation-files-practice',
       GUNICORN_WORKERS: '2',
     },
     mount_points: [
