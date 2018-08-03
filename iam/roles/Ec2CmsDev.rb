@@ -18,38 +18,9 @@ role "Ec2CmsDev", :path=>"/" do
 
   include_template "Ec2InstanceDefault"
 
-  policy "cms-s3" do
-    {
-      "Version" => "2012-10-17",
-      "Statement" => [
-        {
-          "Effect" => "Allow",
-          "Action" => %w(
-            s3:GetObject
-            s3:PutObject
-            s3:DeleteObject
-            s3:ListBucket
-          ),
-          "Resource" => %w(
-            arn:aws:s3:::ioi18-cms-files-dev
-            arn:aws:s3:::ioi18-cms-files-dev/*
-          ),
-        },
-        {
-          "Effect" => "Allow",
-          "Action" => %w(
-            s3:GetObject
-          ),
-          "Resource" => %w(
-            arn:aws:s3:::ioi18-infra/cms/dev/config.json
-          ),
-        },
-      ]
-    }
-  end
-
   attached_managed_policies(
     "arn:aws:iam::550372229658:policy/IoiCodeDeploy",
+    "arn:aws:iam::550372229658:policy/CmsDev",
   )
 end
 

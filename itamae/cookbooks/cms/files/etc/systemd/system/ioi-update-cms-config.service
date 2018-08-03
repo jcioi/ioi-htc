@@ -5,4 +5,5 @@ Before=cms-logservice.service cms-resourceservice.service cms-evaluationservice.
 
 [Service]
 Type=oneshot
+EnvironmentFile=-/etc/cms_aws_access_key.env
 ExecStart=/usr/bin/ioi-update-cms-config

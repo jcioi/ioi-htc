@@ -8,6 +8,7 @@ Group=cmsuser
 RuntimeDirectory=cms
 
 EnvironmentFile=-/etc/ioi-contest-id.env
+EnvironmentFile=-/etc/cms_aws_access_key.env
 ExecStart=/usr/bin/cmsContestWebServer -c $CMS_CONTEST_ID
 
 [Install]

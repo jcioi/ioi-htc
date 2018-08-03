@@ -14,6 +14,15 @@ file '/etc/ioi-contest-id.env' do
   mode  '0644'
 end
 
+unless node[:hocho_ec2]
+  file '/etc/cms_aws_access_key.env' do
+    content "AWS_ACCESS_KEY_ID=#{node[:secrets].fetch(:"cms_#{node[:cms][:cluster]}_aws_access_key_id")}\nAWS_SECRET_ACCESS_KEY=#{node[:secrets].fetch(:"cms_#{node[:cms][:cluster]}_aws_secret_access_key")}\n"
+    owner 'root'
+    group 'root'
+    mode  '0644'
+  end
+end
+
 include_recipe 'user.rb'
 
 include_recipe 'deps.rb'
