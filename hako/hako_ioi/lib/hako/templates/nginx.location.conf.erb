@@ -40,3 +40,7 @@ proxy_set_header <%= header %> "<%= value %>";
 proxy_http_version 1.1;
 proxy_pass <%= location.proxy_pass %>;
 <%- end -%>
+
+<%- location.add_header.each do |header, value| -%>
+add_header <%= header %> "<%= value %>";
+<%- end -%>

@@ -118,6 +118,10 @@ module Hako
           def proxy_pass
             @config.fetch('proxy_pass', DEFAULT_PROXY_PASS)
           end
+
+          def add_header
+            @config.fetch('add_header', {})
+          end
         end
       end
     end
