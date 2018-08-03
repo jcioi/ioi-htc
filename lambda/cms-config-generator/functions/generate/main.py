@@ -31,6 +31,9 @@ def generate_ec2_services(cluster):
     for r in pager.search('Reservations'):
         for instance in r['Instances']:
             service_tag = find_tag('CmsService', instance.get('Tags', []))
+            if service_tag == '':
+                service_tag = None
+
             if service_tag == None:
                 print("[%s] %s: No service tag" % (cluster, instance['InstanceId']))
                 continue
