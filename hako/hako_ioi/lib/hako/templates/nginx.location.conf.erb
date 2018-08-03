@@ -29,10 +29,9 @@ proxy_connect_timeout <%= location.proxy_connect_timeout %>;
 proxy_send_timeout <%= location.proxy_send_timeout %>;
 proxy_read_timeout <%= location.proxy_read_timeout %>;
 
-proxy_set_header X-Forwarded-Proto $request_proto;
-proxy_set_header X-Forwarded-Port "";
-proxy_set_header Connection "";
-proxy_set_header Host "$http_host";
+  <%- location.proxy_set_header.each do |header, value| -%>
+proxy_set_header <%= header %> "<%= value %>";
+  <%- end -%>
 
 proxy_http_version 1.1;
 proxy_pass <%= location.proxy_pass %>;

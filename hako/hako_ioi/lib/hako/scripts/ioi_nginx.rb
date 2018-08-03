@@ -68,6 +68,12 @@ module Hako
 
         class Location < NginxFront::Generator::Location
           DEFAULT_PROXY_PASS = 'http://backend_server'
+          DEFAULT_PROXY_SET_HEADER = {
+            'X-Forwarded-Proto' => '$request_proto',
+            'X-Forwarded-Port' => '',
+            'Connection' => '',
+            'Host' => '$http_host',
+          }
 
           def root
             @config.fetch('root', nil)
@@ -99,6 +105,10 @@ module Hako
 
           def proxy_read_timeout
             @config.fetch('proxy_read_timeout', '60s')
+          end
+
+          def proxy_set_header
+            DEFAULT_PROXY_SET_HEADER.merge(@config.fetch('proxy_set_header', {}))
           end
 
           def proxy_pass
