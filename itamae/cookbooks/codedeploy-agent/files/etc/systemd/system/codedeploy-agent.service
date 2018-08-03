@@ -1,5 +1,6 @@
 [Unit]
 Description=AWS CodeDeploy Host Agent
+Want=ioi-ensure-onpremise-codedeploy-credentials.service
 
 [Service]
 Type=forking
