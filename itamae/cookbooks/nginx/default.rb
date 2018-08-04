@@ -63,18 +63,21 @@ remote_file '/etc/nginx/utils/force_https.conf' do
   owner 'root'
   group 'root'
   mode  '0644'
+  notifies :run, 'execute[nginx try-reload]'
 end
 
 remote_file '/etc/nginx/utils/httpd_alived.conf' do
   owner 'root'
   group 'root'
   mode '644'
+  notifies :run, 'execute[nginx try-reload]'
 end
 
 template '/etc/nginx/utils/tls_modern.conf' do
   owner 'root'
   group 'root'
   mode '644'
+  notifies :run, 'execute[nginx try-reload]'
 end
 
 directory '/etc/nginx/conf.d' do
@@ -88,6 +91,7 @@ if node.dig(:nginx, :default_conf)
     owner 'root'
     group 'root'
     mode '644'
+    notifies :run, 'execute[nginx try-reload]'
   end
 else
   file '/etc/nginx/conf.d/default.conf' do
