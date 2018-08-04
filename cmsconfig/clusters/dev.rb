@@ -96,7 +96,7 @@
   # "Maximum size of a submission in bytes. If you use a proxy",
   # "and set these sizes to large values remember to change",
   # "client_max_body_size in nginx.conf too.",
-  max_submission_length: 100000,
+  max_submission_length: 256000,
   max_input_length: 5000000,
 
   # "STL documentation path in the system (exposed in CWS).",
