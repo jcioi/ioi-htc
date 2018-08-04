@@ -103,3 +103,12 @@ cd hako/
 
 bundle exec hako deploy nanika.jsonnet -t codebuild
 ```
+
+## terraform: Misc (ELB, ...)
+
+```
+cd terraform/
+
+terraform init
+terraform apply
+```
