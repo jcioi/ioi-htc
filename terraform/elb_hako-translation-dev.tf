@@ -42,8 +42,8 @@ resource "aws_lb_target_group" "hako-translation-dev" {
 
   health_check {
     path = "/healthcheck"
-    interval = 30
-    healthy_threshold = 5
+    interval = 6
+    healthy_threshold = 3
     unhealthy_threshold = 2
     matcher = "200"
   }

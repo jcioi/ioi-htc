@@ -31,8 +31,8 @@ resource "aws_lb_target_group" "cms-dev-admin" {
   health_check {
     path = "/httpd_alived"
     interval = 6
-    healthy_threshold = 2
-    unhealthy_threshold = 3
+    healthy_threshold = 3
+    unhealthy_threshold = 2
     matcher = "200"
   }
 }

@@ -42,8 +42,8 @@ resource "aws_lb_target_group" "hako-nginx-omniauth-adapter" {
 
   health_check {
     path = "/site/sha"
-    interval = 30
-    healthy_threshold = 5
+    interval = 6
+    healthy_threshold = 3
     unhealthy_threshold = 2
     matcher = "200"
   }
