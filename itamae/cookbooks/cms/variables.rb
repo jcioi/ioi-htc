@@ -12,4 +12,4 @@ when node[:hocho_ec2].nil?
   node[:cms][:variant] ||= 'onpremise'
 end
 
-node[:cms][:contest_id] ||= node[:contest_ids][node[:cms][:cluster]]
+node[:cms][:contest_id] ||= node.dig(:hocho_ec2, :tags, :CmsContestId)&.to_i || node[:contest_ids][node[:cms][:cluster]]
