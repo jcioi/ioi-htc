@@ -37,7 +37,7 @@ resource "aws_lb_target_group" "cms-practice-admin-public" {
   vpc_id = "vpc-03eed691a6a5a03b2"
   target_type = "instance"
 
-  deregistration_delay = 300
+  deregistration_delay = 60
   slow_start = 0
 
   health_check {

@@ -5,7 +5,7 @@ resource "aws_lb" "cms-dev-public" {
   security_groups = ["sg-07f4a446b97db9116","sg-0e821dd1a7655e981"]
   subnets = ["${data.aws_subnet_ids.public.ids}"]
 
-  idle_timeout = 600
+  idle_timeout = 60
   enable_deletion_protection = false
 }
 resource "aws_lb_listener" "cms-dev-public_80" {
@@ -37,7 +37,7 @@ resource "aws_lb_target_group" "cms-dev-public" {
   vpc_id = "vpc-03eed691a6a5a03b2"
   target_type = "instance"
 
-  deregistration_delay = 300
+  deregistration_delay = 60
   slow_start = 0
 
   health_check {
