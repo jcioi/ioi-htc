@@ -1,7 +1,0 @@
-sorah-cms-scoring-001.dev.aws.ckpd.co:
-  properties:
-    attributes:
-      desired_hostname: sorah-cms-scoring-001
-    run_list:
-      - roles/base/default.rb
-      - roles/cms-scoringservice/default.rb

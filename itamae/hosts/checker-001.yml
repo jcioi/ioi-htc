@@ -1,7 +1,0 @@
-sorah-cms-checker-001.dev.aws.ckpd.co:
-  properties:
-    attributes:
-      desired_hostname: sorah-cms-checker-001
-    run_list:
-      - roles/base/default.rb
-      - roles/cms-checker/default.rb
