@@ -86,6 +86,13 @@ directory '/etc/nginx/conf.d' do
   mode  '0755'
 end
 
+template '/etc/nginx/conf.d/cidr.conf' do
+  owner 'root'
+  group 'root'
+  mode  '0644'
+  notifies :run, 'execute[nginx try-reload]'
+end
+
 if node.dig(:nginx, :default_conf)
   template '/etc/nginx/conf.d/default.conf' do
     owner 'root'
