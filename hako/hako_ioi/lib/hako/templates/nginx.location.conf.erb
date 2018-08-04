@@ -1,13 +1,17 @@
+set $hsts "max-age=1209600";
+
 <%- case location.https_type -%>
 <%- when 'always' -%>
 if ($request_proto = "http") {
   return 301 https://$host$request_uri;
 }
+add_header Strict-Transport-Security $hsts;
 <%- when 'public' -%>
 set $https_only_cond "$ioi_internal,$request_proto";
 if ($https_only_cond = "0,http") {
   return 301 https://$host$request_uri;
 }
+add_header Strict-Transport-Security $hsts;
 <%- end -%>
 
 <%- if location.use_omniauth? -%>
