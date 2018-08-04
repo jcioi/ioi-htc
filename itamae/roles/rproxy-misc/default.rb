@@ -14,7 +14,12 @@ service 'haproxy' do
 end
 
 %w(
+  /etc/nginx/utils/omniauth_enable_location.conf
+  /etc/nginx/utils/omniauth_enable_server.conf
+
   /etc/nginx/conf.d/auth.ioi18.net.conf
+  /etc/nginx/conf.d/admin-dev.ioi18.net.conf
+  /etc/nginx/conf.d/contest-dev.ioi18.net.conf
 ).each do |_|
   template _ do
     owner 'root'

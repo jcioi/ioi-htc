@@ -30,6 +30,11 @@ resource "aws_lb_listener" "rproxy-misc_443" {
     type = "forward"
   }
 }
+resource "aws_lb_listener_certificate" "rproxy-misc_cms-dev" {
+  listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
+  certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/3eb21034-26cc-40eb-a2c5-446d94fb1020"
+}
+
 resource "aws_lb_target_group" "rproxy-misc" {
   name = "rproxy-misc"
   port = 80
