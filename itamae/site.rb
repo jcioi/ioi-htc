@@ -52,7 +52,13 @@ define :apt_key, keyname: nil do
   end
 end
 
-
+define :dpkg_foreign_architecture, arch: nil do
+  name = params[:arch] || params[:name]
+  execute "dpkg --add-architecture #{name}" do
+    not_if "dpkg --print-foreign-architectures | grep -Fx #{name}"
+    notifies :run, 'execute[apt-get update]'
+  end
+end
 
 define :fstab, device: nil, mountpoint: nil, fstype: nil, options: nil, dump: 0, fsckorder: 0 do
   device = params[:device] || params[:name]
