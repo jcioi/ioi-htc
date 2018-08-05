@@ -1,0 +1,24 @@
+[Unit]
+Description=IOI2018 Print System
+Documentation=https://github.com/jcioi/ioi-print
+Requires=cups.service
+After=cups.service
+
+[Service]
+Type=simple
+User=ioiprint
+Group=ioiprint
+RuntimeDirectory=ioiprint
+LogsDirectory=ioiprint
+EnvironmentFile=-/etc/ioiprint.env
+Environment=IOIPRINT_CONFIG=/etc/ioiprint.json
+PIDFile=/run/ioiprint/gunicorn.pid
+WorkingDirectory=/opt/ioiprint
+ExecStart=/bin/bash -uec 'source /opt/ioiprint_venv/bin/activate; gunicorn -p /run/ioiprint/gunicorn.pid -b unix:/run/ioiprint/gunicorn.sock ioiprint.api:app'
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/bin/kill -TERM $MAINPID
+Restart=on-failure
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,6 @@
+# vim: ft=sudoers
+
+Cmnd_Alias IOIPRINT_DEPLOY = /bin/systemctl restart ioiprint, \
+                        /usr/bin/systemd-run -P -p User=deploy -p MemoryMax= /opt/ioiprint/deploy/setup.sh
+deploy ALL = (root) NOPASSWD: IOIPRINT_DEPLOY
+Defaults!IOIPRINT_DEPLOY !requiretty
