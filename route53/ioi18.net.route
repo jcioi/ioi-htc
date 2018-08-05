@@ -60,6 +60,11 @@ template "ioi18.net-private" do
     )
   end
 
+  rrset "print-dev.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "internal-print-dev-1023408308.ap-northeast-1.elb.amazonaws.com."
+  end
+
   rrset "cms-dev-worker-1.lab.ioi18.net", "A" do
     ttl 20
     resource_records "10.18.96.10"
