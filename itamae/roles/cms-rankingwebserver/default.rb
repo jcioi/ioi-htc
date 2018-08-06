@@ -27,6 +27,7 @@ include_cookbook 'cms::variables'
 include_cookbook 'cms::user'
 include_cookbook 'cms::deps'
 include_cookbook 'cms::cms'
+include_cookbook 'cms::utils'
 
 include_cookbook 'nginx'
 include_cookbook 'codedeploy-agent'
