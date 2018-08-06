@@ -1,13 +1,17 @@
 node.reverse_merge!(
   contestant: {
     preview: false,
-    cms_uri: node[:contestant][:preview] ? 'https://contest-practice.ioi18.net' : 'https://contest.ioi18.net'
+    cms_uri: node[:contestant][:preview] ? 'https://contest-practice.ioi18.net' : 'https://contest.ioi18.net',
+    ioiprint_uri: 'ioiprint://10.64.20.110:5000',  ## XXX
   },
   compilers: {
     install_doc: true,
   },
   swap: {
     size: 4 * 2**30,
+  },
+  cups: {
+    log_level: 'debug',
   },
 )
 
@@ -40,4 +44,5 @@ if node[:contestant][:preview]
   include_recipe './preview.rb'
 else
   include_recipe './modprobe.rb'
+  include_recipe './printer.rb'
 end

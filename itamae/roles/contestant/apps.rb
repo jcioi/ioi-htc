@@ -52,6 +52,7 @@ package 'gnome-calculator'
 package 'cppreference-doc-en-html'
 
 ## For GNOME
+package 'evince'
 package 'gkbd-capplet'
 package 'nautilus-extension-gnome-terminal'
 package 'gnome-tweaks'

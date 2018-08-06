@@ -1,0 +1,33 @@
+#!/bin/bash
+set -eu
+
+# ref: backend(7)
+CUPS_BACKEND_FAILED=1
+CUPS_BACKEND_CANCEL=4
+
+trap 'exit $CUPS_BACKEND_FAILED' ERR  # CUPS_BACKEND_FAILED (ref. backend(7))
+
+ARG_JOB=$1
+ARG_OPTIONS=$5
+ARG_FILENAME=${6:-}
+
+IOIPRINT_URI=${DEVICE_URI/#ioiprint/http}
+
+if [[ $FINAL_CONTENT_TYPE != application/vnd.cups-pdf ]]; then
+    echo "Content type not supported: $FINAL_CONTENT_TYPE" >&2
+    exit $CUPS_BACKEND_CANCEL
+fi
+
+if [[ $ARG_FILENAME ]]; then
+    filename="$ARG_FILENAME"
+else
+    filename=$(mktemp -t "cups-job-${ARG_JOB}.XXXXXXXX.pdf")
+    cat - >"$filename"
+fi
+
+if response=$(curl -fsS --form "pdf=@$filename" "${IOIPRINT_URI}/contestant"); then
+    echo "INFO: $response" >&2
+else
+    echo "ERROR: $response" >&2
+    exit $CUPS_BACKEND_FAILED
+fi
