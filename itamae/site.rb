@@ -7,6 +7,7 @@ node[:site_domain] = 'ioi18.net'
 
 node[:contest_ids] = {
   'dev' => 1,
+  'practice' => 1,
 }
 node[:site_cidr] = '10.18.0.0/16'
 # node[:site_cidr6] = ''
