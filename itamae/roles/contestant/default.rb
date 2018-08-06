@@ -1,6 +1,7 @@
 node.reverse_merge!(
   contestant: {
     preview: false,
+    cms_uri: node[:contestant][:preview] ? 'https://contest-practice.ioi18.net' : 'https://contest.ioi18.net'
   },
   compilers: {
     install_doc: true,
@@ -9,13 +10,6 @@ node.reverse_merge!(
     size: 4 * 2**30,
   },
 )
-
-node[:contestant][:cms_uri] ||=
-  if node[:contestant][:preview]
-    'https://contest-practice.ioi18.net'
-  else
-    'https://contest.ioi18.net'
-  end
 
 group 'contestant' do
   gid 1000
