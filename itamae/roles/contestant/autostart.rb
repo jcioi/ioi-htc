@@ -18,3 +18,13 @@ end
     to '/dev/null'
   end
 end
+
+%w[
+  anacron
+  cron
+  wpa_supplicant
+].each do |_|
+  link "/etc/systemd/system/#{_}.service" do
+    to '/dev/null'
+  end
+end

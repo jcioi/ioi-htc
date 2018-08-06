@@ -26,3 +26,9 @@ disabled_apps.each do |_|
     mode '640'
   end
 end
+
+statoverride '/usr/bin/crontab' do
+  owner 'root'
+  group 'crontab'
+  mode '755'  # drop sgid
+end
