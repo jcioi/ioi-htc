@@ -1,12 +1,14 @@
 #!/bin/bash -xe
 target=/opt/cms-isolate
-url='<%= node[:cms].fetch(:isolate).fetch(:tarball_url) %>'
+url_file=/opt/cms-isolate.url
+url=$(cat /opt/cms-isolate.url)
 
-if [ -e "/usr/bin/isolate" ]; then
+if [ -e "/usr/bin/isolate" -a -e /opt/cms-isolate.mark ]; then
   echo "${target} exists" 1>&2
   exit 1
 fi
 
+rm -rf $target || :
 mkdir -p $target
 chown deploy:deploy $target
 
@@ -19,3 +21,4 @@ cp $target/isolate /usr/bin/
 cp $target/isolate-check-environment /usr/bin/
 chown root:cmsuser /usr/bin/isolate
 chmod 4750 /usr/bin/isolate
+touch /opt/cms-isolate.mark
