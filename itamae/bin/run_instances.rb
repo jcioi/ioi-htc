@@ -47,6 +47,8 @@ parser = OptionParser.new do |_|
 
   _.on('-k KEY', '--key KEY') { |k| options[:key_name] = k }
 
+  _.on('-l LIKE', '--like LIKE') { |k| options[:like] = k }
+
   _.on('-p', '--public-ip') { options[:public_ip ] = true }
   _.on('-P', '--no-public-ip') { options[:public_ip] = false }
 
@@ -90,6 +92,27 @@ end
 
 if edit.nil?
   edit = options[:names].empty? || options[:image_id].nil? || options[:vpc].nil? || options[:subnets].empty?
+end
+
+if options[:like]
+  like_spec = options.delete(:like)
+  like = case like_spec
+  when /\Ai-/
+    @ec2.instances(instance_ids: [like_spec]).first
+  else
+    @ec2.instances(filters: [{name: 'tag:Name', values: [like_spec]}]).first
+  end
+  raise "No instance found for #{like_spec}" unless like
+
+  options[:instance_type] = like.instance_type
+  options[:vpc] = like.vpc_id
+  options[:subnets] = [like.subnet_id]
+  options[:security_groups] = like.security_groups.map(&:group_name)
+  options[:key] = like.key_name
+  options[:public_ip] = !!like.public_ip_address
+  options[:role] = like.iam_instance_profile&.arn&.split(?/)&.last
+  options[:ebs_optimized] = like.ebs_optimized
+  options[:tags] = like.tags.map{ |_| _.key == 'Name' ? nil : [_.key, _.value] }.compact.to_h
 end
 
 if edit
