@@ -66,7 +66,7 @@ if node.dig(:base, :zabbix_agent)
 end
 
 unless node[:hocho_ec2]
-  include_cookbook 'disable-swap'
+  include_cookbook 'swap'
 end
 
 file '/root/.ssh/authorized_keys' do

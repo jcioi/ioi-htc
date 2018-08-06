@@ -5,6 +5,9 @@ node.reverse_merge!(
   compilers: {
     install_doc: true,
   },
+  swap: {
+    size: 4 * 2**30,
+  },
 )
 
 node[:contestant][:cms_uri] ||=
@@ -21,6 +24,7 @@ end
 include_cookbook 'isolate-recommendation'
 include_cookbook 'compilers'
 include_cookbook 'console-setup'
+include_cookbook 'swap'
 
 package 'ubuntu-desktop'
 package 'fonts-noto'
