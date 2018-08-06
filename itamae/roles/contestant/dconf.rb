@@ -8,6 +8,7 @@ dconf_defaults 'disable-powersaving' do
     '/org/gnome/settings-daemon/plugins/power/power-button-action' => 'nothing',
     '/org/gnome/desktop/session/idle-delay' => :'uint32 0',
     '/org/gnome/desktop/session/lock-enabled' => false,
+    '/org/gnome/desktop/lockdown/disable-lock-screen' => true,
   )
   lock true
 end
