@@ -4,7 +4,7 @@ node.reverse_merge!(
     timezone: 'Asia/Tokyo',
     config: {
       contestant_max_pages: 10,
-      cups_address: 'localhost:631',
+      cups_server: 'localhost:631',
     },
   },
 )
