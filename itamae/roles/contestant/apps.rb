@@ -18,6 +18,7 @@ package 'vim-gtk3'
 include_recipe './eclipse.rb'
 include_recipe './intellij_idea.rb'
 include_recipe './atom.rb'
+include_recipe './sublime.rb'
 
 ## Interpreters
 package 'python'

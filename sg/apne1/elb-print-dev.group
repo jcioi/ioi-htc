@@ -7,13 +7,13 @@ ec2 "vpc-03eed691a6a5a03b2" do
     ingress do
       permission :tcp, 443 do
         groups(
-          "bastion",
           "translation-dev",
         )
 
-        # ip_ranegs(
+        ip_ranges(
         #   ::CIDR_VENUE_ARENA,
-        # )
+          ::CIDR_VENUE_LAB,
+        )
       end
     end
 

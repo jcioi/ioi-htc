@@ -1,8 +1,8 @@
 node.reverse_merge!(
   contestant: {
     preview: false,
-    cms_uri: node[:contestant][:preview] ? 'https://contest-practice.ioi18.net' : 'https://contest.ioi18.net',
-    ioiprint_uri: 'ioiprint://10.64.20.110:5000',  ## XXX
+    cms_uri: node.dig(:contestant, :preview) ? 'https://contest-practice.ioi18.net' : 'https://contest.ioi18.net',
+    ioiprint_uri: 'ioiprints://print-dev.ioi18.net',
   },
   compilers: {
     install_doc: true,
