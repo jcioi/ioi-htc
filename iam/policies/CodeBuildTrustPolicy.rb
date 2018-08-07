@@ -34,5 +34,17 @@ managed_policy "CodeBuildTrustPolicy", :path=>"/" do
           ],
           'Resource' => '*',
         },
+        {
+          'Effect' => 'Allow',
+          'Action' => [
+            's3:ListBucket',
+            's3:GetObject',
+          ],
+          'Resource' => %w(
+            arn:aws:s3:::ioi18-misc
+            arn:aws:s3:::ioi18-misc/flags/*
+          ),
+        },
+
       ]}
 end
