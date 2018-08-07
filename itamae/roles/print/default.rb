@@ -1,7 +1,10 @@
 node.reverse_merge!(
   cups: {
+    log_level: 'debug',
     web_interface: true,
     listen: ['*:631'],
+    server_alias: '*',
+    external_auth: true,
   },
   nginx: {
     default_conf: false,

@@ -185,6 +185,11 @@ template "ioi18.net-common" do
     resource_records "d1a8dnv37zdy0z.cloudfront.net."
   end
 
+  rrset "print-dev-001.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "rproxy-misc.elb.ioi18.net."
+  end
+
   %w(
     _631443614a51aeef30597369338b45d4.s3-apne1.ioi18.net. _2a11a85cc8ea57ad9cdc4241c6e80af8.acm-validations.aws.
 
@@ -224,6 +229,10 @@ template "ioi18.net-common" do
 
     _62d852ed8612d0871a89d4f6b53dc7c7.print-dev.ioi18.net. _50a2f8abda67affb324988f266bd668c.acm-validations.aws.
     _958355b3baefba4eae97db9a186efd7c.print.ioi18.net. _bc32e87da5d152196d0351e10c049cf4.acm-validations.aws.
+
+    _1552d4cb441db8e30187368916574fa6.print-dev-001.ioi18.net. _1d1dbcdb18d8cdf63140f7289e10912b.acm-validations.aws.
+    _a0815719f67eceb5d81fe820fc0267fe.print-001.ioi18.net. _2091c9a98f83c6cf21350c621c5fbbbb.acm-validations.aws.
+    _f5a3668a9b2198a8c9eb06a816b7890d.print-002.ioi18.net. _eedbbd1df1df0f6dde123d3b00eaf4ac.acm-validations.aws.
 
     _3d984e52aed2599eeb494eaf8dd9e016.public-images.ioi18.net. _602e2f2f7982cf01df046ab34293898f.acm-validations.aws.
   ).each_slice(2) do |(name,target)|
