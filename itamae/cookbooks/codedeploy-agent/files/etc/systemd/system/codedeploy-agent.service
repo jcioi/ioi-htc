@@ -19,7 +19,7 @@ RuntimeDirectory=codedeploy-agent
 StateDirectory=codedeploy-agent
 
 MemorySwapMax=0
-MemoryMax=256M
+MemoryMax=384M
 
 [Install]
 WantedBy=multi-user.target
