@@ -4,5 +4,9 @@ if ! groups | grep -q cmsuser; then
   exit 1
 fi
 source /opt/cms_venv/bin/activate
-cd /opt/cms
-exec bash
+if [[ "$#" -lt 1 ]]; then
+  cd /opt/cms
+  exec bash
+else
+  exec "$@"
+fi

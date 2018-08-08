@@ -1,0 +1,1 @@
+../templates/ioi18-task.rb
