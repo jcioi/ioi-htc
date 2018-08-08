@@ -1,3 +1,9 @@
+node.reverse_merge!(
+  cups_pdf: {
+    out: '${HOME}/PDF',
+  },
+)
+
 package 'printer-driver-cups-pdf' do
   action :install
 end

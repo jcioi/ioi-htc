@@ -2,9 +2,13 @@ node.reverse_merge!(
   cups: {
     log_level: 'debug',
     web_interface: true,
-    listen: ['*:631'],
-    server_alias: '*',
+    listen: ['localhost:631'],
+#    server_alias: '*',
     external_auth: true,
+  },
+  cups_pdf: {
+    out: '/srv/pdf',
+    user_umask: '0000',
   },
   nginx: {
     default_conf: false,
@@ -23,6 +27,12 @@ include_cookbook 'cups'
 include_cookbook 'cups-pdf'
 include_cookbook 'canon-cups-drivers'
 include_cookbook 'ioiprint'
+
+directory '/srv/pdf' do
+  owner 'root'
+  group 'root'
+  mode '755'
+end
 
 template '/etc/nginx/conf.d/print.ioi18.net.conf' do
   owner 'root'

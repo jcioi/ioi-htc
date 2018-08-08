@@ -11,7 +11,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
         )
       end
 
-      permission :tcp, 631 do
+      permission :tcp, 6631 do  # cups proxied by nginx
         groups(
           "rproxy-misc",
         )
