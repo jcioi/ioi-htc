@@ -6,4 +6,5 @@ packer_cache/
 *.vmdk.gz
 *.ova
 *.rebuild
+*.sha256sum
 /timestamp
