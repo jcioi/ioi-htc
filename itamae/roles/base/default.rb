@@ -65,10 +65,6 @@ if node.dig(:base, :zabbix_agent)
   include_cookbook 'zabbix-agent'
 end
 
-unless node[:hocho_ec2]
-  include_cookbook 'swap'
-end
-
 file '/root/.ssh/authorized_keys' do
   action :delete
 end

@@ -8,8 +8,14 @@ if node.dig(:cms, :variant) == 'onpremise'
     codedeploy_agent: {
       proxy_uri: 'http://fproxy.ioi18.net:80'
     },
+    swap: {
+      size: 0,
+    },
   )
+
+  include_cookbook 'swap'
 end
+
 
 include_cookbook 'codedeploy-agent'
 include_cookbook 'codedeploy-agent::onpremises' if node.dig(:cms, :variant) == 'onpremise'
