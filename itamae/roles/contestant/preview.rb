@@ -22,6 +22,7 @@ execute "usermod -a -G netdev #{username.shellescape}" do
 end
 
 package 'netplan.io'
+
 file '/etc/netplan/01-netcfg.yaml' do
   owner 'root'
   group 'root'

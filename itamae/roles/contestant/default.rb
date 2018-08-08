@@ -1,7 +1,10 @@
+def preview?
+  node.dig(:contestant, :preview)
+end
+
 node.reverse_merge!(
   contestant: {
-    preview: false,
-    cms_uri: node.dig(:contestant, :preview) ? 'https://contest-practice.ioi18.net' : 'https://contest.ioi18.net',
+    cms_uri: preview? ? 'https://contest-practice.ioi18.net' : 'https://contest.ioi18.net',
     ioiprint_uri: 'ioiprints://print-dev.ioi18.net',
   },
   compilers: {
@@ -14,6 +17,13 @@ node.reverse_merge!(
     log_level: 'debug',
   },
 )
+
+unless preview?
+  include_cookbook 'op-user'
+  include_cookbook 'sshd'
+
+  include_cookbook 'systemd-networkd'
+end
 
 group 'contestant' do
   gid 1000
@@ -40,7 +50,7 @@ include_recipe './pam.rb'
 include_recipe './limits.rb'
 include_recipe './polkit.rb'
 
-if node[:contestant][:preview]
+if preview?
   include_recipe './preview.rb'
 else
   include_recipe './modprobe.rb'
