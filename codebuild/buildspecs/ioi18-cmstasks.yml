@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - "find . -type f -name '*.sh' -exec chmod +x '{}' '+'"
+  build:
+    commands:
+      - ruby /opt/tools/ioi18_build.rb
+      - touch /tmp/work/task/.built-on-codebuild
+      
+artifacts:
+  files:
+    - '**/*'
+  base-directory: '/tmp/work/task'
