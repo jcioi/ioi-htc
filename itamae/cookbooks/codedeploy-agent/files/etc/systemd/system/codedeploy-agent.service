@@ -1,6 +1,6 @@
 [Unit]
 Description=AWS CodeDeploy Host Agent
-Want=ioi-ensure-onpremise-codedeploy-credentials.service
+Wants=ioi-ensure-onpremise-codedeploy-credentials.service
 
 [Service]
 Type=forking
@@ -18,7 +18,6 @@ LogsDirectory=codedeploy-agent
 RuntimeDirectory=codedeploy-agent
 StateDirectory=codedeploy-agent
 
-MemorySwapMax=0
 MemoryMax=384M
 
 [Install]
