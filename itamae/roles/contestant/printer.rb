@@ -37,6 +37,12 @@ file 'set PAPERSIZE' do
     else
       content << "PAPERSIZE=a4\n"
     end
+
+    if content =~ /^LC_PAPER=/
+      content.gsub!(/^LC_PAPER=.*$/, 'LC_PAPER=en_GB.UTF-8')
+    else
+      content << "LC_PAPER=en_GB.UTF-8\n"
+    end
   end
 end
 
