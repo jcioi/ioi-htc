@@ -13,7 +13,7 @@ if node[:hocho_ec2]
   end
 else
   execute "mkdir -p /etc/systemd/network && cp -pv -t /etc/systemd/network /run/systemd/network/*netplan*" do
-    only_if "test -e /etc/netplan"
+    only_if "test -e /etc/netplan && test -d /run/systemd/network"
   end
 end
 

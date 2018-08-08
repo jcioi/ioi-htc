@@ -23,6 +23,12 @@ end
 
 package 'netplan.io'
 
+directory '/etc/netplan' do
+  owner 'root'
+  group 'root'
+  mode '755'
+end
+
 file '/etc/netplan/01-netcfg.yaml' do
   owner 'root'
   group 'root'
