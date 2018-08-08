@@ -18,3 +18,16 @@ dconf_defaults 'universal-access' do
     '/org/gnome/desktop/a11y/always-show-universal-access-status' => true,
   )
 end
+
+dconf_defaults 'gnome-favorite-apps' do
+  list = %w[
+    ioi18-cms
+    org.gnome.Nautilus
+    yelp
+    org.gnome.Terminal
+  ]
+
+  values(
+    '/org/gnome/shell/favorite-apps' => %{[#{list.map {|app| "'#{app}.desktop'" }.join(', ')}]}.to_sym,
+  )
+end
