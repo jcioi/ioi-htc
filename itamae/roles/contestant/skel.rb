@@ -16,6 +16,7 @@ desktop_shortcuts = {
     /usr/share/applications/org.kde.kdevelop.desktop
     /usr/local/share/applications/eclipse.desktop
     /usr/local/share/applications/intellij-idea-community.desktop
+    /usr/local/share/applications/sublime_text.desktop
   ],
   'Docs' => %w[
     /usr/local/share/applications/cppreference.desktop
