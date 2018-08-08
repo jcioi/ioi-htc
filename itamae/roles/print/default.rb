@@ -7,8 +7,8 @@ node.reverse_merge!(
     external_auth: true,
   },
   cups_pdf: {
-    out: '/srv/pdf',
-    user_umask: '0000',
+    out: '/var/spool/cups-pdf/output',
+    user_umask: '0022',
   },
   nginx: {
     default_conf: false,
@@ -28,9 +28,9 @@ include_cookbook 'cups-pdf'
 include_cookbook 'canon-cups-drivers'
 include_cookbook 'ioiprint'
 
-directory '/srv/pdf' do
-  owner 'root'
-  group 'root'
+directory '/var/spool/cups-pdf/output' do
+  owner 'ioiprint'
+  group 'ioiprint'
   mode '755'
 end
 
