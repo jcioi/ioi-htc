@@ -1,0 +1,8 @@
+boot-dev-01.srv.tkyk.ioi18.net:
+  properties:
+    attributes:
+      fog:
+        interface: ens2
+    run_list:
+      - roles/base/default.rb
+      - roles/boot/default.rb
