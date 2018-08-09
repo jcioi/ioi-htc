@@ -1,0 +1,44 @@
+## Start of FOG Settings
+## Created by the FOG Installer
+## Find more information about this file in the FOG Project wiki:
+##     https://wiki.fogproject.org/wiki/index.php?title=.fogsettings
+## Version: 1.5.4
+## Install time: Thu 09 Aug 2018 04:51:33 PM JST
+ipaddress='10.18.113.60'
+copybackold='0'
+interface='<%= node[:fog].fetch('interface') %>'
+submask='255.255.255.0'
+routeraddress='10.18.113.1'
+plainrouter='10.18.113.1'
+dnsaddress='10.18.205.55'
+username='fog'
+password="<%= node[:secrets].fetch('fog_password') %>"
+osid='2'
+osname='Debian'
+dodhcp='N'
+bldhcp='0'
+dhcpd=''
+blexports='1'
+installtype='N'
+snmysqluser='root'
+snmysqlpass=''
+snmysqlhost='localhost'
+installlang='0'
+storageLocation='/images'
+fogupdateloaded=1
+docroot='/var/www/'
+webroot='/fog/'
+caCreated='yes'
+httpproto='http'
+startrange=''
+endrange=''
+bootfilename='undionly.kpxe'
+packages='apache2 bc build-essential cpp curl g++ gawk gcc genisoimage gzip htmldoc isolinux lftp libapache2-mod-php7.1 libc6 libcurl4 liblzma-dev m4 mysql-client mysql-server net-tools nfs-kernel-server openssh-server php-gettext php7.1 php7.1-bcmath php7.1-cli php7.1-curl php7.1-fpm php7.1-gd php7.1-json php7.1-ldap php7.1-mbstring php7.1-mcrypt php7.1-mysql tar tftp-hpa tftpd-hpa unzip vsftpd wget xinetd zlib1g'
+noTftpBuild=''
+notpxedefaultfile=''
+sslpath='/opt/fog/snapins/ssl/'
+backupPath=''
+php_ver='7.1'
+php_verAdds='-7.1'
+sslprivkey='/opt/fog/snapins/ssl//.srvprivate.key'
+## End of FOG Settings
