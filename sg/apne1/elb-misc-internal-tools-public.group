@@ -1,0 +1,26 @@
+ec2 "vpc-03eed691a6a5a03b2" do
+  security_group "elb-misc-internal-tools-public" do
+    description "elb-misc-internal-tools-public"
+
+    ingress do
+      permission :tcp, 80..80 do
+        ip_ranges(
+          "0.0.0.0/0",
+        )
+      end
+      permission :tcp, 443..443 do
+        ip_ranges(
+          "0.0.0.0/0",
+        )
+      end
+    end
+
+    egress do
+      permission :any do
+        ip_ranges(
+          "0.0.0.0/0",
+        )
+      end
+    end
+  end
+end

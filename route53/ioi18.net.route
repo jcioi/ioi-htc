@@ -102,6 +102,11 @@ template "ioi18.net-common" do
     resource_records "18.179.132.187"
   end
 
+  rrset "awstools.elb.ioi18.net", "CNAME" do
+    ttl 60
+    resource_records "hako-awstools-626763254.ap-northeast-1.elb.amazonaws.com"
+  end
+
   rrset "cms-ranking-dev.elb.ioi18.net.", "CNAME" do
     ttl 60
     resource_records "cms-ranking-dev-1796043830.ap-northeast-1.elb.amazonaws.com."
@@ -128,6 +133,12 @@ template "ioi18.net-common" do
   rrset "auth.ioi18.net.", "CNAME" do
     ttl 60
     resource_records "rproxy-misc.elb.ioi18.net."
+  end
+
+
+  rrset "awstools.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "awstools.elb.ioi18.net."
   end
 
   rrset "contest-dev.ioi18.net.", "CNAME" do
@@ -235,6 +246,8 @@ template "ioi18.net-common" do
     _f5a3668a9b2198a8c9eb06a816b7890d.print-002.ioi18.net. _eedbbd1df1df0f6dde123d3b00eaf4ac.acm-validations.aws.
 
     _3d984e52aed2599eeb494eaf8dd9e016.public-images.ioi18.net. _602e2f2f7982cf01df046ab34293898f.acm-validations.aws.
+
+    _8dc58171646501143140554cf4c13083.awstools.ioi18.net. _4fd199744cdc485e15912eb6a2195b00.acm-validations.aws.
   ).each_slice(2) do |(name,target)|
     rrset name, "CNAME" do
       ttl 60
