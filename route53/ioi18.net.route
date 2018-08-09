@@ -248,6 +248,9 @@ template "ioi18.net-common" do
     _3d984e52aed2599eeb494eaf8dd9e016.public-images.ioi18.net. _602e2f2f7982cf01df046ab34293898f.acm-validations.aws.
 
     _8dc58171646501143140554cf4c13083.awstools.ioi18.net. _4fd199744cdc485e15912eb6a2195b00.acm-validations.aws.
+
+    _323f01e7f1245d5f66bb5819fdc2299c.boot.ioi18.net. _19bfba4de1cb2c07ff441d9b439ba8bb.acm-validations.aws.
+    _3e779ab81ac9f9397bb71dd2a13670d5.boot-dev.ioi18.net. _25fc3fb24fb70dd78408447f1af2ee8f.acm-validations.aws.
   ).each_slice(2) do |(name,target)|
     rrset name, "CNAME" do
       ttl 60
