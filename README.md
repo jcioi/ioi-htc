@@ -112,3 +112,30 @@ cd terraform/
 terraform init
 terraform apply
 ```
+
+## codebuild: AWS CodeBuild buildspec
+
+Use this when a source couldn't provide a buildspec.yml (e.g. CMS task repo)
+
+```
+cd codebuild/
+
+bundle exec ruby set_buildspec.rb XXX
+```
+
+## codepipeline: AWS CodePipeline pipelines, custom actions
+
+```
+cd codepipeline/
+
+# actions/XXX.rb
+bundle exec create_custom_action.rb XXX
+
+# pipelines/XXX.rb
+bundle exec export.rb XXX
+bundle exec upload.rb XXX
+
+bundle exec run.rb XXX
+bundle exec run.rb pipelines/ioi18-task*.rb
+```
+
