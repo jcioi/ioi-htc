@@ -1,0 +1,18 @@
+[Unit]
+Description=CodePipeline cmsImportTaskWorker
+
+[Service]
+User=cmsuser
+Group=cmsuser
+StateDirectory=cms-import-task-worker
+
+Restart=on-failure
+RestartSec=12s
+StartLimitInterval=600
+StartLimitBurst=12
+
+EnvironmentFile=/etc/ioi-codepipeline-cms-import-task-worker.env
+ExecStart=/usr/bin/ioi-codepipeline-cms-import-task-worker.rb
+
+[Install]
+WantedBy=multi-user.target
