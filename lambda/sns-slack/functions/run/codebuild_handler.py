@@ -23,8 +23,11 @@ class CodeBuildHandler(Handler):
     def current_phase(self):
         return self.detail()['current-phase']
 
+    def additional_information():
+        return self.detail()['additional-information']
+
     def from_codepipeline(self):
-        return self.detail().get('source', {}).get('type', None) == 'CODEPIPELINE'
+        return self.additional_information().get('source', {}).get('type', None) == 'CODEPIPELINE'
 
     def build_channel(self):
         if self.event.get('slack_channel'): # debug
