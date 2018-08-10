@@ -7,6 +7,12 @@ resource "aws_lb" "print-dev" {
 
   idle_timeout = 60
   enable_deletion_protection = false
+
+  access_logs {
+    bucket = "ioi18-logs"
+    prefix = "elb"
+    enabled = true
+  }
 }
 resource "aws_lb_listener" "print-dev_443" {
   load_balancer_arn = "${aws_lb.print-dev.arn}"

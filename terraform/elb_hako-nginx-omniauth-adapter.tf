@@ -7,6 +7,12 @@ resource "aws_lb" "hako-nginx-omniauth-adapter" {
 
   idle_timeout = 60
   enable_deletion_protection = false
+
+  access_logs {
+    bucket = "ioi18-logs"
+    prefix = "elb"
+    enabled = true
+  }
 }
 resource "aws_lb_listener" "hako-nginx-omniauth-adapter_443" {
   load_balancer_arn = "${aws_lb.hako-nginx-omniauth-adapter.arn}"

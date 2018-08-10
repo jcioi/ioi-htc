@@ -7,6 +7,12 @@ resource "aws_lb" "cms-practice-admin-public" {
 
   idle_timeout = 60
   enable_deletion_protection = false
+
+  access_logs {
+    bucket = "ioi18-logs"
+    prefix = "elb"
+    enabled = true
+  }
 }
 resource "aws_lb_listener" "cms-practice-admin-public_80" {
   load_balancer_arn = "${aws_lb.cms-practice-admin-public.arn}"

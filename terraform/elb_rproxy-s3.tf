@@ -7,6 +7,12 @@ resource "aws_lb" "rproxy-s3" {
 
   idle_timeout = 60
   enable_deletion_protection = false
+
+  access_logs {
+    bucket = "ioi18-logs"
+    prefix = "elb"
+    enabled = true
+  }
 }
 resource "aws_lb_listener" "rproxy-s3_80" {
   load_balancer_arn = "${aws_lb.rproxy-s3.arn}"
