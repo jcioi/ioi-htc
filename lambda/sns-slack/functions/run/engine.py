@@ -4,6 +4,7 @@ import json
 from botocore.vendored import requests
 
 from codepipeline_handler import CodePipelineHandler
+from codebuild_handler import CodeBuildHandler
 from fallback_handler import FallbackHandler
 
 #from sns_handler_proxy import SnsHandlerProxy
@@ -18,7 +19,8 @@ class Engine():
 
     def handle(self, event):
         handlers = [
-                CodePipelineHandler,
+            CodePipelineHandler,
+            CodeBuildHandler,
         ]
 
         do_fallback = True

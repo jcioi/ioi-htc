@@ -48,8 +48,8 @@ class CodePipelineHandler(Handler):
         if self.is_action():
             action_name = ('%s (%s)' % (self.stage_name(), self.action_name())) if self.stage_name() != self.action_name() else self.stage_name()
             attachment = {
-                'fallback': 'Action %s %s: %s' % (self.pipeline_name(), action_name, self.detail()['state']),
-                'text': 'Action <%s|%s> %s: *%s*' % (self.pipeline_url(), self.pipeline_name(), action_name, self.detail()['state']),
+                'fallback': '%s %s: %s' % (self.pipeline_name(), action_name, self.detail()['state']),
+                'text': '<%s|%s> %s: *%s*' % (self.pipeline_url(), self.pipeline_name(), action_name, self.detail()['state']),
                 'mrkdwn_in': ['text'],
             }
 
