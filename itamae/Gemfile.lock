@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/sorah/hocho
-  revision: 724f873ca4c3e469367e7c4b0a385988a8e425ed
+  revision: d63cfe6c859608692edbbf1256b8b96df53ca515
   specs:
     hocho (0.2.2)
       hashie
@@ -20,13 +20,13 @@ GEM
   specs:
     ansi (1.5.0)
     aws-eventstream (1.0.1)
-    aws-partitions (1.96.0)
-    aws-sdk-core (3.22.1)
+    aws-partitions (1.97.0)
+    aws-sdk-core (3.24.0)
       aws-eventstream (~> 1.0)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-ec2 (1.38.0)
+    aws-sdk-ec2 (1.41.0)
       aws-sdk-core (~> 3)
       aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.3)
@@ -43,10 +43,10 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (5.0.2)
-    net-telnet (0.1.1)
+    net-telnet (0.2.0)
     schash (0.1.2)
     sfl (2.3)
-    specinfra (2.75.0)
+    specinfra (2.75.1)
       net-scp
       net-ssh (>= 2.7)
       net-telnet
