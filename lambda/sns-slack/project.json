@@ -1,0 +1,13 @@
+{
+  "name": "sns-slack",
+  "description": "",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::550372229658:role/LambdaDefault",
+  "environment": {
+    "SLACK_URL": "https://hooks.slack.com/services/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",
+    "SLACK_CHANNEL": "#feed",
+    "SLACK_CHANNEL2": "#feed2",
+    "SLACK_CHANNEL_FALLBACK": "#feed3"
+  }
+}
