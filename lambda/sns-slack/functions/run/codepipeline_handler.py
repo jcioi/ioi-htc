@@ -69,7 +69,7 @@ class CodePipelineHandler(Handler):
         payload = {
             'channel': self.pipeline_channel(),
             'username': 'AWS CodePipeline',
-            'icon_emoji': ':soon:',
+            'icon_emoji': ':potable_water:',
             'attachments': [attachment]
         }
         return [payload]
