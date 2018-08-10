@@ -15,9 +15,11 @@
     # Worker:            %w(sorah-cms-worker-001 sorah-cms-worker-002).map { |_| [_, 26000] },
     Worker: [
       ['10.18.96.10', 26000], # cms-dev-worker-1
+      ['10.18.96.11', 26000], # cms-dev-worker-2
     ],
     ResourceService: [
       ['10.18.96.10', 28000], # cms-dev-worker-1
+      ['10.18.96.11', 28000], # cms-dev-worker-2
     ],
   },
   other_services: {

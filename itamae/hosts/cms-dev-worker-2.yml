@@ -1,0 +1,18 @@
+cms-dev-worker-2.lab.ioi18.net:
+  properties:
+    nopasswd_sudo: false
+    sudo_password: ioipassword
+
+    attributes:
+      codedeploy_agent:
+        onpremises:
+          tags:
+            CmsCluster: dev
+            CmsVariant: onpremise
+      cms:
+        cluster: dev
+        variant: onpremise
+        # desired_hostname: cms-dev-worker-1
+    run_list:
+      - roles/base/default.rb
+      - roles/cms-worker/default.rb
