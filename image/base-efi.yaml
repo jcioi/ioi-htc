@@ -1,0 +1,52 @@
+variables:
+  name: base-efi
+  tmpdir: ./tmp
+  vcpus: '2'
+  mem: '4096'
+
+builders:
+  - type: qemu
+    accelerator: kvm
+    iso_urls:
+      - http://jp.archive.ubuntu.com/ubuntu/dists/bionic/main/installer-amd64/current/images/netboot/mini.iso
+    iso_checksum: bed8a55ae2a657f8349fe3271097cff3a5b8c3d1048cf258568f1601976fa30d
+    iso_checksum_type: sha256
+    ssh_username: provisioner
+    ssh_password: provisioner
+    ssh_timeout: 30m
+    shutdown_command: 'sudo poweroff'
+    http_directory: .
+    output_directory: '{{user `tmpdir`}}/{{user `name`}}'
+    boot_wait: 10s
+    boot_command:
+       - 'e<wait><leftCtrlOn>nnne<leftCtrlOff>'
+       - ' auto=true'
+       - ' url={{ .HTTPIP }}:{{ .HTTPPort }}/d-i/bionic/preseed-efi.cfg'
+       - ' hostname=ioibase'
+       - ' priority=critical'
+       - '<leftCtrlOn>x<leftCtrlOff>'
+    headless: yes
+    vnc_bind_address: 0
+    qemuargs:
+      - [-smp, '{{user `vcpus`}}']
+      - [-m, '{{user `mem`}}']
+      - [-bios, 'OVMF.fd']
+
+provisioners:
+  - type: file
+    source: ./timestamp
+    destination: /tmp/
+    generated: yes
+  - type: shell
+    inline: 'sudo mv -f /tmp/timestamp /etc'
+  - type: shell
+    execute_command: 'sudo {{ .Vars }} sh -ex {{ .Path }}'
+    scripts:
+      - scripts/prepare_mitamae.sh
+
+post-processors:
+  - type: shell-local
+    environment_vars:
+      - 'TMPDIR={{user `tmpdir`}}'
+      - 'IMGNAME={{user `name`}}'
+    inline: 'mv "$TMPDIR/$IMGNAME/packer-qemu" "$IMGNAME.qcow2"; rmdir "$TMPDIR/$IMGNAME"'
