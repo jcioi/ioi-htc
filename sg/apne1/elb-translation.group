@@ -5,11 +5,14 @@ ec2 "vpc-03eed691a6a5a03b2" do
     description "elb-translation"
 
     ingress do
-      # permission :tcp, 80..80 do
-      #   ip_ranges(
-      #     CIDR_VENUE_CONF
-      #   )
-      # end
+      permission :tcp, 80..80 do
+        groups(
+          'rproxy-misc',
+        )
+        # ip_ranges(
+        #   CIDR_VENUE_CONF
+        # )
+      end
       # permission :tcp, 443..443 do
       #   ip_ranges(
       #     CIDR_VENUE_CONF

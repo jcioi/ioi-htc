@@ -21,6 +21,7 @@ end
   /etc/nginx/conf.d/admin-dev.ioi18.net.conf
   /etc/nginx/conf.d/contest-dev.ioi18.net.conf
 
+  /etc/nginx/conf.d/translation.ioi18.net.conf
   /etc/nginx/conf.d/print.ioi18.net.conf
   /etc/nginx/conf.d/boot.ioi18.net.conf
 ).each do |_|

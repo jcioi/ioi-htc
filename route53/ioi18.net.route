@@ -60,9 +60,22 @@ template "ioi18.net-private" do
     )
   end
 
-  rrset "print-dev.ioi18.net.", "CNAME" do
+  rrset "translation-prd.elb.ioi18.net.", 'CNAME' do
+    ttl 60
+    resource_records "internal-hako-translation-prd-2074601485.ap-northeast-1.elb.amazonaws.com."
+  end
+  rrset "translation.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "translation-prd.elb.ioi18.net."
+  end
+
+  rrset "print-dev.elb.ioi18.net.", "CNAME" do
     ttl 60
     resource_records "internal-print-dev-1023408308.ap-northeast-1.elb.amazonaws.com."
+  end
+  rrset "print-dev.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "print-dev.elb.ioi18.net."
   end
 
   rrset "cms-dev-worker-1.lab.ioi18.net", "A" do
@@ -191,19 +204,32 @@ template "ioi18.net-common" do
     resource_records "cms-ranking-practice.elb.ioi18.net."
   end
 
-  rrset "translation-dev.ioi18.net.", "CNAME" do
+  rrset "translation-dev.elb.ioi18.net.", 'CNAME' do
     ttl 60
     resource_records "hako-translation-dev-43725753.ap-northeast-1.elb.amazonaws.com."
   end
+  rrset "translation-dev.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "translation-dev.elb.ioi18.net."
+  end
 
-  rrset "translation-practice.ioi18.net.", "CNAME" do
+  rrset "translation-practice.elb.ioi18.net.", 'CNAME' do
     ttl 60
     resource_records "hako-translation-practice-693408726.ap-northeast-1.elb.amazonaws.com."
+  end
+  rrset "translation-practice.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "translation-practice.elb.ioi18.net."
   end
 
   rrset "public-images.ioi18.net.", "CNAME" do
     ttl 60
     resource_records "d1a8dnv37zdy0z.cloudfront.net."
+  end
+
+  rrset "translation.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "rproxy-misc.elb.ioi18.net."
   end
 
   rrset "print-dev-001.ioi18.net.", "CNAME" do
