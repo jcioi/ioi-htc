@@ -41,22 +41,31 @@ template "ioi18.net-private" do
     ttl 20
     resource_records(
       # priority weight port target
-      '1 10 443 cache-s3-001.apne1.aws.ioi18.net.',
+      '1 10 443 cache-s3-101.apne1.aws.ioi18.net.',
+      '2 10 443 cache-s3-102.apne1.aws.ioi18.net.',
     )
   end
 
   rrset "fproxy.ioi18.net.", "CNAME" do
-    set_identifier 'fproxy-001'
+    set_identifier 'fproxy-101'
     weight 10
     ttl 5
-    resource_records "fproxy-001.apne1.aws.ioi18.net."
+    resource_records "fproxy-101.apne1.aws.ioi18.net."
+  end
+
+  rrset "fproxy.ioi18.net.", "CNAME" do
+    set_identifier 'fproxy-102'
+    weight 10
+    ttl 5
+    resource_records "fproxy-102.apne1.aws.ioi18.net."
   end
 
   rrset "_http._tcp.fproxy.ioi18.net.", "SRV" do
     ttl 20
     resource_records(
       # priority weight port target
-      '1 10 80 fproxy-001.apne1.aws.ioi18.net.',
+      '1 10 80 fproxy-101.apne1.aws.ioi18.net.',
+      '2 10 80 fproxy-102.apne1.aws.ioi18.net.',
     )
   end
 
