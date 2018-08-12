@@ -48,11 +48,29 @@ role "FederatedHSCUser", :path=>"/" do
             logs:TestMetricFilter
           )
         },
-
       ],
     }
+  end
 
-
+  policy 'codepipeline-run' do
+    {
+      "Version" => "2012-10-17",
+      "Statement" => [
+        {
+          "Effect" => "Allow",
+          "Resource" => %w(
+            arn:aws:codepipeline:ap-northeast-1:550372229658:ioi18-task-*
+            arn:aws:codepipeline:ap-northeast-1:550372229658:ioi18-task-*/*
+            arn:aws:codepipeline:ap-northeast-1:550372229658:ioi18-task-*/*/*
+          ),
+          "Action" => %w(
+            codepipeline:StartPipelineExecution
+            codepipeline:RetryStageExecution
+            codepipeline:PutApprovalResult
+          ),
+        },
+      ],
+    }
   end
 
   attached_managed_policies(
