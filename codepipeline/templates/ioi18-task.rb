@@ -1,4 +1,5 @@
 task = @name.gsub(/^ioi18-task-/, 'ioi-2018-')
+practice = @name.include?('practice-')
 {
   name: @name,
   role_arn: "arn:aws:iam::550372229658:role/CodePipelineServiceRole",
@@ -23,7 +24,7 @@ task = @name.gsub(/^ioi18-task-/, 'ioi-2018-')
             Branch: "master",
             OAuthToken: @secrets.fetch(:github_access_token),
             Owner: "jcioi",
-            PollForSourceChanges: "false",
+            PollForSourceChanges: "true",
             Repo: task,
           },
           output_artifacts: [ { name: "TaskSource" } ],
@@ -49,7 +50,7 @@ task = @name.gsub(/^ioi18-task-/, 'ioi-2018-')
           output_artifacts: [ { name: "BuiltTask" } ],
           input_artifacts: [ { name: "TaskSource" } ],
         }
-      ]
+      ],
     },
     {
       name: "DeployToDev",
@@ -70,7 +71,43 @@ task = @name.gsub(/^ioi18-task-/, 'ioi-2018-')
           input_artifacts: [{name: "BuiltTask"}],
         }
       ]
-    }
-  ],
+    },
+    practice ? {
+      name: "PromotionApproval",
+      actions: [
+        {
+          name: "PromotionApproval",
+          action_type_id: {
+            category: "Approval",
+            owner: "AWS",
+            version: "1",
+            provider: "Manual",
+          },
+          input_artifacts: [],
+          output_artifacts: [],
+        },
+      ]
+    } : nil,
+    practice ? {
+      name: "DeployToPractice",
+      actions: [
+        {
+          name: "cmsImportTask-practice",
+          action_type_id: {
+            category: "Deploy",
+            owner: "Custom",
+            provider: "CmsImportTask",
+            version: "5b6b53fc",
+          },
+          run_order: 1,
+          configuration: {
+            cluster: "practice",
+          },
+          output_artifacts: [],
+          input_artifacts: [{name: "BuiltTask"}],
+        }
+      ]
+    } : nil,
+  ].compact,
 }
 
