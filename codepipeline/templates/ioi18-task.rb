@@ -24,7 +24,7 @@ practice = @name.include?('practice-')
             Branch: "master",
             OAuthToken: @secrets.fetch(:github_access_token),
             Owner: "jcioi",
-            PollForSourceChanges: "true",
+            PollForSourceChanges: "false",
             Repo: task,
           },
           output_artifacts: [ { name: "TaskSource" } ],
