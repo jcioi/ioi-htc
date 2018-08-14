@@ -128,6 +128,14 @@ template "ioi18.net-common" do
     )
   end
 
+  rrset "*.lo.ioi18.net.", "A" do
+    ttl 60
+    resource_records "127.0.0.1"
+  end
+  rrset "*.lo.ioi18.net.", "AAAA" do
+    ttl 60
+    resource_records "::1"
+  end
 
   rrset "bastion.ioi18.net", "A" do
     ttl 60
