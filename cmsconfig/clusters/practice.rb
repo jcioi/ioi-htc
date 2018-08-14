@@ -151,5 +151,7 @@
   # s3_backend_proxy: 'fproxy.ioi18.net:80',
   # s3_backend_fetch_base_url: 'https://cache.s3-apne1.ioi18.net/ioi18-cms-files-practice/',
   #
+
+  question_hook_urls: ['https://hooks.slack.com/services/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'],
 }
 
