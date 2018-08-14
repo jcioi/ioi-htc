@@ -1,6 +1,9 @@
 GZIP=pigz
 SPARSIFY=true
 
+BRIDGE_CONTESTANT=br-ioi-arena
+MAC_CONTESTANT=52:54:00:1f:2f:3f
+
 export PACKER_KEY_INTERVAL = 10ms
 
 preview: preview.ova
@@ -9,6 +12,18 @@ preview: preview.ova
 publish-preview: preview.ova
 	./publish.sh $< ioi18-$$(date +%Y%m%d).ova
 .PHONY: publish-preview
+
+contestant: contestant.qcow2
+.PHONY: contestant
+
+run-contestant: contestant.qcow2.overlay
+	sudo qemu-system-x86_64 -machine accel=kvm -m 4G -smp 2,cores=2 -cpu host \
+		-drive if=virtio,file=$<,format=qcow2 \
+		-display sdl -vga virtio \
+		-netdev bridge,id=net0,br=${BRIDGE_CONTESTANT} -device virtio-net-pci,netdev=net0,mac=${MAC_CONTESTANT},bootindex=1 \
+		-bios OVMF.fd -boot menu=on
+.PNONY: run-contestant
+
 
 %.json: %.yaml
 	ruby -rjson -ryaml -e 'File.write(ARGV[1], JSON.dump(YAML.load_file(ARGV[0])))' $< $@
@@ -36,6 +51,9 @@ timestamp: FORCE
 
 %.ova: %.ovf %.vmdk.gz
 	tar cf $@ -- $^
+
+%.qcow2.overlay: %.qcow2 FORCE
+	qemu-img create -f qcow2 -b $< $@
 
 .SECONDARY:
 FORCE:

@@ -2,6 +2,7 @@ tmp/
 packer_cache/
 *.json
 *.qcow2
+*.qcow2.overlay
 *.vmdk
 *.vmdk.gz
 *.ova
