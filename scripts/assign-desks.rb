@@ -52,7 +52,7 @@ begin
 
   fail "Not all users are assigned" unless assignment.values.reject(&:nil?).uniq.size == users.size
 
-  def desks.neibours(desk)
+  def desks.neighbors(desk)
     a,y = *desk.scan(/\A(.)-(.).\z/)[0]
     c_b = (a.ord-?A.ord) % 2 == 0 ? [a, (a.ord+1).chr] : [(a.ord-1).chr, a]
     c_y = [y.to_i-1, y, y.to_i+1].map(&:to_s)
@@ -62,13 +62,10 @@ begin
   end
 
   desks.flatten.each do |desk|
-    neibours = desks.neibours(desk)
-    user = assignment[desk]
-    next unless user
+    next unless user = assignment[desk]
 
-    neibours.each do |nei|
-      nei_user = assignment[nei]
-      next unless nei_user
+    desks.neighbors(desk).each do |nei|
+      next unless nei_user = assignment[nei]
 
       raise Dame if user['team'] == nei_user['team']
     end
