@@ -5,8 +5,9 @@ local elbSecurityGroups = ['sg-06f0c7cda02530a27'];  // elb-nginx-omniauth-adapt
 
 {
   scheduler: utils.fargateScheduler(taskSecurityGroups) {
-    cpu: '1024',
-    memory: '2048',
+    cpu: '512',
+    memory: '1024',
+    desired_count: 2,
     elb_v2: {
       vpc_id: utils.vpcId,
       scheme: 'internal',
@@ -37,14 +38,13 @@ local elbSecurityGroups = ['sg-06f0c7cda02530a27'];  // elb-nginx-omniauth-adapt
   },
   app: {
     image: utils.ecrRepository('ioi18-nginx-omniauth-adapter'),
-    cpu: 256,
-    memory: 512,
     env: {
       RACK_ENV: 'production',
       SECRET_KEY_BASE: utils.secret('nginx_omniauth_adapter_session_secret'),
       NGX_OMNIAUTH_SECRET: utils.secret('nginx_omniauth_adapter_secret'),
       GITHUB_KEY: utils.secret('nginx_omniauth_adapter_github_key'),
       GITHUB_SECRET: utils.secret('nginx_omniauth_adapter_github_secret'),
+      GITHUB_ACCESS_TOKEN: utils.secret('github_access_token'),
     },
     log_configuration: utils.awsLogs('app'),
   },
