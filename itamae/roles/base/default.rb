@@ -2,6 +2,7 @@ node.reverse_merge!(
   in_container: run_command("systemd-detect-virt --container", error: false).exit_status == 0,
   base: {
     zabbix_agent: false, # TODO: zabbix_agent
+    timesyncd: true,
   },
 )
 
@@ -25,16 +26,18 @@ include_cookbook 'sshd'
 
 include_cookbook 'systemd-networkd'
 
-template "/etc/systemd/timesyncd.conf" do
-  owner 'root'
-  group 'root'
-  mode  '0644'
-  notifies :restart, 'service[systemd-timesyncd]' unless node[:in_container]
-end
+if node[:base][:timesyncd]
+  template "/etc/systemd/timesyncd.conf" do
+    owner 'root'
+    group 'root'
+    mode  '0644'
+    notifies :restart, 'service[systemd-timesyncd]' unless node[:in_container]
+  end
 
-unless node[:in_container]
-  service "systemd-timesyncd" do
-    action [:enable, :start]
+  unless node[:in_container]
+    service "systemd-timesyncd" do
+      action [:enable, :start]
+    end
   end
 end
 

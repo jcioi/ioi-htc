@@ -21,6 +21,12 @@ end
 
 node[:desired_hostname] ||= node.dig(:hocho_ec2, :tags, :Name)
 
+if node[:hocho_ec2]
+  node[:ntp_servers] = %w(time1.google.com time2.google.com time3.google.com time4.google.com)
+else
+  node[:ntp_servers] = %w(ntp-001.apne1.aws.ioi18.net ntp-002.apne1.aws.ioi18.net)
+end
+
 execute "systemctl daemon-reload" do
   action :nothing
 end
