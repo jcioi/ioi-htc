@@ -10,6 +10,24 @@ ec2 "vpc-03eed691a6a5a03b2" do
           "0.0.0.0/0",
         )
       end
+
+      permission :tcp, 5201..5201 do
+        groups(
+          "default",
+        )
+        ip_ranges(
+          "10.18.0.0/16",
+        )
+      end
+      permission :udp, 5201..5201 do
+        groups(
+          "default",
+        )
+        ip_ranges(
+          "10.18.0.0/16",
+        )
+      end
+
     end
 
     egress do
