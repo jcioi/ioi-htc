@@ -97,6 +97,12 @@ template "ioi18.net-private" do
     resource_records "10.18.96.11"
   end
 
+  rrset "rt-capio-001.lab.ioi18.net", "A" do
+    ttl 20
+    resource_records "10.18.104.1"
+  end
+
+
   rrset "boot-dev-01.srv.tkyk.ioi18.net", "A" do
     ttl 60
     resource_records "10.18.113.60"
