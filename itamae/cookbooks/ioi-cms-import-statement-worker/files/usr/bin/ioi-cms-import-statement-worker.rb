@@ -17,16 +17,8 @@ class Worker
   attr_reader :sqs, :s3, :queue_name, :workdir, :logger
 
   def run
-    loop do
-      resp = sqs.receive_message(queue_url: queue_url, wait_time_seconds: 20)
-      next sleep 10 if resp.messages.empty?
-      resp.messages.each do |message|
-        handle_message(JSON.parse(message.body))
-        sqs.delete_message(queue_url: queue_url, receipt_handle: message.receipt_handle)
-      end
-    rescue => e
-      logger.error { e }
-      sleep 10
+    Aws::SQS::QueuePoller.new(queue_url, client: sqs).poll do |message|
+      handle_message(JSON.parse(message.body))
     end
   end
 
