@@ -1,0 +1,18 @@
+[Unit]
+Description=cmsAddStatement worker
+
+[Service]
+User=cmsuser
+Group=cmsuser
+StateDirectory=cms-import-statement-worker
+
+Restart=on-failure
+RestartSec=12s
+StartLimitInterval=600
+StartLimitBurst=12
+
+EnvironmentFile=/etc/ioi-cms-import-statement-worker.env
+ExecStart=/usr/bin/ioi-cms-import-statement-worker.rb
+
+[Install]
+WantedBy=multi-user.target
