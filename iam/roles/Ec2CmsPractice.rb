@@ -51,6 +51,7 @@ role "Ec2CmsPractice", :path=>"/" do
   attached_managed_policies(
     "arn:aws:iam::550372229658:policy/IoiCodeDeploy",
     "arn:aws:iam::550372229658:policy/CmsTaskImporter",
+    "arn:aws:iam::550372229658:policy/CmsStatementImporterPractice",
   )
 end
 
