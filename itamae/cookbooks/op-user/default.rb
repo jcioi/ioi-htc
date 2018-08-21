@@ -21,6 +21,7 @@ node.reverse_merge!(
     name: node.fetch(:op_user_name),
     authorized_keys: [],
     include_default_authorized_keys: true,
+    homedir_mode: '0755',
   },
 )
 
@@ -41,7 +42,7 @@ end
 directory "/home/#{username}" do
   owner username
   group username
-  mode "755"
+  mode node.dig(:op_user, :homedir_mode)
 end
 
 directory "/home/#{username}/.ssh" do

@@ -7,6 +7,9 @@ node.reverse_merge!(
     cms_uri: preview? ? 'https://contest-practice.ioi18.net' : 'https://contest.ioi18.net',
     ioiprint_uri: 'ioiprints://print-dev.ioi18.net',
   },
+  op_user: {
+    homedir_mode: '700',
+  },
   compilers: {
     install_doc: true,
   },
