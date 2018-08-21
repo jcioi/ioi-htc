@@ -45,7 +45,10 @@ class Worker
         s3_key: message.fetch('s3_key'),
       )
     when 'statement_deleted'
-      # todo
+      handle_statement_deleted(
+        task_name: task_name,
+        language_code: language_code,
+      )
     else
       raise Failure, "Unknown message type: #{type}"
     end
@@ -59,6 +62,12 @@ class Worker
 
     unless system('ioi-cms-venv', 'cmsAddStatement', '--overwrite', task_name, language_code, file.path)
       raise Failure, "cmsAddStatement: #$?"
+    end
+  end
+
+  def handle_statement_deleted(task_name:, language_code:)
+    unless system('ioi-cms-venv', 'cmsRemoveStatement', task_name, language_code)
+      raise Failure, "cmsRemoveStatement: #$?"
     end
   end
 end
