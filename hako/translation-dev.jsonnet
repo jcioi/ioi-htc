@@ -48,6 +48,8 @@ local elbSecurityGroups = ['sg-035c00f22c7fe5429'];  // elb-translation-dev
       REDIS_HOST: 'ioitrans-dev-redis.vozztv.0001.apne1.cache.amazonaws.com',
       REDIS_DB: '1',
       S3_BUCKET: 'ioi18-translation-files-dev',
+      SQS_QUEUE_NAME: 'cms-statement-dev',
+      SQS_REGION_NAME: 'ap-northeast-1',
       PRINT_SYSTEM_URL: 'https://print-dev.ioi18.net',
       GUNICORN_WORKERS: '2',
     },

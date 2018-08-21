@@ -32,6 +32,24 @@ role "EcsTranslationPractice", :path=>"/" do
     }
   end
 
+  policy "translation-sqs" do
+    {
+      "Version"=>"2012-10-17",
+      "Statement"=>[
+        {
+          "Effect" => "Allow",
+          "Action" => [
+            'sqs:GetQueueUrl',
+            'sqs:SendMessage',
+          ],
+          "Resource" => [
+            'arn:aws:sqs:*:550372229658:cms-statement-practice',
+          ],
+        },
+      ],
+    }
+  end
+
   attached_managed_policies(
     "arn:aws:iam::550372229658:policy/EcsBasicPolicy",
   )

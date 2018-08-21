@@ -49,6 +49,8 @@ local elbSecurityGroups = ['sg-0d628db6dcf52657f'];  // elb-translation
       REDIS_HOST: 'translation-prd.vozztv.0001.apne1.cache.amazonaws.com',
       REDIS_DB: '1',
       S3_BUCKET: 'ioi18-translation-files-prd',
+      SQS_QUEUE_NAME: 'cms-statement-prd',
+      SQS_REGION_NAME: 'ap-northeast-1',
       GUNICORN_WORKERS: '2',
     },
     mount_points: [
