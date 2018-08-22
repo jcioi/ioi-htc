@@ -42,6 +42,7 @@ package 'ubuntu-desktop'
 package 'fonts-noto'
 package 'fonts-noto-cjk'
 
+include_recipe './gdm.rb'
 include_recipe './apps.rb'
 include_recipe './desktop.rb'
 include_recipe './autostart.rb'
