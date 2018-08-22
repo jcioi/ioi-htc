@@ -1,0 +1,5 @@
+#!/bin/bash
+set -eux
+
+loginctl terminate-seat seat0
+systemctl restart gdm

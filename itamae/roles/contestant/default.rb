@@ -53,6 +53,7 @@ include_recipe './dconf.rb'
 include_recipe './pam.rb'
 include_recipe './limits.rb'
 include_recipe './polkit.rb'
+include_recipe './admin-commands.rb'
 
 if preview?
   include_recipe './preview.rb'

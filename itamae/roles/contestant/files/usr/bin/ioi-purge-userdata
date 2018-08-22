@@ -1,0 +1,5 @@
+#!/bin/bash
+set -eux
+
+find /home -mindepth 1 -maxdepth 1 -not -name ioi -exec rm -rf {} +
+find /var/tmp -mindepth 1 -maxdepth 1 -not -name systemd-private-* -exec rm -rf {} +
