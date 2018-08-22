@@ -9,12 +9,20 @@ REGIONS = %w(
 )
 
 template "ioi18.net-public" do
+  rrset "service.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "rproxy-misc.elb.ioi18.net."
+  end
 end
 
 template "ioi18.net-private" do
   rrset "nginx-omniauth-adapter.elb.ioi18.net", "CNAME" do
     ttl 60
     resource_records "internal-hako-nginx-omniauth-adapter-655739428.ap-northeast-1.elb.amazonaws.com"
+  end
+  rrset "ioi-console.elb.ioi18.net", "CNAME" do
+    ttl 60
+    resource_records "internal-hako-ioi-console-684969648.ap-northeast-1.elb.amazonaws.com."
   end
   rrset "cms-dev.elb.ioi18.net", "CNAME" do
     ttl 60
@@ -87,6 +95,11 @@ template "ioi18.net-private" do
     resource_records "print-dev.elb.ioi18.net."
   end
 
+  rrset "service.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "ioi-console.elb.ioi18.net."
+  end
+
   rrset "cms-dev-worker-1.lab.ioi18.net", "A" do
     ttl 20
     resource_records "10.18.96.10"
@@ -101,7 +114,6 @@ template "ioi18.net-private" do
     ttl 20
     resource_records "10.18.104.1"
   end
-
 
   rrset "boot-dev-01.srv.tkyk.ioi18.net", "A" do
     ttl 60
@@ -265,6 +277,16 @@ template "ioi18.net-common" do
     resource_records "rproxy-misc.elb.ioi18.net."
   end
 
+  rrset "console.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "rproxy-misc.elb.ioi18.net."
+  end
+
+  rrset "leader.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "rproxy-misc.elb.ioi18.net."
+  end
+
   %w(
     _631443614a51aeef30597369338b45d4.s3-apne1.ioi18.net. _2a11a85cc8ea57ad9cdc4241c6e80af8.acm-validations.aws.
 
@@ -287,6 +309,13 @@ template "ioi18.net-common" do
 
     _11a6cd1855d8541503900e801984fe4b.ranking-prd.ioi18.net. _eb9fb506761632f14203916e02e901e7.acm-validations.aws.
     _c063bd48cbc67ffd2513b1d017300872.ranking.ioi18.net. _f90a64419522052a76b257622118626b.acm-validations.aws.
+
+    _6093762e336ee07804ad373b99949cf2.contest-ext.ioi18.net. _25f39bb098520a10313baa0ba3815527.tljzshvwok.acm-validations.aws.
+    _bc6d3000da7af6956e538a7c1e0a40d3.ranking-ext.ioi18.net. _4cb99130a743b626f744799d9892b46b.tljzshvwok.acm-validations.aws.
+    _d6993863aafd01078e77ebd7c4887eed.admin-ext.ioi18.net. _1f12c32a2860048c293d0c16f344b3a7.tljzshvwok.acm-validations.aws.
+    _f1b159cbe3bea5344f9ad96ed3adeb24.ranking-ext-origin.ioi18.net. _bdd396ae450f5400f1ba1968aed28f4d.tljzshvwok.acm-validations.aws.
+    _bc6d3000da7af6956e538a7c1e0a40d3.ranking-ext.ioi18.net. _4cb99130a743b626f744799d9892b46b.tljzshvwok.acm-validations.aws.
+    _bc6d3000da7af6956e538a7c1e0a40d3.ranking-ext.ioi18.net. _4cb99130a743b626f744799d9892b46b.tljzshvwok.acm-validations.aws.
 
     _f9aa29e9d33b79bc4c1618a10553de2f.ranking-dev.ioi18.net. _95be44eaf321748480040382a6bebd0b.acm-validations.aws.
 
@@ -315,6 +344,11 @@ template "ioi18.net-common" do
 
     _323f01e7f1245d5f66bb5819fdc2299c.boot.ioi18.net. _19bfba4de1cb2c07ff441d9b439ba8bb.acm-validations.aws.
     _3e779ab81ac9f9397bb71dd2a13670d5.boot-dev.ioi18.net. _25fc3fb24fb70dd78408447f1af2ee8f.acm-validations.aws.
+
+    _6a9f42cf8cf6ac05bf8e9fb666387fa0.console.ioi18.net. _7b03ddc961f7579ce9075bef7be8ea74.tljzshvwok.acm-validations.aws.
+    _9f71205a7e22c68ffc57b7813e2f9b78.service.ioi18.net. _c4c8844c2e3b82ad1d7003e45930ba9a.tljzshvwok.acm-validations.aws.
+    _f2885c1f66fb3b2ea4079637187b9cc2.leader.ioi18.net. _e6f0c6584e14e393799b638fa97b06bb.tljzshvwok.acm-validations.aws.
+    
   ).each_slice(2) do |(name,target)|
     rrset name, "CNAME" do
       ttl 60

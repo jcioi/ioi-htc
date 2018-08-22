@@ -24,6 +24,8 @@ end
   /etc/nginx/conf.d/translation.ioi18.net.conf
   /etc/nginx/conf.d/print.ioi18.net.conf
   /etc/nginx/conf.d/boot.ioi18.net.conf
+
+  /etc/nginx/conf.d/console.ioi18.net.conf
 ).each do |_|
   template _ do
     owner 'root'
