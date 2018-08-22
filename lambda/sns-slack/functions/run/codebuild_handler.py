@@ -23,7 +23,7 @@ class CodeBuildHandler(Handler):
     def current_phase(self):
         return self.detail()['current-phase']
 
-    def additional_information():
+    def additional_information(self):
         return self.detail()['additional-information']
 
     def from_codepipeline(self):
