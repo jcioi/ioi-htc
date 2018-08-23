@@ -1,6 +1,10 @@
 inventory_providers:
   - ec2:
       region: ap-northeast-1
+      filters:
+        - name: instance-state-name
+          values:
+            - running
       hostname_template: '<%= tag(instance, "Name") %>.<%= tag(vpc, "Name") %>.aws.ioi18.net'
       runlist_template: 'tag(instance, "Role", "").split(/,\s*/).map {|_| "roles/#{_}/default.rb" }'
       cache_path: tmp/hocho-ec2-cache.apne1.yml
