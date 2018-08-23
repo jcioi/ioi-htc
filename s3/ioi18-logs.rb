@@ -26,7 +26,7 @@ bucket "ioi18-logs" do
             ap-southeast-2	783225319266
             ap-south-1	718504428378
             sa-east-1	507241528517
-          ).each_slice(2).map(&:last),
+          ).each_slice(2).map{ |_| "arn:aws:iam::#{_[1]}:root" },
         }
       }
     ]
