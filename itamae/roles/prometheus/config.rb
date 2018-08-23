@@ -30,7 +30,7 @@ node.reverse_merge!(
                   { aws_namespace: 'AWS/CloudFront', aws_dimensions: %w(DistributionId), aws_metric_name: metric, period_seconds: 300 }.merge(stats_opt)
                 end
               end,
-            ].flatten,
+            ].flatten.map{ |_| _[:aws_dimensions] ? _.merge(aws_dimension_select_regex: _[:aws_dimensions].map{ |k| [k, ['.*']] }.to_h) : _},
           },
         },
         'ap-northeast-1' => {
@@ -347,7 +347,7 @@ node.reverse_merge!(
                   }.merge(stats_opt)
                 end
               end,
-            ].flatten,
+            ].flatten.map{ |_| _[:aws_dimensions] ? _.merge(aws_dimension_select_regex: _[:aws_dimensions].map{ |k| [k, ['.*']] }.to_h) : _},
           },
         },
       },
