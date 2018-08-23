@@ -16,6 +16,15 @@ ec2 "vpc-03eed691a6a5a03b2" do
           "bastion",
         )
       end
+
+      # prometheus exporter_proxy,node_exporter
+      permission :tcp, 9099..9100 do
+        groups(
+          "prometheus",
+          "bastion",
+        )
+      end
+
     end
 
     egress do

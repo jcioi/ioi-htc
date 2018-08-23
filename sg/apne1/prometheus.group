@@ -1,0 +1,26 @@
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ec2 "vpc-03eed691a6a5a03b2" do
+  security_group "prometheus" do
+    description "prometheus"
+
+    ingress do
+      # prometheus
+      permission :tcp, 9090..9090 do
+        groups(
+          "bastion",
+        )
+      end
+
+    end
+
+    egress do
+      permission :any do
+        ip_ranges(
+          "0.0.0.0/0",
+        )
+      end
+    end
+  end
+end
