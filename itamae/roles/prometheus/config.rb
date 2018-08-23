@@ -368,6 +368,7 @@ scrape_configs.push(
 scrape_configs.push(
   job_name: :cloudwatch,
   scrape_interval: '5m',
+  scrape_timeout: '2m',
   static_configs: [
     targets: %w(
       localhost:9106
