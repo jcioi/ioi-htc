@@ -41,9 +41,11 @@ provisioners:
   - type: file
     source: ../itamae/cookbooks
     destination: /tmp/itamae/
+  - type: file
+    source: './{{user `name`}}.attrs.json'
+    destination: /tmp/itamae/node.json
   - type: shell
     inline: |
-      echo '{"contestant":{"preview":true}}' > /tmp/itamae/node.json
       cd /tmp/itamae && sudo mitamae local -j node.json site.rb roles/contestant/default.rb
   - type: shell
     execute_command: 'sudo {{ .Vars }} sh -ex {{ .Path }}'

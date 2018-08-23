@@ -45,9 +45,11 @@ provisioners:
   - type: file
     source: ../itamae/secrets
     destination: /tmp/itamae/
+  - type: file
+    source: './{{user `name`}}.attrs.json'
+    destination: /tmp/itamae/node.json
   - type: shell
     inline: |
-      echo '{}' > /tmp/itamae/node.json
       cd /tmp/itamae && sudo mitamae local -j node.json site.rb roles/aspire3/default.rb roles/contestant/default.rb
   - type: shell
     execute_command: 'sudo {{ .Vars }} sh -ex {{ .Path }}'
