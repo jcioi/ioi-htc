@@ -27,6 +27,10 @@ else
   node[:ntp_servers] = %w(ntp-001.apne1.aws.ioi18.net ntp-002.apne1.aws.ioi18.net)
 end
 
+if node[:hocho_ec2]
+  node[:extra_disk] = '/dev/xvdf'
+end
+
 execute "systemctl daemon-reload" do
   action :nothing
 end

@@ -12,7 +12,8 @@ ExecStart=/opt/node_exporter/node_exporter \
 <%- node[:prometheus][:node_exporter].fetch(:collectors).each do |c| -%>
   --collector.<%= c %> \
 <%- end -%>
-  --collector.textfile.directory /var/lib/node_exporter/textfile_collector
+  --collector.textfile.directory /var/lib/prometheus-node-exporter/textfile_collector
+
 
 [Install]
 WantedBy=multi-user.target

@@ -45,12 +45,6 @@ file "/opt/node_exporter.url" do
   notifies :run, 'execute[install-node-exporter]', :immediately
 end
 
-template '/etc/systemd/system/prometheus-node-exporter.service' do
-  owner 'root'
-  group 'root'
-  mode  '0644'
-  notifies :run, 'execute[systemctl daemon-reload]'
-end
 
 directory '/var/lib/prometheus-node-exporter' do
   owner 'root'
@@ -61,6 +55,16 @@ directory '/var/lib/prometheus-node-exporter/textfile_collector' do
   owner 'root'
   group 'root'
   mode  '0755'
+end
+
+execute 'systemctl daemon-reload && systemctl try-restart prometheus-node-exporter.service' do
+  action :nothing
+end
+template '/etc/systemd/system/prometheus-node-exporter.service' do
+  owner 'root'
+  group 'root'
+  mode  '0644'
+  notifies :run, 'execute[systemctl daemon-reload && systemctl try-restart prometheus-node-exporter.service]', :immediately
 end
 
 service 'prometheus-node-exporter.service' do

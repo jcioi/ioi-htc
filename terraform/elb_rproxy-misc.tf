@@ -56,6 +56,10 @@ resource "aws_lb_listener_certificate" "rproxy-misc_console" {
   listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
   certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/d849fcde-6e59-4962-b1a2-768af878591a"
 }
+resource "aws_lb_listener_certificate" "rproxy-misc_prometheus" {
+  listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
+  certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/02b06b2c-2c1e-4623-a6ae-70acc0cc9076"
+}
 
 resource "aws_lb_target_group" "rproxy-misc" {
   name = "rproxy-misc"
