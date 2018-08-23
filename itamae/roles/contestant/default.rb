@@ -42,7 +42,6 @@ package 'ubuntu-desktop'
 package 'fonts-noto'
 package 'fonts-noto-cjk'
 
-include_recipe './gdm.rb'
 include_recipe './apps.rb'
 include_recipe './desktop.rb'
 include_recipe './autostart.rb'
@@ -58,6 +57,7 @@ include_recipe './admin-commands.rb'
 if preview?
   include_recipe './preview.rb'
 else
+  include_recipe './gdm.rb'
   include_recipe './modprobe.rb'
   include_recipe './printer.rb'
 end
