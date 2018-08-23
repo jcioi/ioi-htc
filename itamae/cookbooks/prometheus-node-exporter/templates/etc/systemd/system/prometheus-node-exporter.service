@@ -1,0 +1,18 @@
+[Unit]
+Description=Prometheus Node Exporter
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+MemoryLimit=200M
+Restart=always
+RestartSec=6s
+ExecStart=/opt/node_exporter/node_exporter \
+<%- node[:prometheus][:node_exporter].fetch(:collectors).each do |c| -%>
+  --collector.<%= c %> \
+<%- end -%>
+  --collector.textfile.directory /var/lib/node_exporter/textfile_collector
+
+[Install]
+WantedBy=multi-user.target

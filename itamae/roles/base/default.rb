@@ -15,6 +15,12 @@ end
 
 include_cookbook 'apt-source-ubuntu'
 
+directory '/opt' do
+  owner 'root'
+  group 'root'
+  mode  '0755'
+end
+
 directory "/usr/share/cnw" do
   owner 'root'
   group 'root'
@@ -64,6 +70,7 @@ end
 
 include_cookbook 'iperf3'
 
+include_cookbook 'prometheus-node-exporter'
 if node.dig(:base, :zabbix_agent)
   include_cookbook 'zabbix-agent'
 end
