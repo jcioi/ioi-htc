@@ -11,7 +11,7 @@ include_recipe './config.rb'
 include_role 'base'
 include_cookbook 'mnt-vol'
 include_cookbook 'prometheus'
-include_cookbook 'prometheus-cloudwatch-exporter'
+include_recipe './cloudwatch.rb'
 
 directory '/mnt/vol/prometheus-data' do
   owner 'prometheus'
