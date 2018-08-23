@@ -11,6 +11,7 @@ include_recipe './config.rb'
 include_role 'base'
 include_cookbook 'mnt-vol'
 include_cookbook 'prometheus'
+include_cookbook 'prometheus-cloudwatch-exporter'
 
 directory '/mnt/vol/prometheus-data' do
   owner 'prometheus'
@@ -23,6 +24,7 @@ file '/etc/prometheus/prometheus.yml' do
   owner 'root'
   group 'root'
   mode  '0644'
+  notifies :reload, 'service[prometheus.service]'
 end
 
 service 'prometheus.service' do

@@ -1,0 +1,13 @@
+#!/bin/bash -xe
+PORT="$(grep '^# port=' /etc/prometheus/cloudwatch.$1.yml|head -n1|cut -f2 -d=)"
+if [[ -z "$PORT" ]]; then
+  PORT=9106
+fi
+
+exec /usr/bin/docker run --rm \
+  -p ${PORT}:9106 \
+  --ulimit nofile=30000 \
+  -v /etc/prometheus/cloudwatch.$1.yml:/config.yml:ro \
+  'prom/cloudwatch-exporter:<%= node[:prometheus][:cloudwatch_exporter].fetch(:version) %>' \
+  /config.yml
+

@@ -1,0 +1,11 @@
+[Unit]
+Description=Prometheus CloudWatch Exporter
+Requires=docker.service
+Before=prometheus.service
+After=docker.service
+
+[Service]
+ExecStart=/usr/bin/prometheus-cloudwatch-exporter %i
+
+[Install]
+WantedBy=multi-user.target

@@ -26,7 +26,7 @@ role "Ec2Prometheus", :path=>"/" do
           "Effect" => "Allow",
           "Action" => %w(
             cloudwatch:ListMetrics
-            cloudwatch:GetMetricStatistic
+            cloudwatch:GetMetricStatistics
           ),
           "Resource" => %w(
             *

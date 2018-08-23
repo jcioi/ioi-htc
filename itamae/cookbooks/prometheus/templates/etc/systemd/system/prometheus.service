@@ -4,7 +4,7 @@ Requires=docker.service
 After=docker.service
 
 [Service]
-ExecStart=/usr/bin/docker run --rm \
+ExecStart=/usr/bin/docker run --rm --name prometheus \
     --network=host \
     --userns=host \
     --user=900 \
@@ -18,7 +18,8 @@ ExecStart=/usr/bin/docker run --rm \
     --storage.tsdb.path=/prometheus-data \
     --storage.tsdb.retention=20d \
     --web.console.libraries=/etc/prometheus/console_libraries \
-    --web.console.templates=/etc/prometheus/consoles \
+    --web.console.templates=/etc/prometheus/consoles
+ExecReload=/usr/bin/docker kill -s HUP prometheus
 
 
 [Install]
