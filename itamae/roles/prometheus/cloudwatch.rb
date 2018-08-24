@@ -16,7 +16,7 @@ node.reverse_merge!(
                   Requests
                   TotalErrorRate
                 ).map do |metric|
-                  { aws_namespace: 'AWS/CloudFront', aws_dimensions: %w(DistributionId), aws_metric_name: metric, period_seconds: 300 }.merge(stats_opt)
+                  { aws_namespace: 'AWS/CloudFront', aws_dimensions: %w(DistributionId Region), aws_metric_name: metric, period_seconds: 300 }.merge(stats_opt)
                 end
               end,
             ].flatten.map{ |_| _[:aws_dimensions] ? _.merge(aws_dimension_select_regex: _[:aws_dimensions].map{ |k| [k, ['.*']] }.to_h) : _},
