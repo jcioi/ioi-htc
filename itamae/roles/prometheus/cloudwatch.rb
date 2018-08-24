@@ -26,6 +26,7 @@ node.reverse_merge!(
           port: 9106,
           config: {
             region: 'ap-northeast-1',
+            delay_seconds: 360,
             metrics: [
               [{aws_statistics: %w(Average Minimum Maximum)}, {aws_extended_statistics: %w(p50 p95 p99)}].flat_map do |stats_opt|
                 %w(
@@ -113,10 +114,9 @@ node.reverse_merge!(
                   CPUSurplusCreditBalance
                   CPUSurplusCreditsCharged
                   CPUUtilization
-                  DiskReadBytes
                   DiskReadOps
-                  DiskWriteBytes
                   DiskWriteOps
+                  NetworkIn
                   NetworkOut
                   NetworkPacketsIn
                   NetworkPacketsOut
@@ -136,7 +136,6 @@ node.reverse_merge!(
                 %w(
                   MemoryUtilization
                   CPUUtilization
-                  MemoryUtilization
                 ).map do |metric|
                   {
                     aws_namespace: 'AWS/ECS',
@@ -168,7 +167,6 @@ node.reverse_merge!(
                   CurrConnections
                   CPUUtilization
                   CurrItems
-                  ReplicationBytes
                   FreeableMemory
                 ).map do |metric|
                   {
@@ -215,15 +213,11 @@ node.reverse_merge!(
                   BytesInFromDestination
                   PacketsDropCount
                   ConnectionEstablishedCount
-                  PacketsOutToDestination
                   ErrorPortAllocation
                   BytesOutToSource
                   BytesInFromSource
-                  PacketsOutToSource
                   BytesOutToDestination
-                  PacketsInFromDestination
                   ActiveConnectionCount
-                  PacketsInFromSource
                 ).map do |metric|
                   {
                     aws_namespace: 'AWS/NATGateway',
@@ -249,7 +243,6 @@ node.reverse_merge!(
                   FreeableMemory
                   FreeLocalStorage
                   FreeStorageSpace
-                  MaximumUsedTransactionIDs
                   NetworkReceiveThroughput
                   NetworkThroughput
                   NetworkTransmitThroughput
@@ -269,7 +262,7 @@ node.reverse_merge!(
                   {
                     aws_namespace: 'AWS/RDS',
                     aws_metric_name: metric,
-                    aws_dimensions: %w(DBClusterIdentifier Role DBInstanceIdentifier),
+                    aws_dimensions: %w(DBInstanceIdentifier),
                     period_seconds: 300
                   }.merge(stats_opt)
                 end
@@ -331,7 +324,7 @@ node.reverse_merge!(
                   {
                     aws_namespace: 'AWS/VPN',
                     aws_metric_name: metric,
-                    aws_dimensions: %w(TunnelIpAddress VpnId),
+                    aws_dimensions: %w(TunnelIpAddress),
                     period_seconds: 300
                   }.merge(stats_opt)
                 end
@@ -344,3 +337,4 @@ node.reverse_merge!(
   },
 )
 
+include_cookbook 'prometheus-cloudwatch-exporter'
