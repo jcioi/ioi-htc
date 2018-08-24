@@ -22,6 +22,7 @@ end
 
 %w(
   /etc/prometheus/rules/node.yml
+  /etc/prometheus/rules/prometheus.yml
 ).each do |_|
   template _ do
     owner 'root'
