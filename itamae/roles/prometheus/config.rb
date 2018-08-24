@@ -8,11 +8,28 @@ node.reverse_merge!(
         external_labels: {
         },
       },
-      rule_files: nil,#%w(/etc/prometheus/rules/*),
+      rule_files: %w(/etc/prometheus/rules/*.yml),
       scrape_configs: [],
     },
   },
 )
+
+directory '/etc/prometheus/rules' do
+  owner 'root'
+  group 'root'
+  mode  '0755'
+end
+
+%w(
+  /etc/prometheus/rules/node.yml
+).each do |_|
+  template _ do
+    owner 'root'
+    group 'root'
+    mode  '0644'
+    notifies :reload, 'service[prometheus.service]'
+  end
+end
 
 scrape_configs = node[:prometheus][:config][:scrape_configs]
 
@@ -73,9 +90,11 @@ if node[:hocho_ec2]
         target_label: "vpc_id",
       },
       {
-        source_labels: ["__meta_ec2_CmsCluster"],
+        source_labels: ["__meta_ec2_tag_CmsCluster"],
         target_label: "cms_cluster",
       },
     ],
   )
 end
+
+
