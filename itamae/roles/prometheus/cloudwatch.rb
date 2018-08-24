@@ -22,41 +22,63 @@ node.reverse_merge!(
             ].flatten.map{ |_| _[:aws_dimensions] ? _.merge(aws_dimension_select_regex: _[:aws_dimensions].map{ |k| [k, ['.*']] }.to_h) : _},
           },
         },
+        'ap-northeast-1h' => {
+          port: 29106,
+          config: {
+            region: 'ap-northeast-1',
+            period_seconds: 60,
+            delay_seconds: 120,
+            metrics: [
+              [{aws_dimensions: %w(LoadBalancer AvailabilityZone TargetGroup)}, {aws_dimensions: %w(LoadBalancer AvailabilityZone)}].flat_map do |dim_opt|
+                [
+                  [{aws_statistics: %w(Average Minimum Maximum)}, {aws_extended_statistics: %w(p50 p95 p99)}].flat_map do |stats_opt|
+                    %w(
+                      TargetResponseTime
+                    ).map do |metric|
+                      {
+                        aws_namespace: 'AWS/ApplicationELB',
+                        aws_metric_name: metric,
+                      }.merge(stats_opt).merge(dim_opt)
+                    end
+                  end,
+                  %w(
+                    HTTPCode_Target_5XX_Count
+                    HTTPCode_Target_4XX_Count
+                    HTTPCode_Target_3XX_Count
+                    HTTPCode_Target_2XX_Count
+                    HTTPCode_ELB_5XX_Count
+                    HTTPCode_ELB_4XX_Count
+                  ).map do |metric|
+                    {
+                      aws_namespace: 'AWS/ApplicationELB',
+                      aws_metric_name: metric,
+                      aws_statistics: %w(Sum)
+                    }.merge(dim_opt)
+                  end,
+                ]
+              end,
+
+              [{aws_statistics: %w(SampleCount Average Minimum Maximum)}].flat_map do |stats_opt|
+                %w(
+                  MemoryUtilization
+                  CPUUtilization
+                ).map do |metric|
+                  {
+                    aws_namespace: 'AWS/ECS',
+                    aws_metric_name: metric,
+                    aws_dimensions: %w(ClusterName ServiceName),
+                  }.merge(stats_opt)
+                end
+              end,
+            ].flatten,
+          },
+        },
         'ap-northeast-1' => {
           port: 9106,
           config: {
             region: 'ap-northeast-1',
             delay_seconds: 360,
             metrics: [
-              [{aws_statistics: %w(Average Minimum Maximum)}, {aws_extended_statistics: %w(p50 p95 p99)}].flat_map do |stats_opt|
-                %w(
-                  TargetResponseTime
-                ).map do |metric|
-                  {
-                    aws_namespace: 'AWS/ApplicationELB',
-                    aws_metric_name: metric,
-                    aws_dimensions: %w(LoadBalancer AvailabilityZone TargetGroup),
-                    period_seconds: 300,
-                  }.merge(stats_opt)
-                end
-              end,
-              %w(
-                HTTPCode_Target_5XX_Count
-                HTTPCode_Target_4XX_Count
-                HTTPCode_Target_3XX_Count
-                HTTPCode_Target_2XX_Count
-                HTTPCode_ELB_5XX_Count
-                HTTPCode_ELB_4XX_Count
-              ).map do |metric|
-                {
-                  aws_namespace: 'AWS/ApplicationELB',
-                  aws_metric_name: metric,
-                  aws_dimensions: %w(LoadBalancer AvailabilityZone TargetGroup),
-                  period_seconds: 300,
-                  aws_statistics: %w(Sum)
-                }
-              end,
-
               [{aws_statistics: %w(Average Minimum Maximum)}, {aws_extended_statistics: %w(p50 p95 p99)}].flat_map do |stats_opt|
                 %w(
                   Latency
@@ -127,20 +149,6 @@ node.reverse_merge!(
                     aws_namespace: 'AWS/EC2',
                     aws_metric_name: metric,
                     aws_dimensions: %w(InstanceId),
-                    period_seconds: 300
-                  }.merge(stats_opt)
-                end
-              end,
-
-              [{aws_statistics: %w(SampleCount Average Minimum Maximum)}].flat_map do |stats_opt|
-                %w(
-                  MemoryUtilization
-                  CPUUtilization
-                ).map do |metric|
-                  {
-                    aws_namespace: 'AWS/ECS',
-                    aws_metric_name: metric,
-                    aws_dimensions: %w(ServiceName),
                     period_seconds: 300
                   }.merge(stats_opt)
                 end
@@ -315,7 +323,7 @@ node.reverse_merge!(
                 end
               end,
 
-              [{aws_statistics: %w(Average Minimum Maximum)}].flat_map do |stats_opt|
+              [{aws_statistics: %w(Sum Average Minimum Maximum)}].flat_map do |stats_opt|
                 %w(
                   TunnelDataIn
                   TunnelState
