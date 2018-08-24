@@ -31,6 +31,12 @@ end
 %w(
   /etc/prometheus/rules/node.yml
   /etc/prometheus/rules/prometheus.yml
+  /etc/prometheus/rules/aws_ec2.yml
+  /etc/prometheus/rules/aws_elb.yml
+  /etc/prometheus/rules/aws_lambda.yml
+  /etc/prometheus/rules/aws_nat.yml
+  /etc/prometheus/rules/aws_rds.yml
+  /etc/prometheus/rules/aws_sqs.yml
 ).each do |_|
   template _ do
     owner 'root'
@@ -58,6 +64,16 @@ scrape_configs.push(
     targets: %w(
       localhost:9106
       localhost:19106
+    ),
+  ],
+)
+scrape_configs.push(
+  job_name: :cloudwatch_h,
+  scrape_interval: '1m',
+  scrape_timeout: '1m',
+  static_configs: [
+    targets: %w(
+      localhost:29106
     ),
   ],
 )
