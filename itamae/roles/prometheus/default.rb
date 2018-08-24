@@ -13,6 +13,7 @@ include_role 'base'
 include_cookbook 'mnt-vol'
 include_cookbook 'prometheus'
 include_recipe './cloudwatch.rb'
+include_recipe './alertmanager.rb'
 
 directory '/mnt/vol/prometheus-data' do
   owner 'prometheus'

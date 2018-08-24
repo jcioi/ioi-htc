@@ -10,6 +10,14 @@ node.reverse_merge!(
       },
       rule_files: %w(/etc/prometheus/rules/*.yml),
       scrape_configs: [],
+      alerting: {
+        alert_relabel_configs: [],
+        alertmanagers: [
+          static_configs: [
+            targets: %w(localhost:9093),
+          ],
+        ],
+      },
     },
   },
 )

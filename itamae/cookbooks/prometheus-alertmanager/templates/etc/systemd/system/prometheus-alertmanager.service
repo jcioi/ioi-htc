@@ -1,0 +1,21 @@
+[Unit]
+Description=Prometheus Alertmanager
+Requires=docker.service
+After=docker.service
+
+[Service]
+ExecStart=/usr/bin/docker run --rm --name prometheus-alertmanager \
+    --network=host \
+    --userns=host \
+    --user=900 \
+    --ulimit nofile=1048576 \
+    -v /etc/prometheus/alertmanager.yml:/alertmanager.yml:ro \
+<%- node[:prometheus][:alertmanager].fetch(:mounts).each do |mount| -%>
+    -v <%= mount %> \
+<%- end -%>
+    prom/alertmanager:<%= node[:prometheus][:alertmanager].fetch(:version) %> \
+    --config.file=/alertmanager.yml \
+    --storage.path=/data
+
+[Install]
+WantedBy=multi-user.target
