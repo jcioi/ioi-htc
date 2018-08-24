@@ -42,6 +42,8 @@ node.reverse_merge!(
                     end
                   end,
                   %w(
+                    RequestCount
+                    NewConnectionCount
                     HTTPCode_Target_5XX_Count
                     HTTPCode_Target_4XX_Count
                     HTTPCode_Target_3XX_Count
