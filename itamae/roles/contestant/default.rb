@@ -10,6 +10,9 @@ node.reverse_merge!(
   op_user: {
     homedir_mode: '700',
   },
+  ioi_set_hostname: {
+    template: 'contestant-m-%m',
+  },
   compilers: {
     install_doc: true,
   },
@@ -23,6 +26,7 @@ node.reverse_merge!(
 
 unless preview?
   include_cookbook 'op-user'
+  include_cookbook 'ioi-set-hostname'
   include_cookbook 'sshd'
 
   include_cookbook 'systemd-networkd'
