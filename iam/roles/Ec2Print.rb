@@ -1,6 +1,6 @@
-role "Ec2PrintDev", :path=>"/" do
+role "Ec2Print", :path=>"/" do
   instance_profiles(
-    "Ec2PrintDev",
+    "Ec2Print",
   )
 
   assume_role_policy_document do
@@ -23,4 +23,4 @@ role "Ec2PrintDev", :path=>"/" do
   )
 end
 
-instance_profile "Ec2PrintDev", :path=>"/"
+instance_profile "Ec2Print", :path=>"/"
