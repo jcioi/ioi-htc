@@ -1,5 +1,11 @@
 #!/usr/bin/env ruby
 
+product = `dmidecode -s system-product-name`.chomp
+if product != 'Aspire A315-51'
+  puts "Not running on Aspire 3"
+  exit 0
+end
+
 line = IO.popen(['efibootmgr', '-v'], &:readlines)
          .grep(%r{/IPv4})
          .first
