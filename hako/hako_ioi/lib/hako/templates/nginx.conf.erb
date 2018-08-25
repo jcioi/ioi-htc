@@ -21,7 +21,7 @@ geo $ioi_internal_single {
 
 <%- if location_uses_omniauth? -%>
 upstream elb_nginx_omniauth_adapter {
-  server nginx-omniauth-adapter.elb.ioi18.net:80 fail_timeout=0;
+  server nginx-omniauth-adapter.nlb.ioi18.net:80 fail_timeout=0;
   keepalive 4;
 }
 <%- end -%>
