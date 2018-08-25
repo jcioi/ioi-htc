@@ -15,5 +15,5 @@ remote_file '/etc/systemd/system/ioi-set-bootorder.service' do
 end
 
 service 'ioi-set-bootorder' do
-  action :enable
+  action [:enable, :start]
 end
