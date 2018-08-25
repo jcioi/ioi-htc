@@ -2,7 +2,7 @@ groups:
   - name: awsvpn_state
     rules:
       - alert: AwsVpnTunnelDown
-        expr: 'aws_vpn_tunnel_state_minimum < 1'
+        expr: 'aws_vpn_tunnel_state_minimum offset 6m < 1'
         labels:
           severity: page
         annotations:
