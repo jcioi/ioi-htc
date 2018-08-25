@@ -23,6 +23,7 @@ if node.dig(:cms, :variant) == 'onpremise'
 
   include_cookbook 'swap'
   include_cookbook 'ioi-set-hostname'
+  include_cookbook 'disable-power-switches'
 end
 
 
