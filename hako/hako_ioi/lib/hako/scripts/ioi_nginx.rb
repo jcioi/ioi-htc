@@ -15,7 +15,8 @@ module Hako
         configure_health_check_path(app)
 
         front = containers.fetch('front')
-        front.docker_labels['net.ioi18.nginx-config-hash'] = Digest::SHA2.hexdigest(JSON.dump(@options))
+        front.docker_labels['net.ioi18.nginx-config-hash'] = Digest::SHA2.hexdigest(
+                                             JSON.dump(@options.merge(_templates: Generator.templates_shasum)))
       end
 
       private
@@ -48,8 +49,28 @@ module Hako
       end
 
       class Generator < NginxFront::Generator
-        def templates_directory
+        def self.templates_shasum
+          [nginx_conf_erb, nginx_location_conf_erb].map do |path|
+            Digest::SHA256.file(path).hexdigest
+          end
+        end
+
+        def self.templates_directory
           File.expand_path('../../templates', __FILE__)
+        end
+
+        # @return [String]
+        def nginx_conf_erb; self.class.nginx_conf_erb; end
+        def nginx_location_conf_erb; self.class.nginx_location_conf_erb; end
+
+        # @return [String]
+        def self.nginx_conf_erb
+          File.join(templates_directory, 'nginx.conf.erb')
+        end
+
+        # @return [String]
+        def self.nginx_location_conf_erb
+          File.join(templates_directory, 'nginx.location.conf.erb')
         end
 
         def locations
