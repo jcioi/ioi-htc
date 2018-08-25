@@ -22,19 +22,11 @@ cmsworker: cmsworker.qcow2
 .PHONY: cmsworker
 
 run-contestant: contestant.qcow2.overlay
-	sudo qemu-system-x86_64 -machine accel=kvm -m 4G -smp 2,cores=2 -cpu host \
-		-drive if=virtio,file=$<,format=qcow2 \
-		-display sdl -vga virtio \
-		-netdev bridge,id=net0,br=${BRIDGE_CONTESTANT} -device virtio-net-pci,netdev=net0,mac=${MAC_CONTESTANT},bootindex=1 \
-		-bios OVMF.fd -boot menu=on
+	sudo ./run-qemu.sh $< ${BRIDGE_CONTESTANT} ${MAC_CONTESTANT}
 .PNONY: run-contestant
 
 run-cmsworker: cmsworker.qcow2.overlay
-	sudo qemu-system-x86_64 -machine accel=kvm -m 4G -smp 2,cores=2 -cpu host \
-		-drive if=virtio,file=$<,format=qcow2 \
-		-display sdl -vga virtio \
-		-netdev bridge,id=net0,br=${BRIDGE_CMSWORKER} -device virtio-net-pci,netdev=net0,mac=${MAC_CMSWORKER},bootindex=1 \
-		-bios OVMF.fd -boot menu=on
+	sudo ./run-qemu.sh $< ${BRIDGE_CMSWORKER} ${MAC_CMSWORKER}
 .PNONY: run-cmsworker
 
 base.qcow2: d-i/bionic/preseed.cfg
