@@ -1,0 +1,14 @@
+[Unit]
+Description=Prometheus Varnish Exporter
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+MemoryLimit=50M
+Restart=always
+RestartSec=6s
+ExecStart=/opt/varnish_exporter/prometheus_varnish_exporter
+
+[Install]
+WantedBy=multi-user.target

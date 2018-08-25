@@ -109,7 +109,12 @@ host_jobs = [
     port: 9099,
     metrics_path: '/haproxy_exporter/metrics',
   },
-
+  {
+    job_name: 'varnish',
+    role: 'cache-s3',
+    port: 9099,
+    metrics_path: '/varnish_exporter/metrics',
+  },
 ]
 
 if node[:hocho_ec2]

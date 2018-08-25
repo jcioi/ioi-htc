@@ -22,4 +22,4 @@ template '/etc/systemd/system/varnish.service.d/exec.conf' do
   notifies :run, 'execute[systemctl daemon-reload]'
 end
 
-
+include_cookbook 'prometheus-varnish-exporter'
