@@ -2,4 +2,5 @@
 set -eux
 
 loginctl terminate-seat seat0
+sleep 3
 systemctl restart gdm
