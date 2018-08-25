@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+template = File.read('/etc/hostname.template').chomp
+
+hostname = template.gsub('%m') do
+  Dir['/sys/class/net/*']
+    .grep(%r{net/en})
+    .sort
+    .first
+    .yield_self { |ifpath| File.read(File.join(ifpath, 'address')) }
+    .chomp
+    .gsub(/:/, '')
+end
+
+exec('/usr/bin/hostnamectl', 'set-hostname', hostname)
