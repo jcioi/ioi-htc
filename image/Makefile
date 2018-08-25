@@ -37,17 +37,19 @@ run-cmsworker: cmsworker.qcow2.overlay
 		-bios OVMF.fd -boot menu=on
 .PNONY: run-cmsworker
 
+base.qcow2: d-i/bionic/preseed.cfg
+base-efi.qcow2: d-i/bionic/preseed-efi.cfg
+preview.qcow2: base.qcow2 preview.attrs.json
+contestant.qcow2: base-efi.qcow2 contestant.attrs.json
+cmsworker.qcow2: base-efi.qcow2 cmsworker.attrs.json
 
 %.json: %.yaml
 	ruby -rjson -ryaml -e 'File.write(ARGV[1], JSON.dump(YAML.load_file(ARGV[0])))' $< $@
 
-%.qcow2: %.json %.attrs.json %.rebuild | timestamp
+%.qcow2: %.json %.rebuild | timestamp
 	rm -rf tmp/$$(basename -s .qcow2 $@)
 	time packer build $<
 	$(SPARSIFY) && sudo virt-sparsify --in-place $@
-
-base.qcow2: d-i/bionic/preseed.cfg
-preview.qcow2: base.qcow2
 
 # touch this file to rebuild the corresponding %.qcow2
 %.rebuild:
