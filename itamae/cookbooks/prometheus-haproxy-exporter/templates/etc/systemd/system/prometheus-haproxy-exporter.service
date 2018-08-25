@@ -1,0 +1,18 @@
+[Unit]
+Description=Prometheus HAProxy Exporter
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=nobody
+Group=haproxy
+MemoryLimit=50M
+Restart=always
+RestartSec=6s
+ExecStart=/opt/haproxy_exporter/haproxy_exporter \
+  --haproxy.scrape-uri=unix:/run/haproxy/admin.sock
+
+
+[Install]
+WantedBy=multi-user.target

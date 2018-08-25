@@ -93,6 +93,22 @@ host_jobs = [
     port: 9099,
     metrics_path: '/unbound_exporter/metrics',
   },
+  {
+    job_name: 'haproxy',
+    role: 'cache-s3|rproxy-misc|rproxy-s3',
+    port: 9099,
+    metrics_path: '/haproxy_exporter/metrics',
+  },
+  {
+    job_name: 'haproxy_cms',
+    relabel_configs: [
+      {source_labels: %w(cms_cluster), regex: '^dev$', action: 'keep'},
+      {source_labels: %w(role), regex: 'cms-rankingwebserver', action: 'drop'},
+    ],
+    port: 9099,
+    metrics_path: '/haproxy_exporter/metrics',
+  },
+
 ]
 
 if node[:hocho_ec2]
@@ -143,6 +159,7 @@ if node[:hocho_ec2]
           source_labels: ["__meta_ec2_tag_CmsCluster"],
           target_label: "cms_cluster",
         },
+        *job[:relabel_configs],
       ].compact,
     )
   end
