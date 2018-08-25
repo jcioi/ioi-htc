@@ -8,7 +8,10 @@ if node.dig(:cms, :variant) == 'onpremise'
 
   node.reverse_merge!(
     codedeploy_agent: {
-      proxy_uri: 'http://fproxy.ioi18.net:80'
+      proxy_uri: 'http://fproxy.ioi18.net:80',
+      onpremises: {
+        blacklist: '^525400', # qemu
+      },
     },
     swap: {
       size: 0,
