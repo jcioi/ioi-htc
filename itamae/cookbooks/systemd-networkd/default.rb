@@ -32,6 +32,15 @@ directory '/etc/systemd/resolved.conf.d' do
   mode '755'
 end
 
+unless node[:hocho_ec2]
+  template '/etc/systemd/resolved.conf.d/resolvers.conf' do
+    owner 'root'
+    group 'root'
+    mode '644'
+    notifies :restart, 'service[systemd-resolved]'
+  end
+end
+
 service "systemd-networkd" do
   action [:enable, :start]
 end
