@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ec2 "vpc-03eed691a6a5a03b2" do
+  security_group "elb-print" do
+    description "elb-print"
+
+    ingress do
+      permission :tcp, 443 do
+        groups(
+          "translation",
+        )
+
+        ip_ranges(
+        #   ::CIDR_VENUE_ARENA,
+          ::CIDR_VENUE_LAB,
+        )
+      end
+    end
+
+    egress do
+      permission :any do
+        ip_ranges(
+          "0.0.0.0/0",
+        )
+      end
+    end
+  end
+end
