@@ -20,3 +20,4 @@ unless node[:unbound][:root_trust_anchor_update]
   end
 end
 
+include_cookbook 'prometheus-unbound-exporter'

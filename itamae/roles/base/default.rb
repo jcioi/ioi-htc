@@ -71,6 +71,7 @@ end
 include_cookbook 'iperf3'
 
 include_cookbook 'prometheus-node-exporter'
+include_cookbook 'prometheus-exporter-proxy'
 if node.dig(:base, :zabbix_agent)
   include_cookbook 'zabbix-agent'
 end

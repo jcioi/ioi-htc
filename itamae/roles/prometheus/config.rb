@@ -81,48 +81,71 @@ scrape_configs.push(
   ],
 )
 
+
+host_jobs = [
+  {
+    job_name: 'node',
+    port: 9100,
+  },
+  {
+    job_name: 'unbound',
+    role: '^dns-cache$',
+    port: 9099,
+    metrics_path: '/unbound_exporter/metrics',
+  },
+]
+
 if node[:hocho_ec2]
-  scrape_configs.push(
-    job_name: :ec2_node,
-    ec2_sd_configs: [
-      {region: 'ap-northeast-1', port: 9100},
-    ],
-    relabel_configs: [
-      {
-        source_labels: ["__meta_ec2_instance_state"],
-        regex: "^running$",
-        action: "keep",
-      },
-      {
-        source_labels: ["__meta_ec2_tag_Name"],
-        target_label: "instance",
-      },
-      {
-        source_labels: ["__meta_ec2_tag_Role"],
-        target_label: "role",
-      },
-      {
-        source_labels: ["__meta_ec2_tag_Status"],
-        target_label: "status",
-      },
-      {
-        source_labels: ["__meta_ec2_instance_type"],
-        target_label: "instance_type",
-      },
-      {
-        source_labels: ["__meta_ec2_availability_zone"],
-        target_label: "availability_zone",
-      },
-      {
-        source_labels: ["__meta_ec2_vpc_id"],
-        target_label: "vpc_id",
-      },
-      {
-        source_labels: ["__meta_ec2_tag_CmsCluster"],
-        target_label: "cms_cluster",
-      },
-    ],
-  )
+  host_jobs.each do |job|
+    scrape_configs.push(
+      job_name: "ec2_#{job.fetch(:job_name)}",
+      ec2_sd_configs: [
+        {region: 'ap-northeast-1', port: job.fetch(:port)},
+      ],
+      metrics_path: job.fetch(:metrics_path, '/metrics'),
+      relabel_configs: [
+        {
+          source_labels: ["__meta_ec2_instance_state"],
+          regex: "^running$",
+          action: "keep",
+        },
+        job.key?(:role) ? {
+          source_labels: ["__meta_ec2_tag_Role"],
+          regex: job.fetch(:role),
+          action: "keep",
+        } : nil,
+        {
+          source_labels: ["__meta_ec2_tag_Name"],
+          target_label: "instance",
+        },
+        {
+          source_labels: ["__meta_ec2_tag_Role"],
+          target_label: "role",
+        },
+
+        {
+          source_labels: ["__meta_ec2_tag_Status"],
+          target_label: "status",
+        },
+        {
+          source_labels: ["__meta_ec2_instance_type"],
+          target_label: "instance_type",
+        },
+        {
+          source_labels: ["__meta_ec2_availability_zone"],
+          target_label: "availability_zone",
+        },
+        {
+          source_labels: ["__meta_ec2_vpc_id"],
+          target_label: "vpc_id",
+        },
+        {
+          source_labels: ["__meta_ec2_tag_CmsCluster"],
+          target_label: "cms_cluster",
+        },
+      ].compact,
+    )
+  end
 end
 
 
