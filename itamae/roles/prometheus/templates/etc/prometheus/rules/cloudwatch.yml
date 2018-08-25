@@ -1,7 +1,7 @@
 groups:
   - name: cloudwatch_down
     rules:
-      - alert: Down
+      - alert: CloudwatchDown
         expr: 'up{job=~"^cloudwatch(_.+)?$"} == 0'
         for: 6m
         labels:
