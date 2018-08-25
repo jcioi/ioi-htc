@@ -1,6 +1,7 @@
 [Unit]
 Description=CMS Worker
 PartOf=cms.target
+After=haproxy.service
 
 [Service]
 User=cmsuser
