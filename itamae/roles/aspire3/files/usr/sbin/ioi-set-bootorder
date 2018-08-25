@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+line = IO.popen(['efibootmgr', '-v'], &:readlines)
+         .grep(%r{/IPv4})
+         .first
+
+unless line
+  $stderr.puts "No netboot entry"
+  exit 1
+end
+
+if /^Boot(?<bootnum>\d{4})/ =~ line
+  exec('efibootmgr', '-n', bootnum)
+else
+  $stderr.puts "Malformed line: #{line.chomp}"
+  exit 1
+end
