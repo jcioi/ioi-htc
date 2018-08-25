@@ -38,6 +38,10 @@
   # "Whether to use two-phase commit.",
   twophase_commit: false,
 
+  ### "Redis",
+
+  redis_url: "redis://ioicms-dev.vozztv.0001.apne1.cache.amazonaws.com:6379/0",
+
   ### "Worker",
 
   # "Don't delete the sandbox directory under /tmp/ when they",
@@ -163,4 +167,3 @@
 
   question_hook_urls: ['https://hooks.slack.com/services/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'],
 }
-
