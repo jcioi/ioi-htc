@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ec2 "vpc-03eed691a6a5a03b2" do
+  security_group "cms-redis-dev" do
+    description "cms-redis-dev"
+
+    ingress do
+      permission :tcp, 6379 do
+        groups(
+          "cms-dev",
+        )
+        ip_ranges(
+          *::CIDR_CMS,
+        )
+      end
+    end
+
+    egress do
+      permission :any do
+        ip_ranges(
+          "0.0.0.0/0",
+        )
+      end
+    end
+  end
+end
