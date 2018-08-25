@@ -31,6 +31,7 @@ end
 %w(
   /etc/prometheus/rules/node.yml
   /etc/prometheus/rules/prometheus.yml
+  /etc/prometheus/rules/cloudwatch.yml
   /etc/prometheus/rules/aws_ec2.yml
   /etc/prometheus/rules/aws_elb.yml
   /etc/prometheus/rules/aws_lambda.yml
@@ -65,6 +66,7 @@ scrape_configs.push(
       localhost:9106
       localhost:19106
     ),
+    labels: {downalert: 'ignore'},
   ],
 )
 scrape_configs.push(
@@ -75,6 +77,7 @@ scrape_configs.push(
     targets: %w(
       localhost:29106
     ),
+    labels: {downalert: 'ignore'},
   ],
 )
 

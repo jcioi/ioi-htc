@@ -7,8 +7,8 @@ groups:
   - name: node_down
     rules:
       - alert: Down
-        expr: 'up == 0'
-        for: 2m
+        expr: 'up{downalert!="ignore"} == 0'
+        for: 1m
         labels:
           severity: page
         annotations:
