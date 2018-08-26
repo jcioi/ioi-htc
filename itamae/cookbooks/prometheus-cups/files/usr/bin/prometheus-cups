@@ -25,26 +25,26 @@ class PrometheusCUPS
     printers.each do |name, attrs|
       case attrs['printer-state']
       when '3', '4' # idle, processing
-        @metric_printer_up.set({name: name}, 1)
+        @metric_printer_up.set({printer: name}, 1)
       when '5' # stopped
-        @metric_printer_up.set({name: name}, 0)
+        @metric_printer_up.set({printer: name}, 0)
       end
 
       if v = attrs['printer-state-reasons']
         v.split(?,).each do |reason|
-          @metric_printer_state_reason.set({name: name, reason: reason}, 1)
+          @metric_printer_state_reason.set({printer: name, reason: reason}, 1)
         end
       end
 
       if v = attrs['printer-is-accepting-jobs']
-        @metric_printer_accepting.set({name: name}, v == 'true' ? 1 : 0)
+        @metric_printer_accepting.set({printer: name}, v == 'true' ? 1 : 0)
       end
 
       printer = CupsPrinter.new(name)
       jobs = printer.get_all_jobs.each.group_by {|job| job[:state] }
 
       CupsFFI::IppJState.symbols.each do |state|
-        @metric_printer_active_jobs.set({name: name, state: state}, jobs[state]&.size || 0)
+        @metric_printer_active_jobs.set({printer: name, state: state}, jobs[state]&.size || 0)
       end
     end
   rescue => e
