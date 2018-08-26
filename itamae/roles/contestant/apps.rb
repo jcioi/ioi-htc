@@ -38,7 +38,6 @@ package 'valgrind'
 package 'visualvm'
 
 ## Utilities
-package 'firefox'
 package 'gnome-terminal'
 package 'konsole'
 package 'xterm'
@@ -57,3 +56,18 @@ package 'evince'
 package 'gkbd-capplet'
 package 'nautilus-extension-gnome-terminal'
 package 'gnome-tweaks'
+
+## Firefox
+package 'firefox'
+package 'xvfb'
+
+execute 'firefox -CreateProfile' do
+  command 'env HOME=/etc/skel xvfb-run firefox -CreateProfile "ioi.default /etc/skel/.mozilla/firefox/ioi.default"'
+  not_if 'test -e /etc/skel/.mozilla/firefox/ioi.default'
+end
+
+template '/etc/skel/.mozilla/firefox/ioi.default/prefs.js' do
+  owner 'root'
+  group 'root'
+  mode '0600'
+end
