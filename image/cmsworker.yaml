@@ -50,7 +50,7 @@ provisioners:
     destination: /tmp/itamae/node.json
   - type: shell
     inline: |
-      cd /tmp/itamae && sudo mitamae local -j node.json site.rb roles/aspire3/default.rb roles/cms-worker/default.rb
+      cd /tmp/itamae && sudo mitamae local -j node.json site.rb roles/cms-worker/default.rb roles/aspire3/default.rb
   - type: shell
     execute_command: 'sudo {{ .Vars }} sh -ex {{ .Path }}'
     scripts:
