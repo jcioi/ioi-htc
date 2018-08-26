@@ -1,7 +1,7 @@
 node.reverse_merge!(
   prometheus: {
     exporter_proxy: {
-      blob: 'https://s3-apne1.ioi18.net/ioi18-infra/packages/exporter_proxy-0.1.0',
+      blob: 'https://s3-apne1.ioi18.net/ioi18-infra/packages/exporter_proxy-0.2.0',
       listen: "0.0.0.0:9099",
       exporters: {
         node_exporter: {path: '/node_exporter/metrics', url: 'http://localhost:9100/metrics'},
