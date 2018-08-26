@@ -115,6 +115,13 @@ host_jobs = [
     port: 9099,
     metrics_path: '/varnish_exporter/metrics',
   },
+  {
+    job_name: 'kea',
+    role: 'dhcp',
+    port: 9099,
+    metrics_path: '/kea_exporter/metrics',
+  },
+
 ]
 
 if node[:hocho_ec2]

@@ -22,6 +22,7 @@ else
   # dns-cache-001,dns-cache-002
   node[:resolvers] = %w(10.18.205.55 10.18.221.163)
 end
+node[:resolvers_global] = %w(10.18.205.55 10.18.221.163)
 
 node[:desired_hostname] ||= node.dig(:hocho_ec2, :tags, :Name)
 
@@ -34,6 +35,8 @@ end
 if node[:hocho_ec2]
   node[:extra_disk] = '/dev/xvdf'
 end
+
+include_recipe './machines'
 
 execute "systemctl daemon-reload" do
   action :nothing
