@@ -99,6 +99,15 @@ template "ioi18.net-private" do
     resource_records "print-dev.elb.ioi18.net."
   end
 
+  rrset "print.elb.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "internal-print-269290833.ap-northeast-1.elb.amazonaws.com."
+  end
+  rrset "print.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "print.elb.ioi18.net."
+  end
+
   rrset "service.ioi18.net.", "CNAME" do
     ttl 60
     resource_records "ioi-console.elb.ioi18.net."
@@ -272,6 +281,14 @@ template "ioi18.net-common" do
   end
 
   rrset "print-dev-001.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "rproxy-misc.elb.ioi18.net."
+  end
+  rrset "print-001.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "rproxy-misc.elb.ioi18.net."
+  end
+  rrset "print-002.ioi18.net.", "CNAME" do
     ttl 60
     resource_records "rproxy-misc.elb.ioi18.net."
   end
