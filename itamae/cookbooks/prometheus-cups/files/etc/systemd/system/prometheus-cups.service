@@ -1,0 +1,7 @@
+[Unit]
+Description=Collect CUPS metrics for prometheus
+
+[Service]
+Type=oneshot
+Environment=CUPS_LIB=libcups.so.2
+ExecStart=/usr/bin/prometheus-cups -o /var/lib/prometheus-node-exporter/textfile_collector/cups.prom

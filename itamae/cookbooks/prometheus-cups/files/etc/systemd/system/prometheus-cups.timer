@@ -1,0 +1,9 @@
+[Unit]
+Description=Collect CUPS metrics for prometheus
+After=cups.service
+
+[Timer]
+OnUnitInactiveSec=60s
+
+[Install]
+WantedBy=timers.target

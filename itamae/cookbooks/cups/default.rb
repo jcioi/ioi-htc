@@ -26,3 +26,5 @@ end
 service 'cups-browsed' do
   action [:disable, :stop]
 end
+
+include_cookbook 'prometheus-cups'
