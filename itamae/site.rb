@@ -33,7 +33,13 @@ else
 end
 
 if node[:hocho_ec2]
-  node[:extra_disk] = '/dev/xvdf'
+  if run_command('test -e /dev/disk/by-path', error: false).exit_status == 0
+    package 'nvme-cli'
+    extra_disk = run_command("for x in /dev/nvme*n1; do if nvme id-ctrl --raw-binary $x 2>/dev/null | cut -c3073-3104 | tr -s ' ' | grep -q sdf; then echo $x; fi ; done", error: true).stdout.strip
+    node[:extra_disk] = extra_disk unless extra_disk.empty?
+  else
+    node[:extra_disk] =  '/dev/xvdf'
+  end
 end
 
 include_recipe './machines'
