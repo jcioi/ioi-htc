@@ -5,8 +5,8 @@ local elbSecurityGroups = ['sg-0d6c8d7523b36c389'];  // elb-misc-internal-tools
 
 {
   scheduler: utils.fargateScheduler(taskSecurityGroups) {
-    cpu: '256',
-    memory: '512',
+    cpu: '1024',
+    memory: '2048',
     elb_v2: {
       scheme: 'internal',
       vpc_id: utils.vpcId,
