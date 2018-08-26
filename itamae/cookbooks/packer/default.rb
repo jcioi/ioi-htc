@@ -1,35 +1,34 @@
-package 'golang'
-package 'make'
+node.reverse_merge!(
+  packer: {
+    release: '1.2.5',
+  },
+)
 
-gopath = '/opt/go'
+release = node[:packer].fetch(:release)
+node[:packer][:zip_url] = "https://releases.hashicorp.com/packer/#{release}/packer_#{release}_linux_amd64.zip"
 
-directory gopath do
-  owner 'root'
-  group 'root'
-  mode '755'
+%W[
+  /opt/packer-#{release}
+  /opt/packer-#{release}/bin
+].each do |_|
+  directory _ do
+    owner 'root'
+    group 'root'
+    mode '0755'
+  end
 end
 
-file '/root/build_packer.sh' do
-  owner 'root'
-  group 'root'
-  mode '755'
-  content <<EOF
-#!/bin/bash
-set -eu
-export GOPATH=#{gopath.shellescape}
-export PATH=$GOPATH/bin:$PATH
-
-go get -d github.com/hashicorp/packer
-go get github.com/kardianos/govendor
-
-make -C #{gopath.shellescape}/src/github.com/hashicorp/packer
+execute 'download packer' do
+  script = <<EOF
+zip=/opt/packer-#{release}.zip
+curl -fLsS -o "$zip" #{node[:packer][:zip_url].shellescape}
+unzip -d /opt/packer-#{release}/bin "$zip"
 EOF
-end
 
-execute '/root/build_packer.sh' do
-  only_if "! test -x #{gopath.shellescape}/bin/packer"
+  command "bash -euxc #{script.shellescape}"
+  not_if "test -e /opt/packer-#{release}/bin/packer"
 end
 
 link '/usr/local/bin/packer' do
-  to "#{gopath}/bin/packer"
+  to "/opt/packer-#{release}/bin/packer"
 end
