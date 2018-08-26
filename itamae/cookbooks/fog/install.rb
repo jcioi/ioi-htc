@@ -1,15 +1,17 @@
-execute 'download fog installer' do
-  script = <<EOF
-tmp=$(mktemp --tmpdir "XXXXXXXXX.tar.gz")
-mkdir -p /opt/fogproject
-curl -fLsS -o "$tmp" https://github.com/FOGProject/fogproject/archive/1.5.4.tar.gz
-echo "e8e1ad8ddc8e2926b1cf407f21cec1dc57c30a65e9411ab8df7d10a454683015 $tmp" | sha256sum -c
-tar zxf "$tmp" -C /opt/fogproject --strip=1
-EOF
+repo = node[:fog][:repo]
+branch = node[:fog][:branch]
 
-  command "bash -exo pipefail -c #{script.shellescape}"
-  not_if 'test -e /opt/fogproject/bin/installfog.sh'
-  notifies :run, 'execute[installfog.sh]'
+execute 'clone fog installer' do
+  command "git clone --depth=1 --single-branch --branch #{branch.shellescape} #{repo.shellescape} /opt/fogproject"
+  not_if 'test -d /opt/fogproject/.git'
+end
+
+execute 'update fog installer' do
+  command 'cd /opt/fogproject && git checkout FETCH_HEAD'
+  not_if <<EOF
+cd /opt/fogproject && git fetch origin #{branch.shellescape} && \
+  test "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)"
+EOF
 end
 
 directory '/opt/fog' do
@@ -22,10 +24,9 @@ template '/opt/fog/.fogsettings' do
   owner 'root'
   group 'root'
   mode '0600'
-  notifies :run, 'execute[installfog.sh]'
 end
 
 execute 'installfog.sh' do
-  command 'cd /opt/fogproject/bin && ./installfog.sh --autoaccept'
-  action :nothing
+  command 'cd /opt/fogproject/bin && ./installfog.sh --autoaccept && git rev-parse HEAD > /opt/fog/.revision'
+  only_if %{test ! -e /opt/fog/.revision || test "$(cat /opt/fog/.revision)" != "$(cd /opt/fogproject; git rev-parse HEAD)"}
 end
