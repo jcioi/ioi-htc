@@ -19,6 +19,7 @@ DEFAULT_AUTHORIZED_KEYS = [
 node.reverse_merge!(
   op_user: {
     name: node.fetch(:op_user_name),
+    password: node[:op_user_password],
     authorized_keys: [],
     include_default_authorized_keys: true,
     homedir_mode: '0755',
@@ -26,6 +27,7 @@ node.reverse_merge!(
 )
 
 username = node[:op_user].fetch(:name)
+password = node[:op_user].fetch(:password)
 
 group username do
   gid 10000
@@ -34,6 +36,7 @@ end
 user username do
   uid 10000
   gid 10000
+  password password if password
   home "/home/#{username}"
   shell '/bin/bash'
   create_home true

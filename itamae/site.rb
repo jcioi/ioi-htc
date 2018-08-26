@@ -2,6 +2,10 @@ node[:basedir] = File.expand_path('..', __FILE__)
 node[:secrets] = MitamaeSecrets::Store.new(File.join(node[:basedir],'secrets'))
 
 node[:op_user_name] = 'ioi'
+unless node[:hocho_ec2]
+  node[:op_user_password] = node[:secrets].fetch(:ioi_password)
+end
+
 node[:orgname] = 'ioi18'
 node[:site_domain] = 'ioi18.net'
 
