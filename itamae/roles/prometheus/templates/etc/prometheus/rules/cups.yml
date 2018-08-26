@@ -1,0 +1,28 @@
+groups:
+  - name: cups_textfile_stale
+    rules:
+      - alert: CupsTextfileStale
+        expr: 'time() - node_textfile_mtime_seconds{file="cups.prom"} > 300'
+        labels:
+          severity: warn
+        annotations:
+          summary: "{{$labels.instance}}: CUPS metrics are older than 5m"
+
+  - name: cups_printer_down
+    rules:
+      - alert: CupsPrinterDown
+        expr: 'cups_printer_up < 1'
+        labels:
+          severity: warn
+        annotations:
+          summary: "{{$labels.instance}}: Printer {{$labels.printer}} is down"
+
+  - name: cups_printer_active_jobs
+    rules:
+      - alert: CupsPendingJobs
+        expr: 'cups_printer_active_jobs{state="pending"} > 10'
+        for: 5m
+        labels:
+          severity: warn
+        annotations:
+          summary: "{{$labels.instance}}: Printer {{$labels.printer}} has pending jobs > 10 for 5m ({{$value}})"

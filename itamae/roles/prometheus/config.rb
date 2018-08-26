@@ -33,6 +33,7 @@ end
   /etc/prometheus/rules/prometheus.yml
   /etc/prometheus/rules/cloudwatch.yml
   /etc/prometheus/rules/haproxy.yml
+  /etc/prometheus/rules/cups.yml
   /etc/prometheus/rules/aws_ec2.yml
   /etc/prometheus/rules/aws_elb.yml
   /etc/prometheus/rules/aws_lambda.yml
