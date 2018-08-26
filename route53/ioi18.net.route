@@ -24,6 +24,10 @@ template "ioi18.net-private" do
     ttl 60
     resource_records 'hako-nginx-omniauth-adapter-nlb-ab5d7cea55f2238e.elb.ap-northeast-1.amazonaws.com'
   end
+  rrset "netbox.elb.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "internal-hako-netbox-296931462.ap-northeast-1.elb.amazonaws.com."
+  end
   rrset "ioi-console.elb.ioi18.net", "CNAME" do
     ttl 60
     resource_records "internal-hako-ioi-console-684969648.ap-northeast-1.elb.amazonaws.com."
@@ -212,6 +216,11 @@ template "ioi18.net-common" do
     resource_records "awstools.elb.ioi18.net."
   end
 
+  rrset "netbox.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "rproxy-misc.elb.ioi18.net."
+  end
+
   rrset "contest-dev.ioi18.net.", "CNAME" do
     ttl 60
     resource_records "rproxy-misc.elb.ioi18.net."
@@ -377,7 +386,8 @@ template "ioi18.net-common" do
 
     _8efae632a164da027fa36d879f8d292a.prometheus.ioi18.net. _c02df255914849f6d6d48865696b34e7.tljzshvwok.acm-validations.aws.
     _e1d98d924b163156e17eef13fb1c182f.grafana.ioi18.net. _71f809a59571eca7ca47a571e073d1fa.tljzshvwok.acm-validations.aws.
-    
+
+    _038a436c8816b1a5cdf55f38955eeb6d.netbox.ioi18.net. _e0a34f625e84d30d856b30f7c1020177.tljzshvwok.acm-validations.aws.
   ).each_slice(2) do |(name,target)|
     rrset name, "CNAME" do
       ttl 60

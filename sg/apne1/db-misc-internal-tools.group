@@ -1,0 +1,31 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ec2 "vpc-03eed691a6a5a03b2" do
+  security_group "db-misc-internal-tools" do
+    description "db-misc-internal-tools"
+
+    ingress do
+      permission :tcp, 5432..5432 do
+        groups(
+          "bastion",
+          "ecs-misc-internal-tools",
+        )
+      end
+
+      permission :tcp, 6379..6379 do
+        groups(
+          "bastion",
+          "ecs-misc-internal-tools",
+        )
+      end
+    end
+
+    egress do
+      permission :any do
+        ip_ranges(
+          "0.0.0.0/0",
+        )
+      end
+    end
+  end
+end

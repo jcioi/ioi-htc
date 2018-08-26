@@ -1,0 +1,28 @@
+ec2 "vpc-03eed691a6a5a03b2" do
+  security_group "elb-misc-internal-tools" do
+    description "elb-misc-internal-tools"
+
+    ingress do
+      permission :tcp, 80..80 do
+        groups(
+          "bastion",
+          "rproxy-misc",
+        )
+      end
+      permission :tcp, 443..443 do
+        groups(
+          "bastion",
+          "rproxy-misc",
+        )
+      end
+    end
+
+    egress do
+      permission :any do
+        ip_ranges(
+          "0.0.0.0/0",
+        )
+      end
+    end
+  end
+end
