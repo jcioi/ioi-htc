@@ -16,10 +16,12 @@
     Worker: [
       ['10.18.96.10', 26000], # cms-dev-worker-1
       ['10.18.96.11', 26000], # cms-dev-worker-2
+      ['10.18.113.10', 26000],  # hanazuki 10
     ],
     ResourceService: [
       ['10.18.96.10', 28000], # cms-dev-worker-1
       ['10.18.96.11', 28000], # cms-dev-worker-2
+      ['10.18.113.10', 28000],  # hanazuki 10
     ],
   },
   other_services: {
