@@ -4,6 +4,7 @@ Description=Set hostname based on MAC address
 [Service]
 Type=oneshot
 ExecStart=/usr/sbin/ioi-set-hostname
+RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target

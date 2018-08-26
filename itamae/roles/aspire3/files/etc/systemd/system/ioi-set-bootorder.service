@@ -4,6 +4,7 @@ Description=Set UEFI NextBoot to IPv4 netboot
 [Service]
 Type=oneshot
 ExecStart=/usr/sbin/ioi-set-bootorder
+RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
