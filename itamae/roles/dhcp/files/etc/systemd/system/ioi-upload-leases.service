@@ -1,0 +1,8 @@
+[Unit]
+Description=Upload Kea leases
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ioi-upload-leases

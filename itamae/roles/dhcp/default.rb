@@ -146,6 +146,33 @@ file "/etc/kea/kea-dhcp4.conf" do
   mode  '0644'
 end
 
-service "kea-dhcp4-server" do
+service "kea-dhcp4-server.service" do
   action [:enable, :start]
 end
+
+include_cookbook 'awscli'
+
+remote_file "/usr/bin/ioi-upload-leases" do
+  owner 'root'
+  group 'root'
+  mode  '0755'
+end
+
+remote_file "/etc/systemd/system/ioi-upload-leases.service" do
+  owner 'root'
+  group 'root'
+  mode  '0644'
+  notifies :run, 'execute[systemctl daemon-reload]'
+end
+
+remote_file "/etc/systemd/system/ioi-upload-leases.timer" do
+  owner 'root'
+  group 'root'
+  mode  '0644'
+  notifies :run, 'execute[systemctl daemon-reload]', :immediately
+end
+
+service "ioi-upload-leases.timer" do
+  action [:enable, :start]
+end
+

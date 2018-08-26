@@ -1,0 +1,2 @@
+#!/bin/bash -x
+aws s3 cp /var/lib/kea/dhcp4.leases s3://ioi18-infra/dhcp/leases/$(hostname).4

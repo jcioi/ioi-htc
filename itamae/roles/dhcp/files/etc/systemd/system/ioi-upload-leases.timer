@@ -1,0 +1,10 @@
+[Unit]
+Description=periodically upload kea leases file
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=2min
+RandomizedDelaySec=15
+
+[Install]
+WantedBy=timers.target
