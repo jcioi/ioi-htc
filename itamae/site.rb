@@ -3,7 +3,7 @@ node[:secrets] = MitamaeSecrets::Store.new(File.join(node[:basedir],'secrets'))
 
 node[:op_user_name] = 'ioi'
 unless node[:hocho_ec2]
-  node[:op_user_password] = node[:secrets].fetch(:ioi_password)
+  node[:op_user_password] = node[:secrets].fetch(:ioi_password_crypt)
 end
 
 node[:orgname] = 'ioi18'
