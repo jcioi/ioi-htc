@@ -1,13 +1,18 @@
 node.reverse_merge!(
   nftables: {
-    config_file: node[:hostname],
+    # config_file: node[:hostname],
   },
 )
 
 package 'nftables'
 
+execute 'nft -f /etc/nftables.conf' do
+  command 'nft -f /etc/nftables.conf'
+  action :nothing
+end
+
 if node[:nftables][:config_file]
-  rule_source = node[:nftables][:config_file].kind_of?(String) ? node[:nftables][:config_file] : node[:hostname]
+  rule_source = node[:nftables][:config_file]
 
   template "/etc/nftables.conf" do
     source "templates/etc/nftables.#{rule_source}.conf"
@@ -16,7 +21,10 @@ if node[:nftables][:config_file]
     mode  '0640'
   end
 
-  service 'nftables' do
-    action :enable
-  end
 end
+
+service 'nftables' do
+  action :enable
+end
+
+
