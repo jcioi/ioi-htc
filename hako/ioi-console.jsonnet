@@ -43,6 +43,7 @@ local elbSecurityGroups = ['sg-0cd32a6bd67af4855'];  // elb-ioi-console
       GITHUB_CLIENT_SECRET: utils.secret('ioi_console_github_client_secret'),
       GITHUB_TEAMS: '2589499',  // jcioi/ioi18
       SENTRY_DSN: 'https://7ac3f763910a4424a693bfc69eece15b:8e0a54e046fb4adf9f1e0e5c9ab942ab@sentry.io/1267051',
+      IOIPRINT_URL: 'https://print.ioi18.net',
     },
     mount_points: [
     ],
