@@ -31,6 +31,7 @@ unless preview?
 
   include_cookbook 'systemd-networkd'
   include_cookbook 'prometheus-node-exporter'
+  include_cookbook 'prometheus-usb'
 end
 
 group 'contestant' do

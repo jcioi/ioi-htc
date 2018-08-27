@@ -1,0 +1,9 @@
+[Unit]
+Description=Collect connected USB devices for prometheus
+
+[Timer]
+OnBootSec=60s
+OnUnitInactiveSec=30s
+
+[Install]
+WantedBy=timers.target

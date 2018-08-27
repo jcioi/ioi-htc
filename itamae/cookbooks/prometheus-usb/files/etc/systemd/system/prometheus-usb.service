@@ -1,0 +1,6 @@
+[Unit]
+Description=Collect connected USB devices for prometheus
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/prometheus-usb -o /var/lib/prometheus-node-exporter/textfile_collector/usb.prom

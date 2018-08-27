@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+require 'prometheus/client'
+require 'prometheus/client/formats/text'
+
+class PrometheusUSB
+  def initialize
+    registry = Prometheus::Client.registry
+
+    @metric_node_usb_devices = registry.gauge(:node_usb_devices, 'Number of connected USB devices')
+  end
+
+  def collect
+    devices = IO.popen(['/usr/bin/lsusb', '-t']) do |io|
+      io.each_line.with_object(Hash.new(0)) do |line, devices|
+        if /Class=(?<device_class>.*?), Driver=(?<device_driver>.*?),/ =~ line
+          devices[[device_class, device_driver]] += 1
+        end
+      end
+    end
+
+    devices.each do |(device_class, device_driver), count|
+      @metric_node_usb_devices.set({device_class: device_class, device_driver: device_driver}, count)
+    end
+  end
+end
+
+PrometheusUSB.new.collect
+
+opts = ARGV.getopts("o:")
+text = Prometheus::Client::Formats::Text.marshal(Prometheus::Client.registry)
+if dst = opts['o']
+  tmp = "#{dst}.#$$"
+  File.write(tmp, text)
+  File.rename(tmp, dst)
+else
+  puts text
+end
