@@ -20,14 +20,14 @@ end
 remote_file '/etc/systemd/system/prometheus-cups.service' do
   owner 'root'
   group 'root'
-  mode '0755'
+  mode '0644'
   notifies :run, 'execute[systemctl daemon-reload]'
 end
 
 remote_file '/etc/systemd/system/prometheus-cups.timer' do
   owner 'root'
   group 'root'
-  mode '0755'
+  mode '0644'
   notifies :run, 'execute[systemctl daemon-reload]', :immediately
 end
 

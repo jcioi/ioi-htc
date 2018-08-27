@@ -1,8 +1,9 @@
 [Unit]
 Description=Collect CUPS metrics for prometheus
-After=cups.service
+After=cups.socket
 
 [Timer]
+OnBootSec=60s
 OnUnitInactiveSec=60s
 
 [Install]
