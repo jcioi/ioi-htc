@@ -30,6 +30,7 @@ unless preview?
   include_cookbook 'sshd'
 
   include_cookbook 'systemd-networkd'
+  include_cookbook 'prometheus-node-exporter'
 end
 
 group 'contestant' do
