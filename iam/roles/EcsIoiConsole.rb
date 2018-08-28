@@ -100,7 +100,7 @@ role "EcsIoiConsole", :path=>"/" do
           ),
           "Condition" => {
             "StringLike" => {
-               "ssm:resourceTag/CmsCluster":[
+               "ssm:resourceTag/CmsCluster" => [
                   "dev",
                   "prd",
                ],
