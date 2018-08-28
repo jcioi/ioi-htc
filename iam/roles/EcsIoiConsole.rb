@@ -75,9 +75,19 @@ role "EcsIoiConsole", :path=>"/" do
           "Effect" => "Allow",
           "Action" => %w(
             ssm:SendCommand
+            ssm:GetDocument
           ),
           "Resource" => %w(
              arn:aws:ssm:*::document/AWS-RunShellScript
+          )
+        },
+        {
+          "Effect" => "Allow",
+          "Action" => %w(
+            ssm:SendCommand
+          ),
+          "Resource" => %w(
+            arn:aws:s3:::ioi18-console/remote-task/ssm-log/*
           )
         },
         {
