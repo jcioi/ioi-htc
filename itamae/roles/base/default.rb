@@ -69,6 +69,7 @@ end
 
 
 include_cookbook 'iperf3'
+include_cookbook 'awscli' if node[:hocho_ec2]
 
 include_cookbook 'prometheus-node-exporter'
 include_cookbook 'prometheus-exporter-proxy'

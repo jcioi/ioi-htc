@@ -37,7 +37,22 @@ template "Ec2InstanceDefault" do
             "s3:ListMultipartUploadParts",
             "s3:ListBucketMultipartUploads"
           ],
-          "Resource" => "arn:aws:s3:::ioi18-ssm-agent/*"
+          "Resource" => %w(
+            arn:aws:s3:::ioi18-misc-internal
+            arn:aws:s3:::ioi18-misc-internal/console-dev/remote-task/ssm-log/*
+            arn:aws:s3:::ioi18-console
+            arn:aws:s3:::ioi18-console/remote-task/ssm-log/*
+          )
+        },
+        {
+          "Effect" => "Allow",
+          "Action" => [
+            "s3:GetObject",
+          ],
+          "Resource" => %w(
+            arn:aws:s3:::ioi18-misc-internal/console-dev/remote-task/ssm-scratch/*
+            arn:aws:s3:::ioi18-console/remote-task/scratch/*
+          )
         },
         {
           "Effect" => "Allow",
