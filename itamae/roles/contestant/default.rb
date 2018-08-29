@@ -9,6 +9,9 @@ node.reverse_merge!(
   },
   op_user: {
     homedir_mode: '700',
+    authorized_keys: [
+      'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCrfnnnnr9guAV2LgaWWHXoKZm7pfvCGiFx9nZe2O1CiL3N7BA7yckmFU6gIv/spNyRxKqkmnDRFgT1kWs84QkTqCjedOL1sEIzxoFsO/1yZoXyAnCHPZfJzQnQsxoyAQwJM/JYAK4u5YrlocjFfGKgLZ/tpRjV5VfX81lBrEvVj7OSfKj8Bvr0l3vX4dPH/Zs8CjcuwCR+r/iMKr/hFTzMin72ZXhZs1nvJFATVQZIjZHyULoGZy3f10PT8T/25TxQ82txqmS9v0HR7r2rma9o9DpKxCG5hDS/MEM9suIzgt/cedjqY5Wz/1bIjMmMkK7UBgHfsPJfdKZ3mZtAClb8Fq+XVOn07408jyU3/BOgQw7uDpGy82lRyfoaQztRa3vUTb6KTULuf20lwr+bPhOdNw0AvYZVLuS/QYinNpr4VhVV5LQvb/18pwQBt5QvMLkpgAp4RFNk0rEKJShARJY6HyS9tRRToDjnFVNCv63a7bvJpkHAo1CzgQmsSNWXW+WtmtGZtqXotViIePp/5+QmylKXQK9NL+OSfS0USNLvr4NF0v9OUGU9UP40z9yXwNVLoVzEeOZzdurMmphQ/tktMRgPfbkfA8opO7XImpJ2REoCD2YvYhdLsaKI7CaMij9CvDba4LzZHZl4V/o2QHtztL0+vqChwpWlcm5dj9KLEQ== ioi18m'
+    ],
   },
   ioi_set_hostname: {
     template: 'contestant-m-%m',
