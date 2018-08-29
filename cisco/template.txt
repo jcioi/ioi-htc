@@ -10,7 +10,7 @@ service password-encryption
 
 ! host名
 hostname aaaa
-ip domain name mgmt.ioi18.net
+ip domain name venue.ioi18.net
 
 ! 2048 bit RSA key for SSH
 crypto key rsa generate

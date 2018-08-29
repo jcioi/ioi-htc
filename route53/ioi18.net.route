@@ -521,11 +521,52 @@ end
 
 ###
 
+ONPREMISES_DOMAIN = 'venue.ioi18.net'
+onpremises = {
+  'rt-sto-001' => {
+    primary: 'lo',
+    ifaces: {
+      'lo' => '10.18.0.11',
+    }
+  }
+}
+template "ioi18.net-onpremises" do
+  onpremises.each do |hostname, host|
+    fqdn = "#{hostname}.#{ONPREMISES_DOMAIN}."
+    short_fqdn = "#{hostname}.c.ioi18.net."
+    rrset fqdn, 'CNAME' do
+      ttl 60
+      resource_records  "#{host.fetch(:primary)}.#{fqdn}"
+    end
+    rrset short_fqdn, 'CNAME' do
+      ttl 60
+      resource_records fqdn
+    end
+
+    host.fetch(:ifaces).each do |iface, ip|
+      rrset "#{host.fetch(:primary)}.#{fqdn}", 'A' do
+        ttl 60
+        resource_records ip
+      end
+    end
+  end
+end
+
 ###
 
 REV_DOMAINS.each do |network|
   rev_domain = "#{network.split(?.).reverse.join(?.)}.in-addr.arpa."
   hosted_zone rev_domain do
+    onpremises.each do |hostname, host|
+      host.fetch(:ifaces).each do |iface, ip|
+        rrset "#{ip.split(?.).reverse.join(?.)}.in-addr.arpa.", 'PTR' do
+          ttl 60
+          resource_records "#{iface}.#{hostname}.#{ONPREMISES_DOMAIN}"
+        end
+      end
+
+    end
+
     region_vpc_instances.each do |region, vpcs|
       vpcs.each do |short_name, _|
         vpc region, _[:id]
@@ -559,6 +600,7 @@ hosted_zone "ioi18.net.", "Z1V30A252QIS0J" do
   include_template 'ioi18.net-common'
   include_template 'ioi18.net-private'
   include_template 'ioi18.net-aws_instances'
+  include_template 'ioi18.net-onpremises'
 end
 
 
