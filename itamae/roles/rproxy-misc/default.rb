@@ -28,6 +28,7 @@ end
   /etc/nginx/conf.d/console.ioi18.net.conf
 
   /etc/nginx/conf.d/netbox.ioi18.net.conf
+  /etc/nginx/conf.d/ioi18.net.conf
 
   /etc/nginx/conf.d/prometheus.conf
 ).each do |_|

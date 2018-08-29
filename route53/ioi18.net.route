@@ -139,6 +139,14 @@ template "ioi18.net-private" do
 end
 
 template "ioi18.net-common" do
+  rrset "ioi18.net", "A" do
+    dns_name "rproxy-misc-1695373556.ap-northeast-1.elb.amazonaws.com."
+  end
+  rrset "ioi18.net", "AAAA" do
+    dns_name "rproxy-misc-1695373556.ap-northeast-1.elb.amazonaws.com."
+  end
+
+
   rrset "ioi18.net.", "CAA" do
     ttl 300
     resource_records(
@@ -388,6 +396,8 @@ template "ioi18.net-common" do
     _e1d98d924b163156e17eef13fb1c182f.grafana.ioi18.net. _71f809a59571eca7ca47a571e073d1fa.tljzshvwok.acm-validations.aws.
 
     _038a436c8816b1a5cdf55f38955eeb6d.netbox.ioi18.net. _e0a34f625e84d30d856b30f7c1020177.tljzshvwok.acm-validations.aws.
+
+    _5f9a6eb46e932d0ae3858ede1828de2b.ioi18.net. _bc969a3559cf8db86ab0abd96c1b109d.tljzshvwok.acm-validations.aws.
   ).each_slice(2) do |(name,target)|
     rrset name, "CNAME" do
       ttl 60
