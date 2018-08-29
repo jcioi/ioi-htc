@@ -308,6 +308,20 @@ class NameTagProcessor():
                         ],
                     },
                 })
+                if self.engine.shorthand_domain:
+                    shorthand_fqdn = "%s.%s" % (self.name, self.engine.shorthand_domain)
+                    self.handler.change_rrset(self.engine.zone, {
+                        'Action': 'UPSERT',
+                        'ResourceRecordSet': {
+                            'Name': shorthand_fqdn,
+                            'Type': 'CNAME',
+                            'TTL': 60,
+                            'ResourceRecords': [
+                                {'Value': fqdn},
+                            ],
+                        },
+                    })
+
                 ptr_zone = self.engine.lookup_ptr_zone(address)
                 if ptr_zone:
                     self.handler.change_rrset(ptr_zone, {
@@ -435,9 +449,10 @@ class Handler():
         return
 
 class Engine():
-    def __init__(self, adapter, domain, zone, ptr_zones, default_to_amazon_name=False):
+    def __init__(self, adapter, domain, zone, ptr_zones, shorthand_domain=None, default_to_amazon_name=False):
         self.adapter = adapter
         self.domain = domain
+        self.shorthand_domain = shorthand_domain
         self.zone = zone
         self.ptr_zones = ptr_zones
         self.default_to_amazon_name = default_to_amazon_name

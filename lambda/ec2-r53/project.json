@@ -7,6 +7,7 @@
   "environment": {
     "EC2R53_ZONE": "Z1V30A252QIS0J",
     "EC2R53_ZONE_PTR": "10:ZIOWYU1XGG6MH",
-    "EC2R53_DOMAIN": "aws.ioi18.net."
+    "EC2R53_DOMAIN": "aws.ioi18.net.",
+    "EC2R53_SHORTHAND_DOMAIN": "c.ioi18.net."
   }
 }

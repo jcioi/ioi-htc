@@ -247,6 +247,27 @@ class TestEngine(unittest.TestCase):
         ])
         return
 
+    def test_ec2name_shorthand(self):
+        self.engine.shorthand_domain = 'short.invalid.'
+
+        self.adapter.ec2_instances = [
+            self._ec2('i-a0', 'vpc-a', '192.0.2.1', {'Name': 'foo'}),
+            self._ec2('i-b0', 'vpc-b', '198.51.100.1', {'Name': 'foo'}),
+        ]
+
+        self.engine.handle(self._ec2_tag_change('CreateTags', ['i-a0'], {'Name': 'foo'}))
+
+        self.assertEqual(len(self.adapter.r53_received_change_sets), 2)
+        self._assertRRSetChanges('ZONE', [
+            self._r53_change('UPSERT', 'foo.a.test.invalid.', 'A', ['192.0.2.1']),
+            self._r53_change('UPSERT', 'foo.short.invalid.', 'CNAME', ['foo.a.test.invalid.']),
+        ])
+        self._assertRRSetChanges('PTRA', [
+            self._r53_change('UPSERT', '1.2.0.192.in-addr.arpa.', 'PTR', ['foo.a.test.invalid.']),
+        ])
+
+        return
+
     def test_ec2name_renamed_on_delete_event_run(self):
         self.adapter.ec2_instances = [
             self._ec2('i-a1', 'vpc-a', '192.0.2.1', {'Name': 'bar'}),

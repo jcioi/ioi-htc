@@ -4,6 +4,7 @@ REV_DOMAINS = %w(
   10
 )
 DOMAIN = "aws.ioi18.net"
+SHORTHAND_DOMAIN = "c.ioi18.net"
 REGIONS = %w(
   ap-northeast-1
 )
@@ -451,6 +452,7 @@ def fetch_instances()
           alias_from_ip: alias_name_from_ip,
           ip: instance.private_ip_address,
           fqdn: "#{name}.#{vpc_domain}.",
+          short_fqdn: "#{name}.#{SHORTHAND_DOMAIN}",
           alias_fqdn: (alias_name && !alias_name.empty?) ? "#{alias_name}.#{vpc_domain}." : nil,
           alias_fqdn_from_ip: alias_name_from_ip && "#{alias_name_from_ip}.#{vpc_domain}.",
           alias_fqdn_from_instance_id: "#{instance.instance_id}.#{vpc_domain}.",
@@ -476,6 +478,11 @@ template "ioi18.net-aws_instances" do
         rrset instance[:fqdn], "A" do
           ttl 60
           resource_records instance[:ip]
+        end
+
+        rrset instance[:short_fqdn], "CNAME" do
+          ttl 60
+          resource_records instance[:fqdn]
         end
 
         if instance[:alias]
@@ -510,9 +517,9 @@ template "ioi18.net-aws_instances" do
       end
     end
   end
-
-
 end
+
+###
 
 ###
 
