@@ -1,0 +1,126 @@
+version 16.3
+
+! service 各種
+service nagle
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec show-timezone
+service timestamps log datetime msec show-timezone
+service password-encryption
+
+! host名
+hostname aaaa
+ip domain name mgmt.ioi18.net
+
+! 2048 bit RSA key for SSH
+crypto key rsa generate
+
+! log
+logging buffered 16384 informational
+no logging console
+
+! ここみて https://ioi18.net/passwords
+enable secret 5 ああああ
+username ioi privilege 15 secret あああああ
+
+
+no ip bootp server
+no ip domain lookup
+
+archive
+ log config
+  logging enable
+  logging size 500
+  notify syslog contenttype plaintext
+  hidekeys
+
+object-group network bogon4
+ 10.0.0.0 255.0.0.0
+ 172.16.0.0 255.240.0.0
+ 127.0.0.0 255.0.0.0
+ 169.254.0.0 255.255.0.0
+ 198.18.0.0 255.254.0.0
+ 0.0.0.0 255.0.0.0
+ 100.64.0.0 255.192.0.0
+ 192.0.2.0 255.255.255.0
+ 198.51.100.0 255.255.255.0
+ 203.0.113.0 255.255.255.0
+ 224.0.0.0 224.0.0.0
+
+spanning-tree extend system-id
+
+no ip http server
+no ip http secure-server
+
+ip ssh authentication-retries 5
+ip ssh version 2
+
+line con 0
+ login local
+ stopbits 1
+line aux 0
+ login local
+ stopbits 1
+line vty 0 4
+ access-class 1 in
+ privilege level 15
+ login local
+ transport input ssh
+
+! IOI prefixes
+object-group network ioi-rootaccess
+ 10.18.192.0 255.255.192.0
+ 10.18.56.0 255.255.252.0
+ 10.18.4.0 255.255.252.0
+ 10.18.0.0 255.255.255.0
+ip prefix-list ioi seq 5 permit 10.18.0.0/16 le 32
+ip access-list extended ioi-rootaccess
+ permit ip object-group ioi-rootaccess any
+ deny   ip any any
+access-list 1 permit 10.18.192.0 0.0.63.255
+access-list 1 permit 10.18.56.0 0.0.3.255
+access-list 1 permit 10.18.64.0 0.0.31.255
+access-list 1 permit 10.18.4.0 0.0.3.255
+route-map ioi permit 10
+ match ip address prefix-list ioi
+
+! SNMP
+snmp-server community heArt<3pin RO 1
+
+! L3 router only
+interface Loopback0
+ ip address 10.18.0.X 255.255.255.255
+
+! NAT (optional)
+ip nat translation timeout 600
+ip nat translation tcp-timeout 600
+ip nat translation udp-timeout 600
+ip nat translation finrst-timeout 15
+ip nat translation syn-timeout 30
+ip nat translation dns-timeout 15
+ip nat translation routemap-entry-timeout 15
+ip nat translation icmp-timeout 10
+ip nat translation max-entries 65000
+ip nat translation max-entries all-host 200
+
+ip nat inside source list nat-inside interface Dialer0 overload
+
+ip access-list standard nat-inside
+ permit 10.18.0.0 0.0.255.255
+ deny   any
+
+ip access-list extended internet-generic-in
+ permit icmp any any
+ deny   ip object-group bogon4 any
+ permit tcp any any established
+ permit esp any any
+ permit udp any any eq 1701
+ permit udp any any eq isakmp
+ permit udp any any eq non500-isakmp
+ permit udp any any
+ deny   ip any any
+
+end
+
+
+
