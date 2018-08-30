@@ -25,7 +25,6 @@ username ioi privilege 15 secret あああああ
 
 
 no ip bootp server
-no ip domain lookup
 
 archive
  log config
@@ -106,6 +105,15 @@ line vty 0 4
  privilege level 15
  login local
  transport input ssh
+
+! DNS
+ip name-server 10.18.205.55 10.18.221.163
+ip domain lookup
+ip domain lookup source-interface Loopback0
+
+! NTP
+ntp source Loopback0
+ntp server ntp-001.apne1.aws.ioi18.net
 
 ! L3 router only
 interface Loopback0
