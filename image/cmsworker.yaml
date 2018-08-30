@@ -19,7 +19,7 @@ builders:
     output_directory: '{{user `tmpdir`}}/{{user `name`}}'
     boot_wait: 0s
     headless: yes
-    vnc_bind_address: 0
+#    vnc_bind_address: 0
     qemuargs:
       - [-smp, '{{user `vcpus`}}']
       - [-m, '{{user `mem`}}']
@@ -35,6 +35,9 @@ provisioners:
     inline: 'rm -rf /tmp/itamae && mkdir -p /tmp/itamae'
   - type: file
     source: ../itamae/site.rb
+    destination: /tmp/itamae/
+  - type: file
+    source: ../itamae/machines.rb
     destination: /tmp/itamae/
   - type: file
     source: ../itamae/roles

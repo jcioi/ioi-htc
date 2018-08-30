@@ -6,10 +6,10 @@ IMAGE=$1
 BRIDGE=$2
 MACADDR=$3
 
-if [[ $DISPLAY ]]; then
+if [[ -n ${DISPLAY-} ]]; then
     QEMU_DISPLAY="-display sdl -vga virtio"
 else
-    QEMU_DISPLAY=""
+    QEMU_DISPLAY="-nographic"
 fi
 
 exec qemu-system-x86_64 \
