@@ -115,6 +115,10 @@ ip domain lookup source-interface Loopback0
 ntp source Loopback0
 ntp server ntp-001.apne1.aws.ioi18.net
 
+! Syslog
+logging syslog-001.apne1.aws.ioi18.net
+logging on
+
 ! L3 router only
 interface Loopback0
  ip address 10.18.0.X 255.255.255.255
