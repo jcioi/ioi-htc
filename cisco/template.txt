@@ -54,6 +54,25 @@ no ip http secure-server
 
 ip ssh authentication-retries 5
 ip ssh version 2
+ip ssh pubkey-chain
+  username ioi
+    key-string
+AAAAB3NzaC1yc2EAAAADAQABAAACAQC+El9TFI2B29UcJwL3/v
+hmca7RTsT3oClyDQ5WzoYQWhXqbvCzvD5jlzCYxYL3wIN3bmsV
+W/ZiWRb4pj9AqUQX44/KUlnsqqf4pj2WdkZmgNjaSlT1jtbJhU
+O8sT6C3mN+cdIzTiy05AB+HvrG46Yq0fUzk2q9CQ/dACd8Qizj
+oGC3aT08n1sG04L86/hEU6dvQO5lwX3GefzUSVzyce4GcqTwEo
+W7lHYdJkiI8Du0vjbjigO5AjfTjhCdI7Y78FOZTSW/GoWsXzIa
+Kgog58OPFY045aZurP+Kc3pWz76USCUBNSr4w+tD8IpUzBgyD2
+GN/3UVjv9u9sHLtglZdNHq5KPHjGAeNgwnk90BOFKhuLrrZ5rd
+nImXq7ULtmgXSTuURM1KQ7WIOxLAkk9aZn1D1qkBUxKR6CqcJ2
+RWt6T29fIA2Vm6jW+CBvKYWw87hCw6eRLMn6Chkbz9Y4m8QeSZ
+nzV0TfyDmAgD8UfbfAP/TVVve0Df8YbW6IKYEfgf/eEAg2VcxF
+9k4QguksIXgWaXJeylVVI5FHf0B2zB2gMra/FASNUG9/HCqMVo
+s8U8lq9DQXMh4Hs2bbQoqF3BpH8QdGeZnJzUA+iu3JKuo1U6M/
++UdRA/cloFVpFOROTqv92oaLLx6a/6gOSzXg41Zwtz5rsZhRPq
+qnDx2zXY+r2FnQ==
+exit
 
 line con 0
  login local
