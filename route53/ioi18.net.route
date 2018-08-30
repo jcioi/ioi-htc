@@ -316,6 +316,10 @@ template "ioi18.net-common" do
     resource_records "rproxy-misc.elb.ioi18.net."
   end
 
+  rrset "boot.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "rproxy-misc.elb.ioi18.net."
+  end
   rrset "boot-dev.ioi18.net.", "CNAME" do
     ttl 60
     resource_records "rproxy-misc.elb.ioi18.net."
