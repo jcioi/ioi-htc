@@ -551,9 +551,18 @@ onpremises = {
     primary: 'lo',
     ifaces: {
       'lo' => '10.18.0.2',
+      'vlan310-life' => '10.18.56.251',
       'te1-0-48' => '10.18.1.5',
     },
   },
+  'relay-001' => {
+    primary: 'gi0-0',
+    ifaces: {
+      'gi0-0' => '10.18.5.67',
+      'gi0-10' => '10.18.56.67',
+    },
+  },
+
 }
 template "ioi18.net-onpremises" do
   onpremises.each do |hostname, host|
@@ -569,7 +578,7 @@ template "ioi18.net-onpremises" do
     end
 
     host.fetch(:ifaces).each do |iface, ip|
-      rrset "#{host.fetch(:primary)}.#{fqdn}", 'A' do
+      rrset "#{iface}.#{fqdn}", 'A' do
         ttl 60
         resource_records ip
       end
