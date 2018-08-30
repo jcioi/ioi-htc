@@ -72,13 +72,25 @@ conf = {
               "next-server"=> '10.18.96.20',
             },
             {
-              "hw-address" => 'd8:c4:97:24:34:9a',
-              "ip-address" => '10.18.96.13',
+              "hw-address" => 'd8:c4:97:53:53:82',
+              "ip-address" => '10.18.96.12',
               "hostname"   => "cms-dev-worker-3.lab.#{node.fetch(:site_domain)}",
               "next-server"=> '10.18.96.20',
             },
             {
-              "hw-address" => 'a4:bf:01:50:df:7c',
+              "hw-address" => 'd8:c4:97:24:34:9a',
+              "ip-address" => '10.18.96.13',
+              "hostname"   => "cms-dev-worker-4.lab.#{node.fetch(:site_domain)}",
+              "next-server"=> '10.18.96.20',
+            },
+            {
+              "hw-address" => '52:54:00:7e:8e:9e',
+              "ip-address" => '10.18.96.19',
+              "hostname"   => "cms-dev-worker-template.lab.#{node.fetch(:site_domain)}",
+              "next-server"=> '10.18.96.20',
+            },
+            {
+              "hw-address" => '9a:ba:01:63:21:c6',
               "ip-address" => '10.18.96.20',
               "hostname"   => "fog-001.lab.#{node.fetch(:site_domain)}",
             },
