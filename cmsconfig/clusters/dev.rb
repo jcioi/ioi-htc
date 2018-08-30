@@ -14,14 +14,16 @@
   core_services: {
     # Worker:            %w(sorah-cms-worker-001 sorah-cms-worker-002).map { |_| [_, 26000] },
     Worker: [
-      ['10.18.56.10', 26000], # cms-dev-worker-1
-      ['10.18.56.11', 26000], # cms-dev-worker-2
-      ['10.18.113.10', 26000],  # hanazuki 10
+      ['10.18.8.10', 26000], # cms-dev-worker-1
+      ['10.18.8.11', 26000], # cms-dev-worker-2
+      ['10.18.8.12', 26000],  # hanazuki 10
+      ['10.18.8.13', 26000],  # hanazuki 11
     ],
     ResourceService: [
-      ['10.18.56.10', 28000], # cms-dev-worker-1
-      ['10.18.56.11', 28000], # cms-dev-worker-2
-      ['10.18.113.10', 28000],  # hanazuki 10
+      ['10.18.8.10', 28000], # cms-dev-worker-1
+      ['10.18.8.11', 28000], # cms-dev-worker-2
+      ['10.18.8.12', 28000],  # hanazuki 10
+      ['10.18.8.13', 28000],  # hanazuki 11
     ],
   },
   other_services: {
