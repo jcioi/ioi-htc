@@ -42,6 +42,22 @@ conf = {
         arena: [320, '10.18.60.0/22', '10.18.60.0', '10.18.61.0-10.18.63.250'],
         lab: [
           900, '10.18.96.0/24', '10.18.96.1', '10.18.96.200-10.18.96.250',
+          option_data: [
+            {
+              name: "tftp-server-name",
+              code: 66,
+              space: "dhcp4",
+              "csv-format" => true,
+              data: "10.18.96.20",
+            },
+            {
+              name: "boot-file-name",
+              code: 67,
+              space: "dhcp4",
+              "csv-format" => true,
+              data: "ipxe.efi",
+            },
+          ],
           reservation: [
             {
               "hw-address" => 'd8:c4:97:24:37:c6',
@@ -64,6 +80,7 @@ conf = {
         id, prefix, gw, pool, opt = v
         opt ||= {}
         reservation = opt[:reservation]
+        option_data = opt[:option_data] || []
 
         {
           subnet: prefix,
@@ -71,7 +88,7 @@ conf = {
           pools: [
             pool: pool,
           ],
-          "option-data" => [
+          "option-data" => option_data + [
             {
               name: "routers",
               code: 3,
