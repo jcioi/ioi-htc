@@ -42,7 +42,7 @@ conf = {
         arena: [320, '10.18.60.0/22', '10.18.60.0', '10.18.61.0-10.18.63.250'],
         lab: [
           900, '10.18.96.0/24', '10.18.96.1', '10.18.96.200-10.18.96.250',
-          [
+          reservation: [
             {
               "hw-address" => 'd8:c4:97:24:37:c6',
               "ip-address" => '10.18.96.10',
@@ -53,11 +53,18 @@ conf = {
               "ip-address" => '10.18.96.11',
               "hostname"   => "cms-dev-worker-2.lab.#{node.fetch(:site_domain)}",
             },
-
+            {
+              "hw-address" => 'a4:bf:01:50:df:7c',
+              "ip-address" => '10.18.96.20',
+              "hostname"   => "fog-001.lab.#{node.fetch(:site_domain)}",
+            },
           ],
         ],
       }.map do |name, v|
-        id, prefix, gw, pool, reservation = v
+        id, prefix, gw, pool, opt = v
+        opt ||= {}
+        reservation = opt[:reservation]
+
         {
           subnet: prefix,
           id: id,

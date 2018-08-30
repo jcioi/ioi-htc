@@ -1,0 +1,13 @@
+fog-001.lab.ioi18.net:
+  properties:
+    ssh_options:
+      user: ioi
+      host_name: fog-001.lab.ioi18.net
+    attributes:
+      desired_hostname: fog-001
+      fog:
+        interface: eno1
+    run_list:
+      - roles/base/default.rb
+      - roles/boot/default.rb
+      - roles/image-builder/default.rb
