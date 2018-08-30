@@ -13,7 +13,7 @@ hostname aaaa
 ip domain name venue.ioi18.net
 
 ! 2048 bit RSA key for SSH
-crypto key rsa generate
+crypto key generate rsa
 
 ! log
 logging buffered 16384 informational
@@ -74,18 +74,6 @@ s8U8lq9DQXMh4Hs2bbQoqF3BpH8QdGeZnJzUA+iu3JKuo1U6M/
 qnDx2zXY+r2FnQ==
 exit
 
-line con 0
- login local
- stopbits 1
-line aux 0
- login local
- stopbits 1
-line vty 0 4
- access-class 1 in
- privilege level 15
- login local
- transport input ssh
-
 ! IOI prefixes
 object-group network ioi-rootaccess
  10.18.192.0 255.255.192.0
@@ -106,9 +94,27 @@ route-map ioi permit 10
 ! SNMP
 snmp-server community heArt<3pin RO 1
 
+! login
+line con 0
+ login local
+ stopbits 1
+line aux 0
+ login local
+ stopbits 1
+line vty 0 4
+ access-class 1 in
+ privilege level 15
+ login local
+ transport input ssh
+
 ! L3 router only
 interface Loopback0
  ip address 10.18.0.X 255.255.255.255
+
+! L3 OSPF
+router ospf 1
+ router-id 10.18.0.X
+ network 10.18.0.0 0.0.63.255 area 0.0.0.0
 
 ! NAT (optional)
 ip nat translation timeout 600
