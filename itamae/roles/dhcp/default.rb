@@ -8,6 +8,12 @@ node.reverse_merge!(
 include_role 'base'
 include_cookbook 'kea'
 
+def generate_reservation(machines, role, opt={})
+  machines.map do |machine|
+    opt.merge('hw-address' => machine.fetch(:mac), 'ip-address' => machine.fetch(role))
+  end
+end
+
 conf = {
   Dhcp4: {
     "control-socket" => {
@@ -44,7 +50,7 @@ conf = {
               code: 66,
               space: "dhcp4",
               "csv-format" => true,
-              data: "10.18.96.20",
+              data: "10.18.8.20",
             },
             {
               name: "boot-file-name",
@@ -59,43 +65,69 @@ conf = {
               "hw-address" => 'd8:c4:97:24:37:c6',
               "ip-address" => '10.18.8.10',
               "hostname"   => "cms-dev-worker-1.srv.#{node.fetch(:site_domain)}",
-              "next-server"=> '10.18.96.20',
+              "next-server"=> '10.18.8.20',
             },
             {
               "hw-address" => 'd8:c4:97:24:33:ed',
               "ip-address" => '10.18.8.11',
               "hostname"   => "cms-dev-worker-2.srv.#{node.fetch(:site_domain)}",
-              "next-server"=> '10.18.96.20',
+              "next-server"=> '10.18.8.20',
             },
             {
               "hw-address" => 'd8:c4:97:24:34:9a',
               "ip-address" => '10.18.8.12',
               "hostname"   => "cms-dev-worker-3.srv.#{node.fetch(:site_domain)}",
-              "next-server"=> '10.18.96.20',
+              "next-server"=> '10.18.8.20',
             },
             {
               "hw-address" => 'd8:c4:97:53:53:82',
               "ip-address" => '10.18.8.13',
               "hostname"   => "cms-dev-worker-4.srv.#{node.fetch(:site_domain)}",
-              "next-server"=> '10.18.96.20',
+              "next-server"=> '10.18.8.20',
             },
             {
               "hw-address" => '52:54:00:7e:8e:9e',
               "ip-address" => '10.18.8.19',
               "hostname"   => "cms-dev-worker-template.srv.#{node.fetch(:site_domain)}",
-              "next-server"=> '10.18.96.20',
+              "next-server"=> '10.18.8.20',
             },
             {
               "hw-address" => '9a:ba:01:63:21:c6',
               "ip-address" => '10.18.8.20',
               "hostname"   => "fog-001.srv.#{node.fetch(:site_domain)}",
             },
-          ],
+          ] + generate_reservation(
+            node[:onsite_machines_data], :cmsworker,
+            'next-server' => '10.18.8.20',
+          )
         ],
         guest: [300, '10.18.32.0/21', '10.18.32.1', '10.18.33.0-10.18.39.250'],
         adm: [301, '10.18.40.0/21', '10.18.40.1', '10.18.41.0-10.18.47.250'],
         life: [310, '10.18.56.0/22', '10.18.56.1', '10.18.57.0-10.18.59.250'],
-        arena: [320, '10.18.60.0/22', '10.18.60.1', '10.18.61.0-10.18.63.250'],
+        arena: [
+          320, '10.18.60.0/22', '10.18.60.1', '10.18.61.0-10.18.63.250',
+          option_data: [
+            {
+              name: "tftp-server-name",
+              code: 66,
+              space: "dhcp4",
+              "csv-format" => true,
+              data: "10.18.60.20",
+            },
+            {
+              name: "boot-file-name",
+              code: 67,
+              space: "dhcp4",
+              "csv-format" => true,
+              data: "ipxe.efi",
+            },
+          ],
+          reservation: [
+          ] + generate_reservation(
+            node[:onsite_machines_data], :contestant,
+            'next-server' => '10.18.60.20',
+          ),
+        ],
         lab: [
           900, '10.18.96.0/24', '10.18.96.1', '10.18.96.200-10.18.96.250',
         ],
