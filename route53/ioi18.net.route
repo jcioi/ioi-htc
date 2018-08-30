@@ -528,7 +528,7 @@ end
 
 ONPREMISES_DOMAIN = 'venue.ioi18.net'
 onpremises = {
-  'rt-sto-001' => {
+  'rt-ngn-001' => {
     primary: 'lo',
     ifaces: {
       'lo' => '10.18.0.11',
