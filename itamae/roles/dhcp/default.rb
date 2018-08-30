@@ -36,13 +36,8 @@ conf = {
     "rebind-timer" => 660*4,
     subnet4: [
       {
-        srv: [200, '10.18.8.0/22', '10.18.8.1', '10.18.9.0-10.18.11.250'],
-        guest: [300, '10.18.32.0/21', '10.18.32.1', '10.18.33.0-10.18.39.250'],
-        adm: [301, '10.18.40.0/21', '10.18.40.1', '10.18.41.0-10.18.47.250'],
-        life: [310, '10.18.56.0/22', '10.18.56.1', '10.18.57.0-10.18.59.250'],
-        arena: [320, '10.18.60.0/22', '10.18.60.1', '10.18.61.0-10.18.63.250'],
-        lab: [
-          900, '10.18.96.0/24', '10.18.96.1', '10.18.96.200-10.18.96.250',
+        srv: [
+          200, '10.18.8.0/22', '10.18.8.1', '10.18.9.0-10.18.11.250',
           option_data: [
             {
               name: "tftp-server-name",
@@ -62,40 +57,47 @@ conf = {
           reservation: [
             {
               "hw-address" => 'd8:c4:97:24:37:c6',
-              "ip-address" => '10.18.96.10',
-              "hostname"   => "cms-dev-worker-1.lab.#{node.fetch(:site_domain)}",
+              "ip-address" => '10.18.8.10',
+              "hostname"   => "cms-dev-worker-1.srv.#{node.fetch(:site_domain)}",
               "next-server"=> '10.18.96.20',
             },
             {
               "hw-address" => 'd8:c4:97:24:33:ed',
-              "ip-address" => '10.18.96.11',
-              "hostname"   => "cms-dev-worker-2.lab.#{node.fetch(:site_domain)}",
-              "next-server"=> '10.18.96.20',
-            },
-            {
-              "hw-address" => 'd8:c4:97:53:53:82',
-              "ip-address" => '10.18.96.12',
-              "hostname"   => "cms-dev-worker-3.lab.#{node.fetch(:site_domain)}",
+              "ip-address" => '10.18.8.11',
+              "hostname"   => "cms-dev-worker-2.srv.#{node.fetch(:site_domain)}",
               "next-server"=> '10.18.96.20',
             },
             {
               "hw-address" => 'd8:c4:97:24:34:9a',
-              "ip-address" => '10.18.96.13',
-              "hostname"   => "cms-dev-worker-4.lab.#{node.fetch(:site_domain)}",
+              "ip-address" => '10.18.8.12',
+              "hostname"   => "cms-dev-worker-3.srv.#{node.fetch(:site_domain)}",
+              "next-server"=> '10.18.96.20',
+            },
+            {
+              "hw-address" => 'd8:c4:97:53:53:82',
+              "ip-address" => '10.18.8.13',
+              "hostname"   => "cms-dev-worker-4.srv.#{node.fetch(:site_domain)}",
               "next-server"=> '10.18.96.20',
             },
             {
               "hw-address" => '52:54:00:7e:8e:9e',
-              "ip-address" => '10.18.96.19',
-              "hostname"   => "cms-dev-worker-template.lab.#{node.fetch(:site_domain)}",
+              "ip-address" => '10.18.8.19',
+              "hostname"   => "cms-dev-worker-template.srv.#{node.fetch(:site_domain)}",
               "next-server"=> '10.18.96.20',
             },
             {
               "hw-address" => '9a:ba:01:63:21:c6',
-              "ip-address" => '10.18.96.20',
-              "hostname"   => "fog-001.lab.#{node.fetch(:site_domain)}",
+              "ip-address" => '10.18.8.20',
+              "hostname"   => "fog-001.srv.#{node.fetch(:site_domain)}",
             },
           ],
+        ],
+        guest: [300, '10.18.32.0/21', '10.18.32.1', '10.18.33.0-10.18.39.250'],
+        adm: [301, '10.18.40.0/21', '10.18.40.1', '10.18.41.0-10.18.47.250'],
+        life: [310, '10.18.56.0/22', '10.18.56.1', '10.18.57.0-10.18.59.250'],
+        arena: [320, '10.18.60.0/22', '10.18.60.1', '10.18.61.0-10.18.63.250'],
+        lab: [
+          900, '10.18.96.0/24', '10.18.96.1', '10.18.96.200-10.18.96.250',
         ],
       }.map do |name, v|
         id, prefix, gw, pool, opt = v
