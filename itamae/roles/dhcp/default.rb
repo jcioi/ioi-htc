@@ -63,11 +63,19 @@ conf = {
               "hw-address" => 'd8:c4:97:24:37:c6',
               "ip-address" => '10.18.96.10',
               "hostname"   => "cms-dev-worker-1.lab.#{node.fetch(:site_domain)}",
+              "next-server"=> '10.18.96.20',
             },
             {
               "hw-address" => 'd8:c4:97:24:33:ed',
               "ip-address" => '10.18.96.11',
               "hostname"   => "cms-dev-worker-2.lab.#{node.fetch(:site_domain)}",
+              "next-server"=> '10.18.96.20',
+            },
+            {
+              "hw-address" => 'd8:c4:97:24:34:9a',
+              "ip-address" => '10.18.96.13',
+              "hostname"   => "cms-dev-worker-3.lab.#{node.fetch(:site_domain)}",
+              "next-server"=> '10.18.96.20',
             },
             {
               "hw-address" => 'a4:bf:01:50:df:7c',
