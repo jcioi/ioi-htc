@@ -31,9 +31,9 @@ conf = {
       "max-reclaim-time" => 250,
       "unwarned-reclaim-cycles" => 2,
     },
-    "valid-lifetime" => 720,
-    "renew-timer" => 540,
-    "rebind-timer" => 660,
+    "valid-lifetime" => 720*4,
+    "renew-timer" => 540*4,
+    "rebind-timer" => 660*4,
     subnet4: [
       {
         guest: [300, '10.18.32.0/21', '10.18.32.1', '10.18.33.0-10.18.39.250'],
