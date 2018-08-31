@@ -28,7 +28,7 @@ resource "aws_lb_listener" "rproxy-misc_443" {
   load_balancer_arn = "${aws_lb.rproxy-misc.arn}"
   port = 443
   protocol = "HTTPS"
-  certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/61e52d9d-c7cf-4f76-8f0f-72f9ccd92564"
+  certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/141f6aa1-dc3c-44b4-8d13-59299f8a18e2"
   ssl_policy = "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
 
   default_action {
@@ -68,10 +68,11 @@ resource "aws_lb_listener_certificate" "rproxy-misc_wlc" {
   listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
   certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/2929442d-de92-447d-a6a8-d9ed44c9b870"
 }
-resource "aws_lb_listener_certificate" "rproxy-misc_ioi18net" {
+resource "aws_lb_listener_certificate" "rproxy-misc_auth" {
   listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
-  certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/141f6aa1-dc3c-44b4-8d13-59299f8a18e2"
+  certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/61e52d9d-c7cf-4f76-8f0f-72f9ccd92564"
 }
+# SEE ALSO elb_rproxy-misc-internal.tf
 
 resource "aws_lb_target_group" "rproxy-misc" {
   name = "rproxy-misc"

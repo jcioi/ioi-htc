@@ -14,6 +14,7 @@ include_cookbook 'mnt-vol'
 include_cookbook 'prometheus'
 include_recipe './cloudwatch.rb'
 include_recipe './alertmanager.rb'
+include_recipe './snmp.rb'
 
 directory '/mnt/vol/prometheus-data' do
   owner 'prometheus'
