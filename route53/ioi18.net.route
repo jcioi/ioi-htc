@@ -140,11 +140,6 @@ template "ioi18.net-private" do
     resource_records "10.18.8.20"
   end
 
-  rrset "rt-capio-001.lab.ioi18.net", "A" do
-    ttl 20
-    resource_records "10.18.104.1"
-  end
-
   rrset "boot-dev-01.srv.tkyk.ioi18.net", "A" do
     ttl 60
     resource_records "10.18.113.60"
@@ -625,7 +620,13 @@ onpremises = {
 
   'wlc-001' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.20', }, },
   'wlc-002' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.21', }, },
-}
+
+  'cms-dev-worker-1' => { primary: 'enp2s0f1', ifaces: { 'enp2s0f1' => '10.18.8.10' } },
+  'cms-dev-worker-2' => { primary: 'enp2s0f1', ifaces: { 'enp2s0f1' => '10.18.8.11' } },
+  'cms-dev-worker-3' => { primary: 'enp2s0f1', ifaces: { 'enp2s0f1' => '10.18.8.12' } },
+  'cms-dev-worker-4' => { primary: 'enp2s0f1', ifaces: { 'enp2s0f1' => '10.18.8.13' } },
+  'fog-001' => { primary: 'br-srv', ifaces: { 'br-srv' => '10.18.8.20', 'br-arena' => '10.18.60.20' } },
+} 
 template "ioi18.net-onpremises" do
   rrset 'sw-hall-001.venue.ioi18.net', 'CNAME' do
     ttl 60
