@@ -7,6 +7,7 @@ local elbSecurityGroups = ['sg-0d628db6dcf52657f'];  // elb-translation
   scheduler: utils.fargateScheduler(taskSecurityGroups) {
     cpu: '1024',
     memory: '2048',
+    desired_count: 2,
     task_role_arn: utils.iamRole('EcsTranslation'),
     elb_v2: {
       vpc_id: utils.vpcId,
@@ -38,8 +39,6 @@ local elbSecurityGroups = ['sg-0d628db6dcf52657f'];  // elb-translation
   },
   app: {
     image: utils.ecrRepository('ioi18-translation'),
-    cpu: 512,
-    memory: 1024,
     env: {
       SECRET_KEY: utils.secret('translation_secret_key_prd'),
       DB_HOST: 'translation-db.c9ge2hh8rox6.ap-northeast-1.rds.amazonaws.com',
@@ -51,7 +50,8 @@ local elbSecurityGroups = ['sg-0d628db6dcf52657f'];  // elb-translation
       S3_BUCKET: 'ioi18-translation-files-prd',
       SQS_QUEUE_NAME: 'cms-statement-prd',
       SQS_REGION_NAME: 'ap-northeast-1',
-      GUNICORN_WORKERS: '2',
+      PRINT_SYSTEM_URL: 'https://print.ioi18.net',
+      GUNICORN_WORKERS: '5',
     },
     mount_points: [
       {
