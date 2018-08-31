@@ -103,6 +103,31 @@ conf = {
               "ip-address" => '10.18.8.20',
               "hostname"   => "fog-001.srv.#{node.fetch(:site_domain)}",
             },
+            {
+              "hw-address" => 'd8:49:2f:f9:3f:48',
+              "ip-address" => '10.18.8.31',
+              "hostname"   => "prn-ref-001.conf.#{node.fetch(:site_domain)}",
+            },
+            {
+              "hw-address" => 'd8:49:2f:f9:3f:52',
+              "ip-address" => '10.18.8.32',
+              "hostname"   => "prn-ref-002.conf.#{node.fetch(:site_domain)}",
+            },
+            {
+              "hw-address" => 'd8:49:2f:f9:3f:fd',
+              "ip-address" => '10.18.8.33',
+              "hostname"   => "prn-ref-003.conf.#{node.fetch(:site_domain)}",
+            },
+            {
+              "hw-address" => 'd8:49:2f:f9:40:02',
+              "ip-address" => '10.18.8.34',
+              "hostname"   => "prn-ref-004.conf.#{node.fetch(:site_domain)}",
+            },
+            {
+              "hw-address" => 'd8:49:2f:f9:3f:d7',
+              "ip-address" => '10.18.8.35',
+              "hostname"   => "prn-ref-005.conf.#{node.fetch(:site_domain)}",
+            },
           ] + generate_reservation(
             node[:onsite_machines_data], :cmsworker,
             'next-server' => '10.18.8.20',
@@ -135,6 +160,31 @@ conf = {
             node[:onsite_machines_data], :contestant,
             'next-server' => '10.18.60.20',
           ),
+        ],
+        conf: [
+          800, '10.18.64.0/22', '10.18.64.1', '10.18.65.0-10.18.67.250',
+          reservation: [
+            {
+              "hw-address" => 'd8:49:2f:f9:40:fa',
+              "ip-address" => '10.18.64.31',
+              "hostname"   => "prn-conf-001.conf.#{node.fetch(:site_domain)}",
+            },
+            {
+              "hw-address" => 'd8:49:2f:f9:3f:42',
+              "ip-address" => '10.18.64.32',
+              "hostname"   => "prn-conf-002.conf.#{node.fetch(:site_domain)}",
+            },
+            {
+              "hw-address" => 'd8:49:2f:f9:40:f4',
+              "ip-address" => '10.18.64.33',
+              "hostname"   => "prn-conf-003.conf.#{node.fetch(:site_domain)}",
+            },
+            {
+              "hw-address" => 'd8:49:2f:f9:40:90',
+              "ip-address" => '10.18.64.34',
+              "hostname"   => "prn-conf-004.conf.#{node.fetch(:site_domain)}",
+            },
+          ],
         ],
         lab: [
           900, '10.18.96.0/24', '10.18.96.1', '10.18.96.200-10.18.96.250',
