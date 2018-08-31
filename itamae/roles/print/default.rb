@@ -20,6 +20,17 @@ node.reverse_merge!(
   },
 )
 
+if node.dig(:hocho_ec2, :tags, :IoiprintEnv) == 'prd'
+  node.merge!(
+    ioiprint: {
+      config: {
+        translation_printer: 'conf',
+        default_printer: 'ref',
+      },
+    },
+  )
+end
+
 include_role 'base'
 include_cookbook 'nginx'
 include_cookbook 'codedeploy-agent'
