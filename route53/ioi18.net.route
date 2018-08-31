@@ -626,7 +626,17 @@ onpremises = {
   'cms-dev-worker-3' => { primary: 'enp2s0f1', ifaces: { 'enp2s0f1' => '10.18.8.12' } },
   'cms-dev-worker-4' => { primary: 'enp2s0f1', ifaces: { 'enp2s0f1' => '10.18.8.13' } },
   'fog-001' => { primary: 'br-srv', ifaces: { 'br-srv' => '10.18.8.20', 'br-arena' => '10.18.60.20' } },
-} 
+
+  'prn-conf-001' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.64.31', }, },
+  'prn-conf-002' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.64.32', }, },
+  'prn-conf-003' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.64.33', }, },
+  'prn-conf-004' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.64.34', }, },
+  'prn-ref-001' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.8.31', }, },
+  'prn-ref-002' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.8.32', }, },
+  'prn-ref-003' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.8.33', }, },
+  'prn-ref-004' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.8.34', }, },
+  'prn-ref-005' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.8.35', }, },
+}
 template "ioi18.net-onpremises" do
   rrset 'sw-hall-001.venue.ioi18.net', 'CNAME' do
     ttl 60
