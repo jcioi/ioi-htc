@@ -20,6 +20,7 @@ role "FederatedHTCAdmin", :path=>"/" do
               "arn:aws:iam::436825298211:root", # hanazuki
               "arn:aws:iam::461017142772:root", # sei1tani
               "arn:aws:iam::486414336274:root", # nana
+              "arn:aws:iam::318177903959:root", # tyage
             ]
           },
           "Action"=>"sts:AssumeRole",
