@@ -64,6 +64,10 @@ resource "aws_lb_listener_certificate" "rproxy-misc_netbox" {
   listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
   certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/1e7e3ef3-6dcc-4a43-9a17-d64c21defda7"
 }
+resource "aws_lb_listener_certificate" "rproxy-misc_wlc" {
+  listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
+  certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/2929442d-de92-447d-a6a8-d9ed44c9b870"
+}
 resource "aws_lb_listener_certificate" "rproxy-misc_ioi18net" {
   listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
   certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/141f6aa1-dc3c-44b4-8d13-59299f8a18e2"
