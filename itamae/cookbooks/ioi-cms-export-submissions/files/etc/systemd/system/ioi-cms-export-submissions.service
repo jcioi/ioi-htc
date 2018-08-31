@@ -1,0 +1,12 @@
+[Unit]
+Description=cmsExportSubmissions with S3 sync
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=cmsuser
+Group=cmsuser
+
+EnvironmentFile=/etc/ioi-cms-export-submissions.env
+ExecStart=/usr/bin/ioi-cms-export-submissions.sh
