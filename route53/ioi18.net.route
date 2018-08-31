@@ -414,6 +414,9 @@ template "ioi18.net-common" do
 
     _038a436c8816b1a5cdf55f38955eeb6d.netbox.ioi18.net. _e0a34f625e84d30d856b30f7c1020177.tljzshvwok.acm-validations.aws.
 
+    _8520c1c3b454554a15a1678fdfab913f.wlc-001.ioi18.net. _4a2830ac80f0e1b58179d5630ab61fe7.tljzshvwok.acm-validations.aws.
+    _d435e8459fb7f59bfcc6bc368d95af6d.wlc-002.ioi18.net. _c85e7cae16127f39882d4697b29cd6d8.tljzshvwok.acm-validations.aws.
+
     _5f9a6eb46e932d0ae3858ede1828de2b.ioi18.net. _bc969a3559cf8db86ab0abd96c1b109d.tljzshvwok.acm-validations.aws.
   ).each_slice(2) do |(name,target)|
     rrset name, "CNAME" do
