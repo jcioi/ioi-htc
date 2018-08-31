@@ -106,27 +106,27 @@ conf = {
             {
               "hw-address" => 'd8:49:2f:f9:3f:48',
               "ip-address" => '10.18.8.31',
-              "hostname"   => "prn-ref-001.conf.#{node.fetch(:site_domain)}",
+              "hostname"   => "prn-ref-001.srv.#{node.fetch(:site_domain)}",
             },
             {
               "hw-address" => 'd8:49:2f:f9:3f:52',
               "ip-address" => '10.18.8.32',
-              "hostname"   => "prn-ref-002.conf.#{node.fetch(:site_domain)}",
+              "hostname"   => "prn-ref-002.srv.#{node.fetch(:site_domain)}",
             },
             {
               "hw-address" => 'd8:49:2f:f9:3f:fd',
               "ip-address" => '10.18.8.33',
-              "hostname"   => "prn-ref-003.conf.#{node.fetch(:site_domain)}",
+              "hostname"   => "prn-ref-003.srv.#{node.fetch(:site_domain)}",
             },
             {
               "hw-address" => 'd8:49:2f:f9:40:02',
               "ip-address" => '10.18.8.34',
-              "hostname"   => "prn-ref-004.conf.#{node.fetch(:site_domain)}",
+              "hostname"   => "prn-ref-004.srv.#{node.fetch(:site_domain)}",
             },
             {
               "hw-address" => 'd8:49:2f:f9:3f:d7',
               "ip-address" => '10.18.8.35',
-              "hostname"   => "prn-ref-005.conf.#{node.fetch(:site_domain)}",
+              "hostname"   => "prn-ref-005.srv.#{node.fetch(:site_domain)}",
             },
           ] + generate_reservation(
             node[:onsite_machines_data], :cmsworker,
