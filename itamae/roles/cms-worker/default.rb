@@ -17,7 +17,7 @@ if node.dig(:cms, :variant) == 'onpremise'
       size: 0,
     },
     ioi_set_hostname: {
-      template: ['cms', cluster == 'prd' ? null : cluster, 'worker-m-%m'].compact.join(?-),
+      template: ['cms', cluster == 'prd' ? nil : cluster, 'worker-m-%m'].compact.join(?-),
     },
   )
 
