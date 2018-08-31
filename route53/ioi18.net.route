@@ -610,6 +610,9 @@ onpremises = {
   'sw-ara-041' => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.5.204', }, },
   'sw-ref-001' => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.5.220', }, },
   'sw-tc-001' => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.5.230', }, },
+
+  'wlc-001' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.21', }, },
+  'wlc-002' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.22', }, },
 }
 template "ioi18.net-onpremises" do
   rrset 'sw-hall-001.venue.ioi18.net', 'CNAME' do
