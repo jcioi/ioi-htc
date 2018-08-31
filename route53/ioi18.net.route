@@ -616,6 +616,10 @@ onpremises = {
   'prn-ref-005' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.8.35', }, },
 }
 template "ioi18.net-onpremises" do
+  rrset "CISCO-CAPWAP-CONTROLLER.venue.ioi18.net", "CNAME" do
+    ttl 60
+    resource_records 'wlc-001.venue.ioi18.net.'
+  end
   rrset 'sw-hall-001.venue.ioi18.net', 'CNAME' do
     ttl 60
     resource_records "sw-hall.venue.ioi18.net."
