@@ -633,7 +633,7 @@ template "ioi18.net-onpremises" do
     end
     rrset short_fqdn, 'CNAME' do
       ttl 60
-      resource_records fqdn
+      resource_records  "#{host.fetch(:primary)}.#{fqdn}"
     end
 
     host.fetch(:ifaces).each do |iface, ip|
