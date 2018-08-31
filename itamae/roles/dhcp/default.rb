@@ -87,6 +87,12 @@ conf = {
               "next-server"=> '10.18.8.20',
             },
             {
+              "hw-address" => '52:54:00:4d:5d:6d',
+              "ip-address" => '10.18.8.18',
+              "hostname"   => "cms-prd-worker-template.srv.#{node.fetch(:site_domain)}",
+              "next-server"=> '10.18.8.20',
+            },
+            {
               "hw-address" => '52:54:00:7e:8e:9e',
               "ip-address" => '10.18.8.19',
               "hostname"   => "cms-dev-worker-template.srv.#{node.fetch(:site_domain)}",
