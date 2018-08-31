@@ -1,7 +1,7 @@
 variables:
-  name: cmsworker
+  name: cmsworker-dev
   tmpdir: ./tmp
-  vcpus: '2'
+  vcpus: '4'
   mem: '4096'
 
 builders:

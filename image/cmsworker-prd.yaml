@@ -1,0 +1,67 @@
+variables:
+  name: cmsworker-prd
+  tmpdir: ./tmp
+  vcpus: '4'
+  mem: '4096'
+
+builders:
+  - type: qemu
+    accelerator: kvm
+    iso_urls:
+      - ./base-efi.qcow2
+    iso_checksum_type: none
+    disk_image: yes
+    ssh_username: provisioner
+    ssh_password: provisioner
+    ssh_timeout: 10m
+    shutdown_command: 'sudo poweroff'
+    http_directory: .
+    output_directory: '{{user `tmpdir`}}/{{user `name`}}'
+    boot_wait: 0s
+    headless: yes
+#    vnc_bind_address: 0
+    qemuargs:
+      - [-smp, '{{user `vcpus`}}']
+      - [-m, '{{user `mem`}}']
+      - [-bios, 'OVMF.fd']
+
+provisioners:
+  - type: file
+    source: ./timestamp
+    destination: /tmp/
+  - type: shell
+    inline: 'sudo mv -f /tmp/timestamp /etc'
+  - type: shell
+    inline: 'rm -rf /tmp/itamae && mkdir -p /tmp/itamae'
+  - type: file
+    source: ../itamae/site.rb
+    destination: /tmp/itamae/
+  - type: file
+    source: ../itamae/machines.rb
+    destination: /tmp/itamae/
+  - type: file
+    source: ../itamae/roles
+    destination: /tmp/itamae/
+  - type: file
+    source: ../itamae/cookbooks
+    destination: /tmp/itamae/
+  - type: file
+    source: ../itamae/secrets
+    destination: /tmp/itamae/
+  - type: file
+    source: './{{user `name`}}.attrs.json'
+    destination: /tmp/itamae/node.json
+  - type: shell
+    inline: |
+      cd /tmp/itamae && sudo mitamae local -j node.json site.rb roles/cms-worker/default.rb roles/aspire3/default.rb
+  - type: shell
+    execute_command: 'sudo {{ .Vars }} sh -ex {{ .Path }}'
+    scripts:
+      - scripts/cleanup.sh
+
+post-processors:
+  - type: shell-local
+    environment_vars:
+      - 'TMPDIR={{user `tmpdir`}}'
+      - 'IMGNAME={{user `name`}}'
+    inline: 'mv "$TMPDIR/$IMGNAME/packer-qemu" "$IMGNAME.qcow2"; rmdir "$TMPDIR/$IMGNAME"'

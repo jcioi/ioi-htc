@@ -1,0 +1,8 @@
+codedeploy_agent:
+  onpremises:
+    tags:
+      CmsCluster: prd
+      CmsVariant: onpremise
+cms:
+  cluster: prd
+  variant: onpremise
