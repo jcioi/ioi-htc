@@ -216,7 +216,7 @@ conf = {
               code: 15,
               space: "dhcp4",
               "csv-format" => true,
-              data: "#{name}.#{node.fetch(:site_domain)}",
+              data: "venue.#{node.fetch(:site_domain)}",
             }
           ],
           reservations: reservation ? reservation : [
