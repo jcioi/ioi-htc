@@ -81,6 +81,6 @@ service 'ioi-update-cms-config.service' do
   action :enable
 end
 
-execute 'ioi-update-cms-config' do
-  not_if 'grep -q "{" /etc/cms.conf'
-end
+# execute 'ioi-update-cms-config' do
+#   not_if 'grep -q "{" /etc/cms.conf'
+# end
