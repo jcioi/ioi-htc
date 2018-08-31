@@ -44,6 +44,7 @@ conf = {
       {
         srv: [
           200, '10.18.8.0/22', '10.18.8.1', '10.18.9.0-10.18.11.250',
+          "match-client-id" => false,
           option_data: [
             {
               name: "tftp-server-name",
@@ -106,6 +107,7 @@ conf = {
         life: [310, '10.18.56.0/22', '10.18.56.1', '10.18.57.0-10.18.59.250'],
         arena: [
           320, '10.18.60.0/22', '10.18.60.1', '10.18.61.0-10.18.63.250',
+          "match-client-id" => false,
           option_data: [
             {
               name: "tftp-server-name",
@@ -134,8 +136,8 @@ conf = {
       }.map do |name, v|
         id, prefix, gw, pool, opt = v
         opt ||= {}
-        reservation = opt[:reservation]
-        option_data = opt[:option_data] || []
+        reservation = opt.delete(:reservation)
+        option_data = opt.delete(:option_data) || []
 
         {
           subnet: prefix,
@@ -169,7 +171,7 @@ conf = {
             #  }
             #}
           ].flatten,
-        }
+        }.merge(opt)
       end,
     ].flatten,
     "option-data" => [
