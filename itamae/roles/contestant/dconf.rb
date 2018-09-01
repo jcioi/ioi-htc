@@ -22,6 +22,7 @@ end
 dconf_defaults 'gnome-favorite-apps' do
   list = %w[
     ioi18-cms
+    ioi18-service
     org.gnome.Nautilus
     yelp
     org.gnome.Terminal

@@ -5,11 +5,22 @@ remote_file '/usr/share/icons/hicolor/scalable/apps/ioi18.svg' do
   group 'root'
   mode '644'
 end
-
 desktop_entry 'ioi18-cms' do
   display_name 'Grading System'
   icon '/usr/share/icons/hicolor/scalable/apps/ioi18.svg'
   exec "x-www-browser #{node.dig(:contestant, :cms_uri)}"
+  categories %w(Education)
+end
+
+remote_file '/usr/share/icons/hicolor/256x256/apps/callstaff.png' do
+  owner 'root'
+  group 'root'
+  mode '644'
+end
+desktop_entry 'ioi18-service' do
+  display_name 'Call Staff'
+  icon '/usr/share/icons/hicolor/256x256/apps/callstaff.svg'
+  exec "x-www-browser #{node.dig(:contestant, :ioiconsole_uri)}"
   categories %w(Education)
 end
 

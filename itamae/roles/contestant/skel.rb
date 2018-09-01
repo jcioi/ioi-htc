@@ -3,6 +3,7 @@ skel = '/etc/skel'
 desktop_shortcuts = {
   nil => %w[
     /usr/local/share/applications/ioi18-cms.desktop
+    /usr/local/share/applications/ioi18-service.desktop
   ],
   'Editors & IDEs' => %w[
     /usr/share/applications/atom.desktop

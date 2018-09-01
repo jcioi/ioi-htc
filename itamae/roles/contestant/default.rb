@@ -5,6 +5,7 @@ end
 node.reverse_merge!(
   contestant: {
     cms_uri: preview? ? 'https://contest-practice.ioi18.net' : 'https://contest.ioi18.net',
+    ioiconsole_uri: 'https://service.ioi18.net',
     ioiprint_uri: 'ioiprints://print.ioi18.net',
   },
   op_user: {
