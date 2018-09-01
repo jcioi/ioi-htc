@@ -2,13 +2,17 @@ node.reverse_merge!(
   dns_cache: {
     threads: node[:cpu][:total].to_i,
     upstream: node.fetch(:resolvers),
+    upstream_zones: node.dig(:hocho_ec2, :tags, :UpstreamZone)&.split(',') || ['.'],
     log_queries: true,
     stubs: [],
     outgoing_interfaces: %w(),
     interfaces: %w(0.0.0.0 ::0),
   },
 )
-
+unless node[:dns_cache].key?(:recurse)
+  node[:dns_cache][:recurse] = true
+  node[:dns_cache][:recurse] = false if node[:dns_cache][:upstream_zones] != ['.']
+end
 include_role 'base'
 include_cookbook 'systemd-networkd::disable-stub-resolver'
 
@@ -48,12 +52,6 @@ directory "/var/log/unbound" do
   group "unbound"
   mode  "0755"
 end
-
-#remote_file "/etc/unbound/named.cache" do
-#  owner 'root'
-#  group 'root'
-#  mode  '0644'
-#end
 
 template '/etc/apparmor.d/local/usr.sbin.unbound' do
   owner 'root'

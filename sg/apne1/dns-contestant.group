@@ -10,7 +10,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
           "default",
         )
         ip_ranges(
-          *CIDR_VENUE_EXCEPT_ARENA, # TODO:
+          *CIDR_VENUE_ALL,
         )
       end
 
@@ -19,7 +19,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
           "default",
         )
         ip_ranges(
-          *CIDR_VENUE_EXCEPT_ARENA, # TODO:
+          *CIDR_VENUE_ALL,
         )
       end
     end
