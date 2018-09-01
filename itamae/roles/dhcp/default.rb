@@ -157,6 +157,36 @@ conf = {
             },
           ],
           reservation: [
+            {
+              "hw-address" => 'd8:c4:97:24:37:c6',
+              "ip-address" => '10.18.60.10',
+              "hostname"   => "contestant-test-1.venue.#{node.fetch(:site_domain)}",
+              "next-server"=> '10.18.60.20',
+            },
+            {
+              "hw-address" => 'd8:c4:97:24:33:ed',
+              "ip-address" => '10.18.60.11',
+              "hostname"   => "contestant-test-2.venue.#{node.fetch(:site_domain)}",
+              "next-server"=> '10.18.60.20',
+            },
+            {
+              "hw-address" => 'd8:c4:97:24:34:9a',
+              "ip-address" => '10.18.60.12',
+              "hostname"   => "contestant-test-3.venue.#{node.fetch(:site_domain)}",
+              "next-server"=> '10.18.60.20',
+            },
+            {
+              "hw-address" => 'd8:c4:97:53:53:82',
+              "ip-address" => '10.18.60.13',
+              "hostname"   => "contestant-test-4.venue.#{node.fetch(:site_domain)}",
+              "next-server"=> '10.18.60.20',
+            },
+            {
+              "hw-address" => '52:54:00:1f:2f:3f',
+              "ip-address" => '10.18.60.19',
+              "hostname"   => "contestant-template.venue.#{node.fetch(:site_domain)}",
+              "next-server"=> '10.18.60.20',
+            },
           ] + generate_reservation(
             node[:onsite_machines_data], :contestant,
             'next-server' => '10.18.60.20',
