@@ -1,3 +1,9 @@
+node.reverse_merge!(
+  nginx: {
+    default_conf: false,
+  },
+)
+
 include_role 'base'
 include_cookbook 'cms'
 include_cookbook 'nginx'
