@@ -10,6 +10,7 @@ User=ioiprint
 Group=ioiprint
 RuntimeDirectory=ioiprint
 LogsDirectory=ioiprint
+StateDirectory=ioiprint
 EnvironmentFile=-/etc/ioiprint.env
 Environment=IOIPRINT_CONFIG=/etc/ioiprint.json
 PIDFile=/run/ioiprint/gunicorn.pid
