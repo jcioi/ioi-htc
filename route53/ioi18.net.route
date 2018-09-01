@@ -52,6 +52,24 @@ template "ioi18.net-private" do
     resource_records "internal-cms-dev-admin-311960019.ap-northeast-1.elb.amazonaws.com"
   end
 
+  rrset "cms-prd.elb.ioi18.net", "CNAME" do
+    ttl 60
+    resource_records "internal-cms-prd-2018833365.ap-northeast-1.elb.amazonaws.com"
+  end
+  rrset "cms-prd-admin.elb.ioi18.net", "CNAME" do
+    ttl 60
+    resource_records "internal-cms-prd-admin-1406357673.ap-northeast-1.elb.amazonaws.com"
+  end
+
+  rrset "contest.ioi18.net", "CNAME" do
+    ttl 60
+    resource_records "cms-prd.elb.ioi18.net"
+  end
+  rrset "admin.ioi18.net", "CNAME" do
+    ttl 60
+    resource_records "cms-prd-admin.elb.ioi18.net"
+  end
+
   rrset "s3-apne1.ioi18.net.", "CNAME" do
     ttl 60
     resource_records "internal-rproxy-s3-184145372.ap-northeast-1.elb.amazonaws.com."
