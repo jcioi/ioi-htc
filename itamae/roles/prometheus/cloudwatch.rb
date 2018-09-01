@@ -29,7 +29,7 @@ node.reverse_merge!(
             period_seconds: 60,
             delay_seconds: 120,
             metrics: [
-              [{aws_dimensions: %w(LoadBalancer AvailabilityZone TargetGroup)}, {aws_dimensions: %w(LoadBalancer AvailabilityZone)}].flat_map do |dim_opt|
+              [{aws_dimensions: %w(LoadBalancer AvailabilityZone TargetGroup)}].flat_map do |dim_opt|
                 [
                   [{aws_statistics: %w(Average Minimum Maximum)}, {aws_extended_statistics: %w(p50 p95 p99)}].flat_map do |stats_opt|
                     %w(
