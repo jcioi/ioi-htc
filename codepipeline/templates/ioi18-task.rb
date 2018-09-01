@@ -1,5 +1,10 @@
-task = @name.gsub(/^ioi18-task-/, 'ioi-2018-')
-practice = @name.include?('practice-')
+if @name == "ioi18-task-test-batch"
+  task = "test-batch"
+  practice = true
+else
+  task = @name.gsub(/^ioi18-task-/, 'ioi-2018-')
+  practice = @name.include?('practice-')
+end
 {
   name: @name,
   role_arn: "arn:aws:iam::550372229658:role/CodePipelineServiceRole",
@@ -89,10 +94,10 @@ practice = @name.include?('practice-')
       ]
     } : nil,
     practice ? {
-      name: "DeployToPractice",
+      name: "DeployToPrd",
       actions: [
         {
-          name: "cmsImportTask-practice",
+          name: "cmsImportTask-prd",
           action_type_id: {
             category: "Deploy",
             owner: "Custom",
@@ -101,7 +106,7 @@ practice = @name.include?('practice-')
           },
           run_order: 1,
           configuration: {
-            cluster: "practice",
+            cluster: "prd",
           },
           output_artifacts: [],
           input_artifacts: [{name: "BuiltTask"}],
