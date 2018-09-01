@@ -16,6 +16,13 @@ node[:contest_ids] = {
 node[:site_cidr] = '10.18.0.0/16'
 # node[:site_cidr6] = ''
 
+node[:cidr] = {
+  adm: '0.18.40.0/21',
+  life: '10.18.56.0/22',
+  arena: '10.18.60.0/22',
+  lab: '10.18.96.0/19',
+}
+
 if node.dig(:hocho_vpc, :cidr_block)
   node[:resolvers] = [IPAddr.new(node.dig(:hocho_vpc, :cidr_block)).to_s.sub(/\.0$/,'.2')]
 else
