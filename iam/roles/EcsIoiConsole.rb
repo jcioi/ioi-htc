@@ -27,6 +27,15 @@ role "EcsIoiConsole", :path=>"/" do
             arn:aws:s3:::ioi18-console/*
           ),
         },
+        {
+          "Effect" => "Allow",
+          "Action" => %w(
+            s3:GetObject
+          ),
+          "Resource" => %w(
+            arn:aws:s3:::ioi18-infra/dhcp/leases/*
+          ),
+        }
       ]
     }
   end
