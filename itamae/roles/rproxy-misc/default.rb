@@ -18,8 +18,12 @@ end
   /etc/nginx/utils/omniauth_enable_server.conf
 
   /etc/nginx/conf.d/auth.ioi18.net.conf
+
   /etc/nginx/conf.d/admin-dev.ioi18.net.conf
   /etc/nginx/conf.d/contest-dev.ioi18.net.conf
+
+  /etc/nginx/conf.d/admin-prd.ioi18.net.conf
+  /etc/nginx/conf.d/contest-prd.ioi18.net.conf
 
   /etc/nginx/conf.d/translation.ioi18.net.conf
   /etc/nginx/conf.d/print.ioi18.net.conf

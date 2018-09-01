@@ -7,6 +7,9 @@ ec2 "vpc-03eed691a6a5a03b2" do
 
     ingress do
       permission :tcp, 80..80 do
+        groups(
+          'rproxy-misc',
+        )
         ip_ranges(
           *::CIDR_SYSTEM,
         )
