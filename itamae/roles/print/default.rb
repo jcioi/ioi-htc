@@ -16,6 +16,7 @@ node.reverse_merge!(
   ioiprint: {
     config: {
       default_printer: 'PDF',
+      netadmin_url: 'https://console.ioi18.net/',
     },
   },
 )
