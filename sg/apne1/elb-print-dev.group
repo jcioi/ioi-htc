@@ -8,11 +8,13 @@ ec2 "vpc-03eed691a6a5a03b2" do
       permission :tcp, 443 do
         groups(
           "translation-dev",
+          "ioi-console",
         )
 
         ip_ranges(
-        #   ::CIDR_VENUE_ARENA,
+          ::CIDR_VENUE_ARENA,
           ::CIDR_VENUE_LAB,
+          ::CIDR_VENUE_LIFE,
         )
       end
     end
