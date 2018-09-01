@@ -155,6 +155,13 @@ conf = {
               "csv-format" => true,
               data: "ipxe.efi",
             },
+            {
+              name: "domain-name-servers",
+              code: 6,
+              space: "dhcp4",
+              "csv-format" => true,
+              data: "10.18.205.229,10.18.219.179", # dns-contestant-*
+            },
           ],
           reservation: [
             {
