@@ -2,7 +2,7 @@ include_cookbook 'cms::variables'
 
 node.reverse_merge!({
   ioi_cms_export_submissions: {
-    bucket: "s3://ioi18-cms-submissions-#{node[:cms].fetch(:cluster)}/",
+    bucket: "s3://ioi18-cms-submissions-#{node[:cms].fetch(:cluster)}",
     timezone: "Asia/Tokyo",
   }
 })
