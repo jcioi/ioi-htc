@@ -155,10 +155,8 @@ ONPREMISES_WORKERS = IO.readlines(File.join(__dir__, '../workers_prd.txt'), chom
   s3_backend_prefix: '',
 
   # cms::clientlb cookbook
-  s3_backend_proxy: 'localhost:18080',
-  s3_backend_fetch_base_url: 'http://localhost:10080/ioi18-cms-files-prd/',
-  # s3_backend_proxy: 'fproxy.ioi18.net:80',
-  # s3_backend_fetch_base_url: 'https://cache.s3-apne1.ioi18.net/ioi18-cms-files-dev/',
+  s3_backend_proxy: 'fproxy.ioi18.net:80',
+  s3_backend_fetch_base_url: 'https://cache.s3-apne1.ioi18.net/ioi18-cms-files-prd/',
   #
 
   question_hook_urls: ['https://hooks.slack.com/services/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'],
