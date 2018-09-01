@@ -1,8 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 ec2 "vpc-03eed691a6a5a03b2" do
-  security_group "dns-cache" do
-    description "dns-cache"
+  security_group "dns-contestant" do
+    description "dns-contestant"
 
     ingress do
       permission :tcp, 53..53 do
@@ -10,7 +10,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
           "default",
         )
         ip_ranges(
-          *CIDR_VENUE_ALL, # TODO:
+          *CIDR_VENUE_EXCEPT_ARENA, # TODO:
         )
       end
 
@@ -19,7 +19,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
           "default",
         )
         ip_ranges(
-          *CIDR_VENUE_ALL, # TODO:
+          *CIDR_VENUE_EXCEPT_ARENA, # TODO:
         )
       end
     end
