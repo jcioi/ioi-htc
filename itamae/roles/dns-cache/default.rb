@@ -25,7 +25,7 @@ template '/etc/unbound/unbound.conf' do
   owner 'root'
   group 'root'
   mode  '0644'
-  notifies :reload, 'service[unbound]'
+  # notifies :reload, 'service[unbound]'
 end
 
 #directory '/mnt/vol/unbound-log' do
