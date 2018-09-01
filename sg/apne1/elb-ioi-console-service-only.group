@@ -6,12 +6,18 @@ ec2 "vpc-03eed691a6a5a03b2" do
 
     ingress do
       permission :tcp, 80..80 do
+        groups(
+          'bastion',
+        )
         ip_ranges(
           *CIDR_SYSTEM,
           *CIDR_VENUE_ARENA,
         )
       end
       permission :tcp, 443..443 do
+        groups(
+          'bastion',
+        )
         ip_ranges(
           *CIDR_SYSTEM,
           *CIDR_VENUE_ARENA,
