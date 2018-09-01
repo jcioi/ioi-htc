@@ -10,6 +10,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
           'bastion',
           'elb-rproxy-misc',
           'elb-rproxy-misc-internal',
+          "elb-ioi-console-service-only",
         )
       end
     end
