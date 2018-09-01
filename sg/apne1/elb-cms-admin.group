@@ -1,0 +1,29 @@
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ec2 "vpc-03eed691a6a5a03b2" do
+  security_group "elb-cms-admin" do
+    description "elb-cms-admin"
+
+    ingress do
+      permission :tcp, 80..80 do
+        ip_ranges(
+          *::CIDR_SYSTEM,
+        )
+      end
+      permission :tcp, 443..443 do
+        ip_ranges(
+          *::CIDR_SYSTEM,
+        )
+      end
+    end
+
+    egress do
+      permission :any do
+        ip_ranges(
+          "0.0.0.0/0",
+        )
+      end
+    end
+  end
+end
