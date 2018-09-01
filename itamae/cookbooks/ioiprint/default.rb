@@ -1,6 +1,6 @@
 node.reverse_merge!(
   ioiprint: {
-    concurrency: 2,
+    concurrency: 5,
     timezone: 'Asia/Tokyo',
     config: {
       contestant_max_pages: 10,
