@@ -6,12 +6,21 @@ ec2 "vpc-03eed691a6a5a03b2" do
 
     ingress do
       permission :tcp, 80..80 do
+        groups(
+          # for console.ioi18.net
+          'print',
+          'print-dev',
+        )
         ip_ranges(
           ::CIDR_VENUE_LIFE,
           ::CIDR_VENUE_SRV,
         )
       end
       permission :tcp, 443..443 do
+        groups(
+          'print',
+          'print-dev',
+        )
         ip_ranges(
           ::CIDR_VENUE_LIFE,
           ::CIDR_VENUE_SRV,
