@@ -15,6 +15,9 @@ ec2 "vpc-03eed691a6a5a03b2" do
         )
       end
       permission :tcp, 443..443 do
+        groups(
+          'prometheus',
+        )
         ip_ranges(
           *::CIDR_SYSTEM,
         )

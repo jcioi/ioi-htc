@@ -12,18 +12,18 @@ ec2 "vpc-03eed691a6a5a03b2" do
           'print-dev',
         )
         ip_ranges(
-          ::CIDR_VENUE_LIFE,
-          ::CIDR_VENUE_SRV,
+          *CIDR_SYSTEM,
         )
       end
       permission :tcp, 443..443 do
         groups(
           'print',
           'print-dev',
+          # for console.ioi18.net, admin*.ioi18.net
+          'prometheus',
         )
         ip_ranges(
-          ::CIDR_VENUE_LIFE,
-          ::CIDR_VENUE_SRV,
+          *CIDR_SYSTEM,
         )
       end
     end

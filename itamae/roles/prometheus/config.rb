@@ -82,6 +82,30 @@ scrape_configs.push(
     labels: {downalert: 'ignore'},
   ],
 )
+scrape_configs.push(
+  job_name: :cms_contest,
+  scheme: 'https',
+  metrics_path: '/metrics/contest',
+  scrape_interval: '5m',
+  scrape_timeout: '3m',
+  static_configs: [
+    { targets: %w(admin-dev.ioi18.net:443), labels: {cms_cluster: 'dev'} },
+    { targets: %w(admin-practice.ioi18.net:443), labels: {cms_cluster: 'practice'} },
+    { targets: %w(admin.ioi18.net:443), labels: {cms_cluster: 'prd'} },
+  ],
+)
+scrape_configs.push(
+  job_name: :cms_system,
+  scheme: 'https',
+  metrics_path: '/metrics/system',
+  scrape_interval: '5m',
+  scrape_timeout: '3m',
+  static_configs: [
+    { targets: %w(admin-dev.ioi18.net:443), labels: {cms_cluster: 'dev'} },
+    { targets: %w(admin-practice.ioi18.net:443), labels: {cms_cluster: 'practice'} },
+    { targets: %w(admin.ioi18.net:443), labels: {cms_cluster: 'prd'} },
+  ],
+)
 
 
 host_jobs = [
@@ -122,7 +146,6 @@ host_jobs = [
     port: 9099,
     metrics_path: '/kea_exporter/metrics',
   },
-
 ]
 
 if node[:hocho_ec2]
