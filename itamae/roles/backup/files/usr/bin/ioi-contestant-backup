@@ -1,0 +1,118 @@
+#!/usr/bin/env ruby
+require 'pathname'
+require 'json'
+require 'time'
+require 'shellwords'
+
+class Config
+  def initialize(path)
+    @data = File.open(path) {|io| JSON.load(io) }
+  end
+
+  def ssh_key
+    Pathname(@data.fetch('ssh').fetch('key'))
+  end
+
+  def ssh_user
+    @data.fetch('ssh').fetch('user')
+  end
+
+  def s3_bucket
+    @data.fetch('s3').fetch('bucket')
+  end
+
+  def s3_prefix
+    @data.fetch('s3').fetch('bucket')
+  end
+
+  def machines
+    @data.fetch('machines')
+  end
+
+  def backup_directory
+    Pathname('/var/lib/ioi-contestant-backup')
+  end
+
+  def min_interval
+    300
+  end
+end
+
+class Backup
+  def initialize(config)
+    @config = config
+    @lastrun = Hash.new(0)
+  end
+
+  def run
+    machines = config.machines
+    loop do
+      machines.each(&method(:execute))
+    end
+  end
+
+  private
+
+  attr_reader :config
+  attr_reader :lastrun
+
+  def execute(machine)
+    time = Time.now
+    date = time.strftime('%F')
+
+    # since_lastrun = time.to_i - lastrun[machine]
+    # if since_lastrun < config.min_interval
+    #   t = config.min_interval - since_lastrun
+    #   puts "Sleep #{t} seconds for #{machine}"
+    #   sleep(t)
+    # end
+
+    dir = (config.backup_directory + date + machine).tap(&:mkpath)
+    prefix = [config.s3_prefix, date, machine].compact.join('/')
+    if rsync(machine, dir)
+      File.write("/var/lib/prometheus-node-exporter/textfile_collector/ioi-contestant-backup-#{machine}-rsync.prom", <<EOF)
+# TYPE ioi_contestant_backup_last_successful_rsync_time gauge
+ioi_contestant_backup_last_successful_rsync_time{machine="#{machine}"} #{time.to_f}
+EOF
+    end
+
+    if s3sync(dir, prefix)
+      File.write("/var/lib/prometheus-node-exporter/textfile_collector/ioi-contestant-backup-#{machine}-s3sync.prom", <<EOF)
+# TYPE ioi_contestant_backup_last_successful_s3sync_time gauge
+ioi_contestant_backup_last_successful_s3sync_time{machine="#{machine}"} #{time.to_f}
+EOF
+    end
+
+    lastrun[machine] = time.to_i
+  end
+
+  def rsync(machine, dir)
+    ssh_options = %W[-i #{config.ssh_key} -o User=#{config.ssh_user} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null]
+
+    command = %W[scp] + ssh_options + %W[/usr/share/ioi-contestant-backup/rsync-helper #{machine}:]
+    $stderr.puts "! #{command.join(?\s)}"
+    system(*command)
+    $stderr.puts "#$?: #{command.join(?\s)}"
+
+    rsh = %W[ssh] + ssh_options
+    command = %W[rsync -aq -e #{rsh.join(?\s)} --rsync-path="/home/#{config.ssh_user}/rsync-helper" #{machine}:/home/ #{dir}/]
+    $stderr.puts "! #{command.join(?\s)}"
+    unless system(*command)
+      $stderr.puts "#$?: #{command.join(?\s)}"
+      return false
+    end
+    return true
+  end
+
+  def s3sync(dir, prefix)
+    command = %W[aws s3 sync #{dir}/ s3://#{config.s3_bucket}/#{prefix}/ --delete]
+    $stderr.puts "! #{command.join(?\s)}"
+    unless system(*command)
+      $stderr.puts "#$?: #{command.join(?\s)}"
+      return false
+    end
+    return true
+  end
+end
+
+Backup.new(Config.new('/etc/ioi-contestant-backup/config.json')).run

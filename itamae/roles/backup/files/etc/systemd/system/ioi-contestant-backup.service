@@ -1,0 +1,13 @@
+[Unit]
+Description=Backup Contestant Machines
+
+[Service]
+Type=simple
+Environment=/etc/ioi-contestant-backup.env
+StateDirectory=ioi-contestant-backup
+ExecStart=/usr/bin/ioi-contestant-backup
+Restart=always
+RestartSec=1m
+
+[Install]
+WantedBy=multi-user.target

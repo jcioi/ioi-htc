@@ -30,7 +30,7 @@ role "Ec2Backup", :path=>"/" do
         {
           "Effect" => "Allow",
           "Action" => %w(s3:PutObject s3:GetObject),
-          "Resource" => %w(arn:aws:s3:::ioi18-backup/contestant/*),
+          "Resource" => %w(arn:aws:s3:::ioi18-backup/*),
         },
       ],
     }
