@@ -116,6 +116,23 @@ scrape_configs.push(
     { targets: %w(console.ioi18.net:443), labels: {cms_cluster: 'prd'} },
   ],
 )
+scrape_configs.push(
+  job_name: :ioiprint,
+  scheme: 'http',
+  metrics_path: '/metrics',
+  scrape_interval: '5m',
+  scrape_timeout: '3m',
+  static_configs: [
+    {
+      targets: %w(print-001.apne1.aws.ioi18.net print-002.apne1.aws.ioi18.net),
+      labels: {ioiprint_env: 'prd'}
+    },
+    {
+      targets: %w(print-dev-001.apne1.aws.ioi18.net),
+      labels: {ioiprint_env: 'dev'}
+    },
+  ],
+)
 
 host_jobs = [
   {

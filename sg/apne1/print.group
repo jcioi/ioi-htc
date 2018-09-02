@@ -8,6 +8,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
       permission :tcp, 80 do
         groups(
           "elb-print",
+          "prometheus",
         )
       end
 
