@@ -106,7 +106,16 @@ scrape_configs.push(
     { targets: %w(admin.ioi18.net:443), labels: {cms_cluster: 'prd'} },
   ],
 )
-
+scrape_configs.push(
+  job_name: :ioiconsole,
+  scheme: 'https',
+  metrics_path: '/metrics',
+  scrape_interval: '5m',
+  scrape_timeout: '3m',
+  static_configs: [
+    { targets: %w(console.ioi18.net:443), labels: {cms_cluster: 'prd'} },
+  ],
+)
 
 host_jobs = [
   {
