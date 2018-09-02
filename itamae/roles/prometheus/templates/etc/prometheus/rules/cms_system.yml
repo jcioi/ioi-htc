@@ -1,0 +1,9 @@
+groups:
+  - name: cms_disconnected_worker_increased
+    rules:
+      - alert: CmsDisconnectedWorkerIncreased
+        expr: 'increase(cms_workers_total{connection="disconnected",operation="enabled"}[10m]) > 0'
+        labels:
+          severity: warn
+        annotations:
+          summary: "{{$labels.instance}}: The number of disconnected workers increased by {{$value}} in last 10min."
