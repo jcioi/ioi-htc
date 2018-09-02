@@ -9,11 +9,13 @@ ec2 "vpc-03eed691a6a5a03b2" do
         groups(
           'rproxy-misc',
         )
+        ip_ranges(
+          *CIDR_SYSTEM,
+        )
       end
       permission :tcp, 443..443 do
         ip_ranges(
-          CIDR_VENUE_ADM,
-          CIDR_VENUE_LIFE,
+          *CIDR_SYSTEM,
         )
       end
     end
