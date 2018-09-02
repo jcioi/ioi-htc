@@ -6,12 +6,17 @@ end
 
 ##########
 
+execute 'if systemctl is-enabled cms.target; then systemctl restart cms.target; fi' do
+  action :nothing
+end
 # This affects cms-contestwebserver & cms-proxyservice
+
 file '/etc/ioi-contest-id.env' do
   content "CMS_CONTEST_ID=#{node[:cms][:contest_id]}\n"
   owner 'root'
   group 'root'
   mode  '0644'
+  notifies :run, 'execute[if systemctl is-enabled cms.target; then systemctl restart cms.target; fi]'
 end
 
 unless node[:hocho_ec2]
