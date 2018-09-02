@@ -23,6 +23,7 @@ role "Ec2CmsPrd", :path=>"/" do
     "arn:aws:iam::550372229658:policy/CmsTaskImporter",
     "arn:aws:iam::550372229658:policy/CmsStatementImporterPrd",
     "arn:aws:iam::550372229658:policy/CmsPrd",
+    "arn:aws:iam::550372229658:policy/CmsExportPrd",
   )
 end
 

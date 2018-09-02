@@ -18,8 +18,6 @@ cluster = node[:cms][:cluster]
 file '/etc/ioi-cms-export-submissions.env' do
   content <<EOF
 AWS_REGION=#{node[:ioi_cms_export_submissions].fetch(:aws_region)}
-AWS_ACCESS_KEY_ID=#{node[:secrets].fetch("cms_export_#{cluster}_aws_access_key_id")}
-AWS_SECRET_ACCESS_KEY=#{node[:secrets].fetch("cms_export_#{cluster}_aws_secret_access_key")}
 ZIP_DESTINATION=#{node[:ioi_cms_export_submissions].fetch('bucket')}
 TZ=#{node[:ioi_cms_export_submissions].fetch('timezone')}
 EOF
