@@ -9,7 +9,7 @@ node.reverse_merge!(
         bucket: 'ioi18-backup',
         prefix: 'prd',
       },
-      machines: ['10.18.60.13'],
+      machines: ['10.18.60.13'] + node[:onsite_contestant_machines],
     },
   },
 )
