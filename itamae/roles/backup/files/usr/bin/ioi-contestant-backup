@@ -87,7 +87,7 @@ EOF
   end
 
   def rsync(machine, dir)
-    ssh_options = %W[-i #{config.ssh_key} -o User=#{config.ssh_user} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null]
+    ssh_options = %W[-i #{config.ssh_key} -o User=#{config.ssh_user} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=5]
 
     command = %W[scp] + ssh_options + %W[/usr/share/ioi-contestant-backup/rsync-helper #{machine}:]
     $stderr.puts "! #{command.join(?\s)}"
