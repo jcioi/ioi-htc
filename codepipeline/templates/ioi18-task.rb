@@ -1,9 +1,16 @@
+APPROVED_TASKS = [
+  "ioi-2018-combo",
+  "ioi-2018-rectangular_permutation",
+  "ioi-2018-werewolf",
+]
+
 if @name == "ioi18-task-test-batch"
   task = "test-batch"
   practice = true
 else
   task = @name.gsub(/^ioi18-task-/, 'ioi-2018-')
   practice = @name.include?('practice-')
+  approved = APPROVED_TASKS.include?(task)
 end
 {
   name: @name,
@@ -77,7 +84,7 @@ end
         }
       ]
     },
-    practice ? {
+    (practice || approved) ? {
       name: "PromotionApproval",
       actions: [
         {
@@ -93,7 +100,7 @@ end
         },
       ]
     } : nil,
-    practice ? {
+    (practice || approved) ? {
       name: "DeployToPrd",
       actions: [
         {
@@ -115,4 +122,3 @@ end
     } : nil,
   ].compact,
 }
-
