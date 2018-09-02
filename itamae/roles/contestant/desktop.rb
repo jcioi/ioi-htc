@@ -19,7 +19,7 @@ remote_file '/usr/share/icons/hicolor/256x256/apps/callstaff.png' do
 end
 desktop_entry 'ioi18-service' do
   display_name 'Call Staff'
-  icon '/usr/share/icons/hicolor/256x256/apps/callstaff.svg'
+  icon '/usr/share/icons/hicolor/256x256/apps/callstaff.png'
   exec "x-www-browser #{node.dig(:contestant, :ioiconsole_uri)}"
   categories %w(Education)
 end
