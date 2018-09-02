@@ -7,7 +7,7 @@ local elbSecurityGroups = ['sg-0d628db6dcf52657f'];  // elb-translation
   scheduler: utils.fargateScheduler(taskSecurityGroups) {
     cpu: '1024',
     memory: '2048',
-    desired_count: 2,
+    desired_count: 10,
     task_role_arn: utils.iamRole('EcsTranslation'),
     elb_v2: {
       vpc_id: utils.vpcId,
