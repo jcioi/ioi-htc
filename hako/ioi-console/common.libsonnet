@@ -40,6 +40,11 @@ local elbSecurityGroups = ['sg-0cd32a6bd67af4855'];  // elb-ioi-console
       IOI_SSM_SCRATCH_S3_REGION: 'ap-northeast-1',
       IOI_SSM_SCRATCH_S3_BUCKET: 'ioi18-console',
       IOI_SSM_SCRATCH_S3_PREFIX: 'remote-task/scratch/',
+      IOI_SSH_USER: 'ioi',
+      IOI_SSH_KEY_BASE64: utils.secret('id_rsa_ioi18m_base64'),
+      IOI_SSH_LOG_S3_REGION: 'ap-northeast-1',
+      IOI_SSH_LOG_S3_BUCKET: 'ioi18-console',
+      IOI_SSH_LOG_S3_PREFIX: 'remote-task/ssh-log/',
       IOI_IPAM_LEASES_S3_REGION: 'ap-northeast-1',
       IOI_IPAM_LEASES_S3_BUCKET: 'ioi18-infra',
       IOI_IPAM_LEASES_S3_KEY: 'dhcp/leases/dhcp-001.4',
@@ -47,6 +52,7 @@ local elbSecurityGroups = ['sg-0cd32a6bd67af4855'];  // elb-ioi-console
       IOI_IPAM_SSH_USER: 'ioim',
       IOI_IPAM_SSH_PASSWORD: utils.secret('cisco_ssh_password'),
       IOI_IPAM_SWITCH_HOSTS: 'sw-ara-011.venue.ioi18.net,sw-ara-021.venue.ioi18.net,sw-ara-031.venue.ioi18.net,sw-ara-041.venue.ioi18.net',
+
     },
     mount_points: [
     ],
