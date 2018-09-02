@@ -109,8 +109,8 @@ class Worker
 
     def import!
       Dir.chdir(task_dir.to_s) do
-        log "importing #{task_dir.to_s} (ioi-cms-venv cmsImportTask -u .)"
-        system("ioi-cms-venv", "cmsImportTask", "-u", ".", chdir: task_dir.to_s) or raise Failure, "CmsImportTask failed"
+        log "importing #{task_dir.to_s} (ioi-cms-venv cmsImportTask -u -S .)"
+        system("ioi-cms-venv", "cmsImportTask", "-u", "-S", ".", chdir: task_dir.to_s) or raise Failure, "CmsImportTask failed"
       end
     end
 
