@@ -17,8 +17,14 @@ class Worker
   attr_reader :sqs, :s3, :queue_name, :workdir, :logger
 
   def run
-    Aws::SQS::QueuePoller.new(queue_url, client: sqs).poll do |message|
-      handle_message(JSON.parse(message.body))
+    loop do
+      begin
+        Aws::SQS::QueuePoller.new(queue_url, client: sqs).poll do |message|
+          handle_message(JSON.parse(message.body))
+        end
+      rescue
+        $stderr.puts $!
+      end
     end
   end
 
