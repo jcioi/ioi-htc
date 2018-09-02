@@ -64,7 +64,7 @@ ONPREMISES_WORKERS = IO.readlines(File.join(__dir__, '../workers_prd.txt'), chom
   # "for other than testing. It must be a 16 bytes long",
   # "hexadecimal number. You can easily create a key",
   # "calling cmscommon.crypto.get_hex_random_key().",
-  secret_key: @secrets.fetch(:cms_secret_key),
+  secret_key: @secrets.fetch(:cms_secret_key_prd),
 
   # "Whether Tornado prints debug information on stdout.",
   tornado_debug: false,
