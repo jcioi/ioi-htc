@@ -95,7 +95,7 @@ EOF
     $stderr.puts "#$?: #{command.join(?\s)}"
 
     rsh = %W[ssh] + ssh_options
-    command = %W[rsync -aq -e #{rsh.join(?\s)} --rsync-path="/home/#{config.ssh_user}/rsync-helper" #{machine}:/home/ #{dir}/]
+    command = %W[rsync -aq -e #{rsh.join(?\s)} --delete --rsync-path="/home/#{config.ssh_user}/rsync-helper" #{machine}:/home/ #{dir}/]
     $stderr.puts "! #{command.join(?\s)}"
     unless system(*command)
       $stderr.puts "#$?: #{command.join(?\s)}"
