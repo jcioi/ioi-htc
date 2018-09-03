@@ -81,7 +81,11 @@ class Backup
 
   def worker_loop(machines)
     loop do
-      machines.each(&method(:execute))
+      machines.each do |machine|
+        execute(machine)
+      rescue
+        $stderr.puts $!
+      end
     end
   end
 
