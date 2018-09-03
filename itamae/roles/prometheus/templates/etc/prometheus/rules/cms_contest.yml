@@ -11,7 +11,7 @@ groups:
   - name: cms_stuck_submissions
     rules:
       - alert: CmsStuckSubmissions
-        expr: 'sum(cms_judgements_total{cms_cluster="prd",status=~"stuck.*"}) > 0'
+        expr: 'sum(cms_judgements_total{cms_cluster="prd",status=~"stuck.*",dataset_status!="inactive"}) > 0'
         labels:
           severity: critical
         annotations:
