@@ -1,1 +1,26 @@
-groups: []
+groups:
+  - name: cms_question_pending
+    rules:
+      - alert: CmsQuestionPending
+        expr: 'cms_questions_total{status="pending"} > 0'
+        for: '15m'
+        labels:
+          severity: warn
+        annotations:
+          summary: "{{$labels.instance}}: Pending questions remain for 15min."
+  - name: cms_stuck_submissions
+    rules:
+      - alert: CmsStuckSubmissions
+        expr: 'sum(cms_judgements_total{cms_cluster="prd",status=~"stuck.*"}) > 0'
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{$labels.instance}}: {{$value}} submissions get stuck."
+  - name: cms_too_many_submissions
+    rules:
+      - alert: CmsTooManySubmissions
+        expr: 'sum(cms_judgements_total{cms_cluster="prd",status="evaluating",dataset_status!="inactive"}) > 200'
+        labels:
+          severity: warn
+        annotations:
+          summary: "{{$labels.instance}}: Too many evaluating submissions ({{$value}})."
