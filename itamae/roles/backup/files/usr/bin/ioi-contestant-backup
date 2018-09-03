@@ -33,6 +33,10 @@ class Config
     Pathname('/var/lib/ioi-contestant-backup')
   end
 
+  def state_file
+    backup_directory.tap(&:mkpath) + 'state.json'
+  end
+
   def min_interval
     300
   end
@@ -42,6 +46,12 @@ class Backup
   def initialize(config)
     @config = config
     @lastrun = Hash.new(0)
+
+    @state = begin
+               open(config.state_file) {|io| JSON.load(io) }
+             rescue Errno::ENOENT
+               {}
+             end
   end
 
   def run
@@ -70,20 +80,28 @@ class Backup
     dir = (config.backup_directory + date + machine).tap(&:mkpath)
     prefix = [config.s3_prefix, date, machine].compact.join('/')
     if rsync(machine, dir)
-      File.write("/var/lib/prometheus-node-exporter/textfile_collector/ioi-contestant-backup-#{machine}-rsync.prom", <<EOF)
-# TYPE ioi_contestant_backup_last_successful_rsync_time gauge
-ioi_contestant_backup_last_successful_rsync_time{machine="#{machine}"} #{time.to_f}
-EOF
+      @state['last_successful_rsync'] ||= {}
+      @state['last_successful_rsync'][machine] = time.to_i
     end
 
     if s3sync(dir, prefix)
-      File.write("/var/lib/prometheus-node-exporter/textfile_collector/ioi-contestant-backup-#{machine}-s3sync.prom", <<EOF)
-# TYPE ioi_contestant_backup_last_successful_s3sync_time gauge
-ioi_contestant_backup_last_successful_s3sync_time{machine="#{machine}"} #{time.to_f}
-EOF
+      @state['last_successful_s3sync'] ||= {}
+      @state['last_successful_s3sync'][machine] = time.to_i
     end
 
-    lastrun[machine] = time.to_i
+    File.open('/var/lib/prometheus-node-exporter/textfile_collector/ioi-contestant-backup.prom', 'w') do |f|
+      f.puts "# TYPE ioi_contestant_backup_last_successful_rsync_time gauge"
+      @state['last_successful_rsync']&.each do |machine, t|
+        f.puts %[ioi_contestant_backup_last_successful_rsync_time{machine="#{machine}"} #{t}]
+      end
+
+      f.puts "# TYPE ioi_contestant_backup_last_successful_s3sync_time gauge"
+      @state['last_successful_s3sync']&.each do |machine, t|
+        f.puts %[ioi_contestant_backup_last_successful_s3sync_time{machine="#{machine}"} #{t}]
+      end
+    end
+
+    File.write(config.state_file, JSON.dump(@state))
   end
 
   def rsync(machine, dir)
