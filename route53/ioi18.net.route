@@ -304,7 +304,7 @@ template "ioi18.net-common" do
 
   rrset "ranking.ioi18.net.", "CNAME" do
     ttl 60
-    resource_records "d32fbuf9lyn6z6.cloudfront.net."
+    resource_records "d5egddz2i42fl.cloudfront.net."
   end
   rrset "ranking-prd-origin.ioi18.net.", "CNAME" do
     ttl 60

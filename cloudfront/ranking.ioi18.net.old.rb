@@ -1,9 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-distribution "E1NV6PKZJIIC8Y" do
+distribution "EK1FB8RNBZBI8" do
   aliases do
-    quantity 1
-    items ["ranking.ioi18.net"]
+    quantity 0
   end
   default_root_object ""
   origins do
