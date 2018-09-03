@@ -3,7 +3,7 @@ Description=Backup Contestant Machines
 
 [Service]
 Type=simple
-Environment=/etc/ioi-contestant-backup.env
+Environment=TZ=Asia/Tokyo
 StateDirectory=ioi-contestant-backup
 ExecStart=/usr/bin/ioi-contestant-backup
 Restart=always
