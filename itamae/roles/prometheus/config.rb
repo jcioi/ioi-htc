@@ -151,6 +151,16 @@ scrape_configs.push(
     },
   ],
 )
+scrape_configs.push(
+  job_name: :cmsworker_nodes,
+  metrics_path: "/metrics",
+  file_sd_configs: [
+    {
+      files: ['/etc/prometheus/files/cmsworker_nodes.json'],
+      refresh_interval: '2m',
+    },
+  ],
+)
 
 host_jobs = [
   {
