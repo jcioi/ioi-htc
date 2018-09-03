@@ -40,12 +40,17 @@ class Config
   def min_interval
     300
   end
+
+  def concurrency
+    @data.fetch('concurrency', 1)
+  end
 end
 
 class Backup
   def initialize(config)
     @config = config
     @lastrun = Hash.new(0)
+    @mutex = Thread::Mutex.new
 
     @state = begin
                open(config.state_file) {|io| JSON.load(io) }
@@ -56,8 +61,15 @@ class Backup
 
   def run
     machines = config.machines
+
+    batch_size = (machines.size / config.concurrency.to_f).ceil
+    machines.each_slice(batch_size) do |machines|
+      Thread.new(machines, &method(:worker_loop))
+    end
+
     loop do
-      machines.each(&method(:execute))
+      sleep(30)
+      write_metrics
     end
   end
 
@@ -65,43 +77,51 @@ class Backup
 
   attr_reader :config
   attr_reader :lastrun
+  attr_reader :mutex
+
+  def worker_loop(machines)
+    loop do
+      machines.each(&method(:execute))
+    end
+  end
 
   def execute(machine)
     time = Time.now
     date = time.strftime('%F')
 
-    # since_lastrun = time.to_i - lastrun[machine]
-    # if since_lastrun < config.min_interval
-    #   t = config.min_interval - since_lastrun
-    #   puts "Sleep #{t} seconds for #{machine}"
-    #   sleep(t)
-    # end
-
     dir = (config.backup_directory + date + machine).tap(&:mkpath)
     prefix = [config.s3_prefix, date, machine].compact.join('/')
     if rsync(machine, dir)
-      @state['last_successful_rsync'] ||= {}
-      @state['last_successful_rsync'][machine] = time.to_i
+      mutex.synchronize do
+        @state['last_successful_rsync'] ||= {}
+        @state['last_successful_rsync'][machine] = time.to_i
+        File.write(config.state_file, JSON.dump(@state))
+      end
     end
 
     if s3sync(dir, prefix)
-      @state['last_successful_s3sync'] ||= {}
-      @state['last_successful_s3sync'][machine] = time.to_i
+      mutex.synchronize do
+        @state['last_successful_s3sync'] ||= {}
+        @state['last_successful_s3sync'][machine] = time.to_i
+        File.write(config.state_file, JSON.dump(@state))
+      end
     end
+  end
 
+  def write_metrics
     File.open('/var/lib/prometheus-node-exporter/textfile_collector/ioi-contestant-backup.prom', 'w') do |f|
-      f.puts "# TYPE ioi_contestant_backup_last_successful_rsync_time gauge"
-      @state['last_successful_rsync']&.each do |machine, t|
-        f.puts %[ioi_contestant_backup_last_successful_rsync_time{machine="#{machine}"} #{t}]
-      end
+      mutex.synchronize do
+        f.puts "# TYPE ioi_contestant_backup_last_successful_rsync_time gauge"
+        @state['last_successful_rsync']&.each do |machine, t|
+          f.puts %[ioi_contestant_backup_last_successful_rsync_time{machine="#{machine}"} #{t}]
+        end
 
-      f.puts "# TYPE ioi_contestant_backup_last_successful_s3sync_time gauge"
-      @state['last_successful_s3sync']&.each do |machine, t|
-        f.puts %[ioi_contestant_backup_last_successful_s3sync_time{machine="#{machine}"} #{t}]
+        f.puts "# TYPE ioi_contestant_backup_last_successful_s3sync_time gauge"
+        @state['last_successful_s3sync']&.each do |machine, t|
+          f.puts %[ioi_contestant_backup_last_successful_s3sync_time{machine="#{machine}"} #{t}]
+        end
       end
     end
-
-    File.write(config.state_file, JSON.dump(@state))
   end
 
   def rsync(machine, dir)

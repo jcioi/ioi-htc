@@ -10,6 +10,7 @@ node.reverse_merge!(
         prefix: 'prd',
       },
       machines: ['10.18.60.13'] + node[:onsite_contestant_machines],
+      concurrency: 8,
     },
   },
 )
