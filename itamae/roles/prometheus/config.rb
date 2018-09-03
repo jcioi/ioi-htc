@@ -22,6 +22,12 @@ node.reverse_merge!(
   },
 )
 
+directory '/etc/prometheus/files' do
+  owner 'root'
+  group 'root'
+  mode  '0755'
+end
+
 directory '/etc/prometheus/rules' do
   owner 'root'
   group 'root'
@@ -132,6 +138,16 @@ scrape_configs.push(
     {
       targets: %w(print-dev-001.apne1.aws.ioi18.net),
       labels: {ioiprint_env: 'dev'}
+    },
+  ],
+)
+scrape_configs.push(
+  job_name: :contestant_nodes,
+  metrics_path: "/metrics",
+  file_sd_configs: [
+    {
+      files: ['/etc/prometheus/files/contestant_node.json'],
+      refresh_interval: '1m',
     },
   ],
 )

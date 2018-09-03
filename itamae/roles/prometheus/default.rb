@@ -3,6 +3,7 @@ node.reverse_merge!(
     mounts: %w(
       /mnt/vol/prometheus-data:/prometheus-data:rw
       /etc/prometheus/rules:/etc/prometheus/rules:ro
+      /etc/prometheus/files:/etc/prometheus/files:ro
     ),
   },
 )
