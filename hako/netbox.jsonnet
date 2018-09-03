@@ -68,10 +68,12 @@ local elbSecurityGroups = ['sg-0d6c8d7523b36c389'];  // elb-misc-internal-tools
       locations: {
         '/': {
           https_type: 'always',
+        use_omniauth: true,
         },
         '/static': {
           https_type: 'always',
           root: '/opt/netbox/netbox',
+          use_omniauth: true,
         },
       },
     },
