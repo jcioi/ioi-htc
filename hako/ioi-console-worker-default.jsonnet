@@ -7,6 +7,7 @@ appCommon {
   scheduler+: {
     cpu: '1024',
     memory: '2048',
+    desired_count: 20,
   },
   app+: {
     env+: {
