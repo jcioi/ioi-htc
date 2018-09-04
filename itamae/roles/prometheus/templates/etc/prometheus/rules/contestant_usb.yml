@@ -1,0 +1,18 @@
+groups:
+  - name: usb_textfile_stale
+    rules:
+      - alert: USBTextfileStale
+        expr: 'time() - node_textfile_mtime_seconds{file="usb.prom"} > 300'
+        labels:
+          severity: warn
+        annotations:
+          summary: "{{$labels.instance}}: USB metrics are older than 5m"
+
+  - name: contestant_usb_devices
+    rules:
+      - alert: ContestantUnallowedUSBDevice
+        expr: 'node_usb_devices{device_class!="root_hub",device_driver!~"usbhid|",job="contestant_nodes"} > 0'
+        labels:
+          severity: warn
+        annotations:
+          summary: "{{$labels.instance}}: Unallowed USB device (class={{$labels.device_class}}, driver={{$labels.device_driver}}, count={{$value}})"

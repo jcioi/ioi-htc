@@ -48,6 +48,7 @@ end
   /etc/prometheus/rules/aws_nat.yml
   /etc/prometheus/rules/aws_rds.yml
   /etc/prometheus/rules/aws_sqs.yml
+  /etc/prometheus/rules/contestant_usb.yml
 ).each do |_|
   template _ do
     owner 'root'
