@@ -13,13 +13,13 @@ groups:
       - alert: CmsStuckSubmissions
         expr: 'sum(cms_judgements_total{cms_cluster="prd",status=~"stuck.*",dataset_status!="inactive"}) > 0'
         labels:
-          severity: critical
+          severity: page
         annotations:
           summary: "{{$labels.instance}}: {{$value}} submissions get stuck."
-  - name: cms_too_many_submissions
+  - name: cms_too_many_running_judgements
     rules:
-      - alert: CmsTooManySubmissions
-        expr: 'sum(cms_judgements_total{cms_cluster="prd",status="evaluating",dataset_status!="inactive"}) > 200'
+      - alert: CmsTooManyRunningJudgements
+        expr: 'sum(cms_judgements_total{cms_cluster="prd",status=~"(compiling)|(evaluating)",dataset_status!="inactive"}) > 30'
         labels:
           severity: warn
         annotations:
