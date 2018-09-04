@@ -94,6 +94,7 @@ scrape_configs.push(
 scrape_configs.push(
   job_name: :snmp,
   metrics_path: "/snmp",
+  scrape_timeout: '19s',
   static_configs: [
     targets: %w(
       rt-ngn-001.venue.ioi18.net
