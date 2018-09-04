@@ -159,8 +159,8 @@ scrape_configs.push(
   job_name: :ioiprint,
   scheme: 'http',
   metrics_path: '/metrics',
-  scrape_interval: '5m',
-  scrape_timeout: '3m',
+  scrape_interval: '1m',
+  scrape_timeout: '30s',
   static_configs: [
     {
       targets: %w(print-001.apne1.aws.ioi18.net print-002.apne1.aws.ioi18.net),
