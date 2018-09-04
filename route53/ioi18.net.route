@@ -681,7 +681,7 @@ onpremises = {
 
   'ups-hall-001' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.51', }, }, #srv
   'ups-hall-002' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.52', }, }, #srv
-  'ups-hall-003' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.53', }, }, #net
+  'ups-ara-002' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.53', }, }, #net
   'ups-ara-001' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.54', }, }, #net
   'ups-mdf-001' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.48.2', }, }, #net
 }
@@ -765,6 +765,8 @@ end
 
 hosted_zone "ioi18.net.", "Z1V30A252QIS0J" do
   vpc "ap-northeast-1", "vpc-03eed691a6a5a03b2"
+  ignore_under "m.ioi18.net"
+
   include_template 'ioi18.net-common'
   include_template 'ioi18.net-private'
   include_template 'ioi18.net-aws_instances'

@@ -10,6 +10,23 @@ role "EcsIoiConsole", :path=>"/" do
         "Action"=>"sts:AssumeRole"}]}
   end
 
+  policy "route53" do
+    {
+      "Version" => "2012-10-17",
+      "Statement" => [
+        {
+          "Effect" => "Allow",
+          "Action" => %w(
+            route53:ChangeResourceRecordSets
+          ),
+          "Resource" => %w(
+            arn:aws:route53:::hostedzone/Z1V30A252QIS0J
+          ),
+        },
+      ]
+    }
+  end
+
   policy "console-s3" do
     {
       "Version" => "2012-10-17",
