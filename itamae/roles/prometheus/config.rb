@@ -91,6 +91,36 @@ scrape_configs.push(
   ],
 )
 scrape_configs.push(
+  job_name: :snmp,
+  metrics_path: "/snmp",
+  static_configs: [
+    targets: %w(
+      rt-ngn-001.venue.ioi18.net
+      rt-mdf-001.venue.ioi18.net
+      rt-hall-001.venue.ioi18.net
+      rt-hall-002.venue.ioi18.net
+      relay-001.venue.ioi18.net
+      sw-hall.venue.ioi18.net
+      sw-ara-001.venue.ioi18.net
+      sw-ara-002.venue.ioi18.net
+      sw-ara-011.venue.ioi18.net
+      sw-ara-021.venue.ioi18.net
+      sw-ara-031.venue.ioi18.net
+      sw-ara-041.venue.ioi18.net
+      sw-ref-001.venue.ioi18.net
+      sw-tc-001.venue.ioi18.net
+      sw-conf-001.venue.ioi18.net
+      rt-conf-001.venue.ioi18.net
+      wlc-001.venue.ioi18.net
+    ),
+  ],
+  relabel_configs: [
+    {source_labels: %w(__address__), target_label: '__param_target'},
+    {source_labels: %w(__param_target), target_label: 'instance'},
+    {target_label: '__address__', replacement: '127.0.0.1:9116'},
+  ],
+)
+scrape_configs.push(
   job_name: :cms_contest,
   scheme: 'https',
   metrics_path: '/metrics/contest',
@@ -156,7 +186,7 @@ scrape_configs.push(
   metrics_path: "/metrics",
   file_sd_configs: [
     {
-      files: ['/etc/prometheus/files/cmsworker_nodes.json'],
+      files: ['/etc/prometheus/files/cmsworker_node.json'],
       refresh_interval: '2m',
     },
   ],
