@@ -14,7 +14,7 @@ node.reverse_merge!(
               group_interval: '12s',
               repeat_interval: '1h',
               receiver: 'slack-alert-contestants',
-              match: [ { job: "contestant_nodes" } ],
+              match: { job: "contestant_nodes" },
             },
             {
               group_by: ['alertname', 'instance'],
