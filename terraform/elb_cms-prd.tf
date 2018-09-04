@@ -47,7 +47,7 @@ resource "aws_lb_target_group" "cms-prd" {
   slow_start = 0
 
   health_check {
-    path = "/httpd_alived"
+    path = "/healthcheck"
     interval = 6
     healthy_threshold = 3
     unhealthy_threshold = 2

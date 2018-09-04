@@ -40,6 +40,14 @@ resource "aws_lb_listener_certificate" "rproxy-misc_cms-dev" {
   listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
   certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/3eb21034-26cc-40eb-a2c5-446d94fb1020"
 }
+resource "aws_lb_listener_certificate" "rproxy-misc_cms-prd" {
+  listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
+  certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/9091afd1-90cc-4ec6-b701-7bb8ebe9211d"
+}
+resource "aws_lb_listener_certificate" "rproxy-misc_cms-prd-admin" {
+  listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
+  certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/701894ca-19ae-40f9-a14d-9e6169564faf"
+}
 resource "aws_lb_listener_certificate" "rproxy-misc_translation" {
   listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
   certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/0b30594a-ef9d-4268-9d7e-479d28308b66"

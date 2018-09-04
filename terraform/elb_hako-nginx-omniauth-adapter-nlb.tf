@@ -1,5 +1,6 @@
 resource "aws_lb" "hako-nginx-omniauth-adapter-nlb" {
   name = "hako-nginx-omniauth-adapter-nlb"
+  load_balancer_type = "network"
   internal = true
 
   security_groups = []
@@ -25,7 +26,7 @@ resource "aws_lb_target_group" "hako-nginx-omniauth-adapter-nlb" {
   vpc_id = "vpc-03eed691a6a5a03b2"
   target_type = "ip"
 
-  deregistration_delay = 300
+  deregistration_delay = 30
 
   health_check {
     protocol = "TCP"
