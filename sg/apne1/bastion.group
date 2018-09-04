@@ -16,7 +16,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
           "default",
         )
         ip_ranges(
-          "10.18.0.0/16",
+          *CIDR_VENUE_EXCEPT_ARENA,
         )
       end
       permission :udp, 5201..5201 do
@@ -24,7 +24,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
           "default",
         )
         ip_ranges(
-          "10.18.0.0/16",
+          *CIDR_VENUE_EXCEPT_ARENA,
         )
       end
 

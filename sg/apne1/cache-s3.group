@@ -29,6 +29,22 @@ ec2 "vpc-03eed691a6a5a03b2" do
         )
       end
 
+      permission :tcp, 5201..5201 do
+        groups(
+          "default",
+        )
+        ip_ranges(
+          *CIDR_VENUE_EXCEPT_ARENA,
+        )
+      end
+      permission :udp, 5201..5201 do
+        groups(
+          "default",
+        )
+        ip_ranges(
+          *CIDR_VENUE_EXCEPT_ARENA,
+        )
+      end
     end
 
     egress do

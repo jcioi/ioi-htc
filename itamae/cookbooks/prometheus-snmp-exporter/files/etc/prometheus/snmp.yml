@@ -1220,8 +1220,6 @@ apcups:
     - labelname: iemStatusProbeNumber
       type: gauge
   version: 1
-  auth:
-    community: heArt<3pin
 arista_sw:
   walk:
   - 1.3.6.1.2.1.2
@@ -8954,8 +8952,6 @@ synology:
       labelname: serviceName
       oid: 1.3.6.1.4.1.6574.6.1.1.2
       type: OctetString
-  auth:
-    community: heArt<3pin
 ubiquiti_airmax:
   walk:
   - 1.3.6.1.2.1.2

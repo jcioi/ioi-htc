@@ -651,9 +651,9 @@ onpremises = {
   'sw-ara-041' => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.5.204', }, },
   'sw-ref-001' => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.5.220', }, },
   'sw-tc-001'  => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.5.221', }, },
-  'sw-conf-001'  => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.0.31', }, },
+  'rt-conf-001'  => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.0.31', }, },
 
-  'rt-conf-001'  => { primary: 'lo', ifaces: { 'lo' => '10.18.64.2', }, },
+  'sw-conf-001'  => { primary: 'lo', ifaces: { 'lo' => '10.18.64.2', }, },
 
   'wlc-001' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.20', }, },
   'wlc-002' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.21', }, },

@@ -96,30 +96,28 @@ scrape_configs.push(
   metrics_path: "/snmp",
   scrape_timeout: '19s',
   static_configs: [
-    targets: %w(
-      rt-ngn-001.venue.ioi18.net
-      rt-mdf-001.venue.ioi18.net
-      rt-hall-001.venue.ioi18.net
-      rt-hall-002.venue.ioi18.net
-      relay-001.venue.ioi18.net
-      sw-hall.venue.ioi18.net
-      sw-ara-001.venue.ioi18.net
-      sw-ara-002.venue.ioi18.net
-      sw-ara-011.venue.ioi18.net
-      sw-ara-021.venue.ioi18.net
-      sw-ara-031.venue.ioi18.net
-      sw-ara-041.venue.ioi18.net
-      sw-ref-001.venue.ioi18.net
-      sw-tc-001.venue.ioi18.net
-      sw-conf-001.venue.ioi18.net
-      rt-conf-001.venue.ioi18.net
-      wlc-001.venue.ioi18.net
-      ups-hall-001.venue.ioi18.net
-      ups-hall-002.venue.ioi18.net
-      ups-hall-003.venue.ioi18.net
-      ups-ara-001.venue.ioi18.net
-      ups-mdf-001.venue.ioi18.net
-    ),
+    { targets: %w(rt-ngn-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(rt-mdf-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(rt-hall-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(rt-hall-002.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(relay-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(sw-hall.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(sw-ara-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(sw-ara-002.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(sw-ara-011.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(sw-ara-021.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(sw-ara-031.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(sw-ara-041.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(sw-ref-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(sw-tc-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(sw-conf-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(rt-conf-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
+    { targets: %w(wlc-001.venue.ioi18.net), labels: {__param_module: 'cisco_wlc'} },
+    { targets: %w(ups-hall-001.venue.ioi18.net), labels: {__param_module: 'apcups'} },
+    { targets: %w(ups-hall-002.venue.ioi18.net), labels: {__param_module: 'apcups'} },
+    { targets: %w(ups-hall-003.venue.ioi18.net), labels: {__param_module: 'apcups'} },
+    { targets: %w(ups-ara-001.venue.ioi18.net), labels: {__param_module: 'apcups'} },
+    { targets: %w(ups-mdf-001.venue.ioi18.net), labels: {__param_module: 'apcups'} },
   ],
   relabel_configs: [
     {source_labels: %w(__address__), target_label: '__param_target'},
