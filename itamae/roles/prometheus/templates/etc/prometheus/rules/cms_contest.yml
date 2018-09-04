@@ -19,7 +19,7 @@ groups:
   - name: cms_too_many_running_judgements
     rules:
       - alert: CmsTooManyRunningJudgements
-        expr: 'sum(cms_judgements_total{cms_cluster="prd",status=~"(compiling)|(evaluating)",dataset_status!="inactive"}) > 30'
+        expr: 'sum(cms_judgements_total{cms_cluster="prd",status=~"(compiling)|(evaluating)",dataset_status!="inactive"}) > 20'
         labels:
           severity: warn
         annotations:
