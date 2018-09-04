@@ -94,8 +94,8 @@ scrape_configs.push(
   job_name: :cms_contest,
   scheme: 'https',
   metrics_path: '/metrics/contest',
-  scrape_interval: '5m',
-  scrape_timeout: '3m',
+  scrape_interval: '30s',
+  scrape_timeout: '20s',
   static_configs: [
     { targets: %w(admin-dev.ioi18.net:443), labels: {cms_cluster: 'dev'} },
     { targets: %w(admin-practice.ioi18.net:443), labels: {cms_cluster: 'practice'} },
@@ -106,8 +106,8 @@ scrape_configs.push(
   job_name: :cms_system,
   scheme: 'https',
   metrics_path: '/metrics/system',
-  scrape_interval: '5m',
-  scrape_timeout: '3m',
+  scrape_interval: '30s',
+  scrape_timeout: '20s',
   static_configs: [
     { targets: %w(admin-dev.ioi18.net:443), labels: {cms_cluster: 'dev'} },
     { targets: %w(admin-practice.ioi18.net:443), labels: {cms_cluster: 'practice'} },
