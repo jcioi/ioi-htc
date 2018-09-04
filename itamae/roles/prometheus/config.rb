@@ -113,6 +113,11 @@ scrape_configs.push(
       sw-conf-001.venue.ioi18.net
       rt-conf-001.venue.ioi18.net
       wlc-001.venue.ioi18.net
+      ups-hall-001.venue.ioi18.net
+      ups-hall-002.venue.ioi18.net
+      ups-hall-003.venue.ioi18.net
+      ups-ara-001.venue.ioi18.net
+      ups-mdf-001.venue.ioi18.net
     ),
   ],
   relabel_configs: [

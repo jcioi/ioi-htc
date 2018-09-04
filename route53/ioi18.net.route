@@ -678,6 +678,12 @@ onpremises = {
   'prn-ref-003' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.8.33', }, },
   'prn-ref-004' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.8.34', }, },
   'prn-ref-005' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.8.35', }, },
+
+  'ups-hall-001' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.51', }, }, #srv
+  'ups-hall-002' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.52', }, }, #srv
+  'ups-hall-003' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.53', }, }, #net
+  'ups-ara-001' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.5.54', }, }, #net
+  'ups-mdf-001' => { primary: 'mgmt', ifaces: { 'mgmt' => '10.18.48.2', }, }, #net
 }
 template "ioi18.net-onpremises" do
   rrset "CISCO-CAPWAP-CONTROLLER.venue.ioi18.net", "CNAME" do
