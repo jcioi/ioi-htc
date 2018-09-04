@@ -23,7 +23,8 @@ node.reverse_merge!(
               repeat_interval: '1h',
               receiver: 'slack-alert',
             },
-          ]
+          ],
+          receiver: 'slack-alert',
         },
         receivers: [
           {
