@@ -113,10 +113,22 @@ scrape_configs.push(
     { targets: %w(sw-conf-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
     { targets: %w(rt-conf-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
     { targets: %w(wlc-001.venue.ioi18.net), labels: {__param_module: 'cisco_wlc'} },
+  ],
+  relabel_configs: [
+    {source_labels: %w(__address__), target_label: '__param_target'},
+    {source_labels: %w(__param_target), target_label: 'instance'},
+    {target_label: '__address__', replacement: '127.0.0.1:9116'},
+  ],
+)
+scrape_configs.push(
+  job_name: :snmp_low,
+  metrics_path: "/snmp",
+  scrape_timeout: '19s',
+  static_configs: [
     { targets: %w(ups-hall-001.venue.ioi18.net), labels: {__param_module: 'apcups'} },
     { targets: %w(ups-hall-002.venue.ioi18.net), labels: {__param_module: 'apcups'} },
-    { targets: %w(ups-hall-003.venue.ioi18.net), labels: {__param_module: 'apcups'} },
     { targets: %w(ups-ara-001.venue.ioi18.net), labels: {__param_module: 'apcups'} },
+    { targets: %w(ups-ara-002.venue.ioi18.net), labels: {__param_module: 'apcups'} },
     { targets: %w(ups-mdf-001.venue.ioi18.net), labels: {__param_module: 'apcups'} },
   ],
   relabel_configs: [
