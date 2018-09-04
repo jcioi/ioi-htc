@@ -2,6 +2,9 @@ APPROVED_TASKS = [
   "ioi-2018-combo",
   "ioi-2018-rectangular_permutation",
   "ioi-2018-werewolf",
+  "ioi-2018-blinkenlights",
+  "ioi-2018-shortest_path_query",
+  "ioi-2018-meetings",
 ]
 
 if @name == "ioi18-task-test-batch"
