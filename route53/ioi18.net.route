@@ -644,7 +644,7 @@ onpremises = {
     },
   },
   'sw-ara-001' => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.5.200', }, },
-  'sw-ara-002' => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.5.210', }, },
+  'sw-ara-002' => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.5.220', }, },
   'sw-ara-011' => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.5.201', }, },
   'sw-ara-021' => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.5.202', }, },
   'sw-ara-031' => { primary: 'vlan100-mgmt', ifaces: { 'vlan100-mgmt' => '10.18.5.203', }, },
