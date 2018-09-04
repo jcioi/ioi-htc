@@ -172,6 +172,27 @@ scrape_configs.push(
   ],
 )
 scrape_configs.push(
+  job_name: :contestant_ping,
+  metrics_path: "/probe",
+  scrape_interval: '6s',
+  scrape_timeout: '5s',
+  params: {
+    module: %w(ping),
+  },
+  file_sd_configs: [
+    {
+      files: ['/etc/prometheus/files/contestant_node.json'],
+      refresh_interval: '1m',
+    },
+  ],
+  relabel_configs: [
+    {source_labels: %w(__address__), target_label: '__param_target'},
+    {source_labels: %w(__param_target), action: 'replace', regex: '^(.+?):.+$', replacement: '${1}', target_label: '__param_target'},
+    {source_labels: %w(__param_target), target_label: 'instance'},
+    {target_label: '__address__', replacement: '127.0.0.1:9115'},
+  ],
+)
+scrape_configs.push(
   job_name: :contestant_nodes,
   metrics_path: "/metrics",
   file_sd_configs: [
