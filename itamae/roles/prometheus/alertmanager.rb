@@ -7,16 +7,41 @@ node.reverse_merge!(
           resolve_timeout: '5m',
         },
         route: {
-          group_by: ['alertname', 'instance'],
-          group_wait: '12s',
-          group_interval: '12s',
-          repeat_interval: '1h',
-          receiver: 'slack',
+          routes: [
+            {
+              group_by: ['alertname', 'instance'],
+              group_wait: '12s',
+              group_interval: '12s',
+              repeat_interval: '1h',
+              receiver: 'slack-alert-contestants',
+              match: [ {"job": "contestant_nodes"} ],
+            },
+            {
+              group_by: ['alertname', 'instance'],
+              group_wait: '12s',
+              group_interval: '12s',
+              repeat_interval: '1h',
+              receiver: 'slack-alert',
+            },
+          ]
         },
         receivers: [
           {
-            name: 'slack',
-            slack_configs: [ 
+            name: 'slack-alert-contestants',
+            slack_configs: [
+              {
+                send_resolved: true,
+                api_url: 'https://hooks.slack.com/services/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',
+                channel: '#alert-contestants',
+                title_link: 'https://prometheus.ioi18.net',
+                title: "{{ .CommonLabels.instance }} {{ .CommonLabels.ioi_contestant }} {{ .CommonLabels.ioi_desk }} ({{ .CommonLabels.job }})",
+                text: "{{ range .Alerts }}*{{ .Status }}* {{ .Labels.ioi_contestant }} {{ .Labels.ioi_desk }} {{ .Annotations.summary }}\n{{ end }}",
+              },
+            ],
+          },
+          {
+            name: 'slack-alert',
+            slack_configs: [
               {
                 send_resolved: true,
                 api_url: 'https://hooks.slack.com/services/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',
