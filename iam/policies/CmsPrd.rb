@@ -18,6 +18,15 @@ managed_policy "CmsPrd", path: path do
       {
         "Effect" => "Allow",
         "Action" => %w(
+            s3:PutObject
+        ),
+          "Resource" => %w(
+            arn:aws:s3:::ioi18-infra/tmp/*
+        ),
+      },
+      {
+        "Effect" => "Allow",
+        "Action" => %w(
             s3:GetObject
         ),
           "Resource" => %w(
