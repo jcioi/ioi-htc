@@ -11,6 +11,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
         groups(
           "bastion",
           "rproxy-misc",
+          "ioi-console",
         )
       end
     end

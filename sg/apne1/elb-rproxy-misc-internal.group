@@ -20,7 +20,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
         groups(
           'print',
           'print-dev',
-          # for console.ioi18.net, admin*.ioi18.net, prometheus.ioi18.net
+          # for console.ioi18.net, admin*.ioi18.net
           'prometheus',
         )
         ip_ranges(
