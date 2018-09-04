@@ -52,6 +52,7 @@ local elbSecurityGroups = ['sg-0cd32a6bd67af4855'];  // elb-ioi-console
       IOI_IPAM_SSH_USER: 'ioim',
       IOI_IPAM_SSH_PASSWORD: utils.secret('cisco_ssh_password'),
       IOI_IPAM_SWITCH_HOSTS: 'sw-ara-011.venue.ioi18.net,sw-ara-021.venue.ioi18.net,sw-ara-031.venue.ioi18.net,sw-ara-041.venue.ioi18.net',
+      IOI_PROMETHEUS_URL: 'https://prometheus.ioi18.net',
 
     },
     mount_points: [
