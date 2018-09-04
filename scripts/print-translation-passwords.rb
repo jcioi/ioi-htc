@@ -18,7 +18,7 @@ print_users = users.map do |user|
 
   {
     name: "#{country['name']} (#{language['name']})",
-    username: user['username'],
+    login: user['username'],
     password: user['raw_password'],
   }
 end
@@ -26,6 +26,7 @@ end
 payload = {title: "Password for Translation", users: print_users}
 
 http = Net::HTTP.new(IOIPRINT.host, IOIPRINT.port)
+http.use_ssl = IOIPRINT.is_a? URI::HTTPS
 http.post2(IOIPRINT.path, JSON.dump(payload),
            'Content-Type' => 'application/json') do |resp|
   puts resp.body
