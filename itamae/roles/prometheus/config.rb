@@ -123,6 +123,7 @@ scrape_configs.push(
 scrape_configs.push(
   job_name: :snmp_low,
   metrics_path: "/snmp",
+  scrape_interval: '1m',
   scrape_timeout: '19s',
   static_configs: [
     { targets: %w(ups-hall-001.venue.ioi18.net), labels: {__param_module: 'apcups'} },
