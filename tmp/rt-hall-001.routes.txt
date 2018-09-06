@@ -1,0 +1,58 @@
+rt-hall-001#show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.18.1.6 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.18.1.6
+      10.0.0.0/8 is variably subnetted, 34 subnets, 6 masks
+C        10.18.0.1/32 is directly connected, Loopback0
+O        10.18.0.2/32 [110/26] via 10.18.1.18, 1d02h, TenGigabitEthernet1/0/47
+O        10.18.0.11/32
+           [110/101] via 10.18.1.2, 1d02h, TenGigabitEthernet1/0/48
+O        10.18.0.21/32
+           [110/81] via 10.18.1.10, 1d02h, TenGigabitEthernet1/0/45
+O        10.18.0.31/32
+           [110/111] via 10.18.1.2, 1d01h, TenGigabitEthernet1/0/48
+C        10.18.1.0/30 is directly connected, TenGigabitEthernet1/0/48
+L        10.18.1.1/32 is directly connected, TenGigabitEthernet1/0/48
+O        10.18.1.4/30 [110/101] via 10.18.1.2, 1d02h, TenGigabitEthernet1/0/48
+C        10.18.1.8/30 is directly connected, TenGigabitEthernet1/0/45
+L        10.18.1.9/32 is directly connected, TenGigabitEthernet1/0/45
+O        10.18.1.12/30
+           [110/105] via 10.18.1.18, 1d02h, TenGigabitEthernet1/0/47
+C        10.18.1.16/30 is directly connected, TenGigabitEthernet1/0/47
+L        10.18.1.17/32 is directly connected, TenGigabitEthernet1/0/47
+C        10.18.1.20/30 is directly connected, TenGigabitEthernet1/0/3
+L        10.18.1.21/32 is directly connected, TenGigabitEthernet1/0/3
+O        10.18.1.24/30
+           [110/110] via 10.18.1.2, 1d02h, TenGigabitEthernet1/0/48
+C        10.18.4.0/22 is directly connected, Vlan100
+L        10.18.4.251/32 is directly connected, Vlan100
+C        10.18.8.0/22 is directly connected, Vlan200
+L        10.18.8.251/32 is directly connected, Vlan200
+C        10.18.12.0/24 is directly connected, Vlan210
+L        10.18.12.251/32 is directly connected, Vlan210
+O        10.18.32.0/21
+           [110/26] via 10.18.1.18, 1d02h, TenGigabitEthernet1/0/47
+C        10.18.40.0/21 is directly connected, Vlan301
+L        10.18.40.251/32 is directly connected, Vlan301
+O        10.18.48.0/24
+           [110/81] via 10.18.1.10, 1d02h, TenGigabitEthernet1/0/45
+C        10.18.56.0/22 is directly connected, Vlan310
+L        10.18.56.251/32 is directly connected, Vlan310
+C        10.18.60.0/22 is directly connected, Vlan320
+L        10.18.60.251/32 is directly connected, Vlan320
+O        10.18.64.0/22
+           [110/111] via 10.18.1.2, 1d01h, TenGigabitEthernet1/0/48
+O E2     10.18.112.0/22 [110/1] via 10.18.1.2, 1d02h, TenGigabitEthernet1/0/48
+O E2     10.18.192.0/18
+           [110/1] via 10.18.1.10, 1d02h, TenGigabitEthernet1/0/45
+S        10.18.222.91/32 [1/0] via 10.18.1.6
