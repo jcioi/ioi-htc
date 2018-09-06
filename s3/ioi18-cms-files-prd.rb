@@ -5,8 +5,9 @@ bucket "ioi18-cms-files-prd" do
       {
         "Effect" => "Allow",
         "Principal" => {"AWS"=>"*"},
-        "Action" => %w(s3:GetObject),
+        "Action" => %w(s3:GetObject s3:ListBucket),
         "Resource" => %w(
+          arn:aws:s3:::ioi18-cms-files-prd
           arn:aws:s3:::ioi18-cms-files-prd/*
         ),
         "Condition" => {

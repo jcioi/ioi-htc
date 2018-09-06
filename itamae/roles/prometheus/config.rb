@@ -99,19 +99,8 @@ scrape_configs.push(
     { targets: %w(rt-ngn-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
     { targets: %w(rt-mdf-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
     { targets: %w(rt-hall-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(rt-hall-002.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
     { targets: %w(relay-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
     { targets: %w(sw-hall.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(sw-ara-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(sw-ara-002.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(sw-ara-011.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(sw-ara-021.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(sw-ara-031.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(sw-ara-041.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(sw-ref-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(sw-tc-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(sw-conf-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(rt-conf-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
     { targets: %w(wlc-001.venue.ioi18.net), labels: {__param_module: 'cisco_wlc'} },
   ],
   relabel_configs: [
@@ -128,8 +117,6 @@ scrape_configs.push(
   static_configs: [
     { targets: %w(ups-hall-001.venue.ioi18.net), labels: {__param_module: 'apcups'} },
     { targets: %w(ups-hall-002.venue.ioi18.net), labels: {__param_module: 'apcups'} },
-    { targets: %w(ups-ara-001.venue.ioi18.net), labels: {__param_module: 'apcups'} },
-    { targets: %w(ups-ara-002.venue.ioi18.net), labels: {__param_module: 'apcups'} },
     { targets: %w(ups-mdf-001.venue.ioi18.net), labels: {__param_module: 'apcups'} },
   ],
   relabel_configs: [
