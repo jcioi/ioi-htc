@@ -92,40 +92,6 @@ scrape_configs.push(
   ],
 )
 scrape_configs.push(
-  job_name: :snmp,
-  metrics_path: "/snmp",
-  scrape_timeout: '19s',
-  static_configs: [
-    { targets: %w(rt-ngn-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(rt-mdf-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(rt-hall-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(relay-001.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(sw-hall.venue.ioi18.net), labels: {__param_module: 'if_mib_ifname'} },
-    { targets: %w(wlc-001.venue.ioi18.net), labels: {__param_module: 'cisco_wlc'} },
-  ],
-  relabel_configs: [
-    {source_labels: %w(__address__), target_label: '__param_target'},
-    {source_labels: %w(__param_target), target_label: 'instance'},
-    {target_label: '__address__', replacement: '127.0.0.1:9116'},
-  ],
-)
-scrape_configs.push(
-  job_name: :snmp_low,
-  metrics_path: "/snmp",
-  scrape_interval: '1m',
-  scrape_timeout: '19s',
-  static_configs: [
-    { targets: %w(ups-hall-001.venue.ioi18.net), labels: {__param_module: 'apcups'} },
-    { targets: %w(ups-hall-002.venue.ioi18.net), labels: {__param_module: 'apcups'} },
-    { targets: %w(ups-mdf-001.venue.ioi18.net), labels: {__param_module: 'apcups'} },
-  ],
-  relabel_configs: [
-    {source_labels: %w(__address__), target_label: '__param_target'},
-    {source_labels: %w(__param_target), target_label: 'instance'},
-    {target_label: '__address__', replacement: '127.0.0.1:9116'},
-  ],
-)
-scrape_configs.push(
   job_name: :cms_contest,
   scheme: 'https',
   metrics_path: '/metrics/contest',
@@ -195,26 +161,6 @@ scrape_configs.push(
     {source_labels: %w(__param_target), action: 'replace', regex: '^(.+?):.+$', replacement: '${1}', target_label: '__param_target'},
     {source_labels: %w(__param_target), target_label: 'instance'},
     {target_label: '__address__', replacement: '127.0.0.1:9115'},
-  ],
-)
-scrape_configs.push(
-  job_name: :contestant_nodes,
-  metrics_path: "/metrics",
-  file_sd_configs: [
-    {
-      files: ['/etc/prometheus/files/contestant_node.json'],
-      refresh_interval: '1m',
-    },
-  ],
-)
-scrape_configs.push(
-  job_name: :cmsworker_nodes,
-  metrics_path: "/metrics",
-  file_sd_configs: [
-    {
-      files: ['/etc/prometheus/files/cmsworker_node.json'],
-      refresh_interval: '2m',
-    },
   ],
 )
 
