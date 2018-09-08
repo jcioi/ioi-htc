@@ -9,6 +9,7 @@ ec2 "vpc-03eed691a6a5a03b2" do
         groups(
           "elb-misc-internal-tools-public",
           "elb-misc-internal-tools",
+          "rproxy-misc",
         )
       end
     end

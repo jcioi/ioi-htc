@@ -385,6 +385,11 @@ template "ioi18.net-common" do
     resource_records "rproxy-misc.elb.ioi18.net."
   end
 
+  rrset "slack-patron.ioi18.net.", "CNAME" do
+    ttl 60
+    resource_records "rproxy-misc.elb.ioi18.net."
+  end
+
   %w(
     _631443614a51aeef30597369338b45d4.s3-apne1.ioi18.net. _2a11a85cc8ea57ad9cdc4241c6e80af8.acm-validations.aws.
 
@@ -456,6 +461,8 @@ template "ioi18.net-common" do
     _d435e8459fb7f59bfcc6bc368d95af6d.wlc-002.ioi18.net. _c85e7cae16127f39882d4697b29cd6d8.tljzshvwok.acm-validations.aws.
 
     _5f9a6eb46e932d0ae3858ede1828de2b.ioi18.net. _bc969a3559cf8db86ab0abd96c1b109d.tljzshvwok.acm-validations.aws.
+
+    _10d1a4a26c6e1028ba0d75012ae4df7e.slack-patron.ioi18.net. _f4861c9225713e6b4e1ca090af757c0f.tljzshvwok.acm-validations.aws.
   ).each_slice(2) do |(name,target)|
     rrset name, "CNAME" do
       ttl 60

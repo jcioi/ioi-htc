@@ -80,6 +80,10 @@ resource "aws_lb_listener_certificate" "rproxy-misc_auth" {
   listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
   certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/61e52d9d-c7cf-4f76-8f0f-72f9ccd92564"
 }
+resource "aws_lb_listener_certificate" "rproxy-misc_slack-patron" {
+  listener_arn = "${aws_lb_listener.rproxy-misc_443.arn}"
+  certificate_arn = "arn:aws:acm:ap-northeast-1:550372229658:certificate/ba6a3cec-9dce-44f6-a104-153381921cde"
+}
 # SEE ALSO elb_rproxy-misc-internal.tf
 
 resource "aws_lb_target_group" "rproxy-misc" {
