@@ -36,6 +36,7 @@ end
   /etc/nginx/conf.d/ioi18.net.conf
 
   /etc/nginx/conf.d/prometheus.conf
+  /etc/nginx/conf.d/grafana.conf
   /etc/nginx/conf.d/patron.conf
 ).each do |_|
   template _ do
