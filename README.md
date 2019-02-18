@@ -47,7 +47,7 @@ bundle exec roadwork -a
 
 We have 2 Route53 hosted zones with same name for split DNS.
 
-## piculet: EC2 Security Groups
+### piculet: EC2 Security Groups
 
 ```
 cd sg/
@@ -56,7 +56,7 @@ bundle exec piculet -a --dry-run
 bundle exec piculet -a
 ```
 
-## miam: AWS IAM
+### miam: AWS IAM
 
 ```
 cd iam/
@@ -65,7 +65,7 @@ bundle exec miam -a --dry-run
 bundle exec miam -a
 ```
 
-## bukelatta: S3 Bucket Polcy
+### bukelatta: S3 Bucket Polcy
 
 ```
 cd s3/
@@ -74,7 +74,7 @@ bundle exec bukelatta -a --dry-ryn
 bundle exec bukelatta -a
 ```
 
-## cfdef: CloudFront
+### cfdef: CloudFront
 
 ```
 cd cloudfront/
@@ -83,7 +83,7 @@ bundle exec cfdef -a --dry-run
 bundle exec cfdef -a
 ```
 
-## cmsconfig: CMS config.json template
+### cmsconfig: CMS config.json template
 
 ```
 cd cmsconfig/
@@ -95,7 +95,7 @@ bundle exec ruby upload.rb dev
 bundle exec ruby upload.rb prd onpremise
 ```
 
-## hako: ECS tasks
+### hako: ECS tasks
 
 ```
 cd hako/
@@ -104,7 +104,7 @@ cd hako/
 bundle exec hako deploy nanika.jsonnet -t codebuild
 ```
 
-## terraform: Misc (ELB, ...)
+### terraform: Misc (ELB, ...)
 
 ```
 cd terraform/
@@ -113,7 +113,7 @@ terraform init
 terraform apply
 ```
 
-## codebuild: AWS CodeBuild buildspec
+### codebuild: AWS CodeBuild buildspec
 
 Use this when a source couldn't provide a buildspec.yml (e.g. CMS task repo)
 
@@ -123,7 +123,7 @@ cd codebuild/
 bundle exec ruby set_buildspec.rb XXX
 ```
 
-## codepipeline: AWS CodePipeline pipelines, custom actions
+### codepipeline: AWS CodePipeline pipelines, custom actions
 
 ```
 cd codepipeline/
@@ -139,3 +139,10 @@ bundle exec run.rb XXX
 bundle exec run.rb pipelines/ioi18-task*.rb
 ```
 
+## Other software components used during IOI2018
+- Contest System: https://github.com/jcioi/ioi-cms
+- Printing System: https://github.com/jcioi/ioi-print
+- Translation System: https://github.com/jcioi/ioi-translation
+- Contestant & Admin Console: https://github.com/jcioi/ioi_console
+- https://github.com/jcioi/ioi-cms-buildenv
+- https://github.com/jcioi/ioi-infra-hako-front
