@@ -146,3 +146,4 @@ bundle exec run.rb pipelines/ioi18-task*.rb
 - Contestant & Admin Console: https://github.com/jcioi/ioi_console
 - https://github.com/jcioi/ioi-cms-buildenv
 - https://github.com/jcioi/ioi-infra-hako-front
+- https://github.com/jcioi/ioi-awstools
